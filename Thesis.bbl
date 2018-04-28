@@ -1,0 +1,101 @@
+\begin{thebibliography}{14}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{#1}
+\providecommand{\href}[2]{\url{#2}}
+\providecommand{\doi}[1]{DOI: \href{http://dx.doi.org/#1}{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax\relax\else
+  \urlstyle{same}\fi
+
+\bibitem[陈浩元(2005)]{chen2005zhulu}
+陈浩元, 2005.
+\newblock 著录文后参考文献的规则及注意事项\allowbreak[J].
+\newblock 编辑学报, 17\penalty0 (6): 413--415.
+
+\bibitem[陈晋镳\ 等(1980)陈晋镳, 张惠民, 朱士兴, 赵震, and
+  王振刚]{chen1980zhongguo}
+陈晋镳, 张惠民, 朱士兴, 等, 1980.
+\newblock
+  蓟县震旦亚界研究\allowbreak[M]//\allowbreak{}中国地质科学院天津地质矿产研究所.
+\newblock 中国震旦亚界.
+\newblock 天津: 天津科学技术出版社: 56--114.
+
+\bibitem[初景利(2004)]{chu2004tushu}
+初景利, 2004.
+\newblock 图书馆数字参考咨询服务研究\allowbreak[M].
+\newblock 北京: 北京图书馆出版社.
+
+\bibitem[哈里森·沃尔德伦(2012)]{hls2012jinji}
+哈里森·沃尔德伦, 2012.
+\newblock 经济数学与金融数学\allowbreak[M].
+\newblock 谢远涛, 译.
+\newblock 北京: 中国人民大学出版社: 235--236.
+
+\bibitem[牛志明\ 等(2013)牛志明, 斯温兰德, and
+  雷光春]{niu2013zonghe}
+牛志明, 斯温兰德, 雷光春, 2013.
+\newblock 综合湿地管理国际研讨会论文集\allowbreak[C].
+\newblock 北京: 海洋出版社.
+
+\bibitem[袁训来\ 等(2012{\natexlab{a}})袁训来, 陈哲, and
+  肖书海]{yuan2012lana}
+袁训来, 陈哲, 肖书海, 2012{\natexlab{a}}.
+\newblock 蓝田生物群:
+  一个认识多细胞生物起源和早期演化的新窗口 --
+  篇一\allowbreak[J].
+\newblock 科学通报, 57\penalty0 (34): 3219.
+
+\bibitem[袁训来\ 等(2012{\natexlab{b}})袁训来, 陈哲, and
+  肖书海]{yuan2012lanb}
+袁训来, 陈哲, 肖书海, 2012{\natexlab{b}}.
+\newblock 蓝田生物群:
+  一个认识多细胞生物起源和早期演化的新窗口 --
+  篇二\allowbreak[J].
+\newblock 科学通报, 57\penalty0 (34): 3219.
+
+\bibitem[袁训来\ 等(2012{\natexlab{c}})袁训来, 陈哲, and
+  肖书海]{yuan2012lanc}
+袁训来, 陈哲, 肖书海, 2012{\natexlab{c}}.
+\newblock 蓝田生物群:
+  一个认识多细胞生物起源和早期演化的新窗口 --
+  篇三\allowbreak[J].
+\newblock 科学通报, 57\penalty0 (34): 3219.
+
+\bibitem[ボハンデ(1928)]{Bohan1928}
+ボハンデ, 1928.
+\newblock 過去及び現在に於ける英国と会\allowbreak[J].
+\newblock 日本時報, 17: 5--9.
+
+\bibitem[Lamport(1986)]{lamport1986document}
+LAMPORT L, 1986.
+\newblock Document preparation system\allowbreak[M].
+\newblock [S.l.]: Addison-Wesley Reading, MA.
+
+\bibitem[Stamerjohanns\ et~al.(2009)Stamerjohanns, Ginev, David, Misev,
+  Zamdzhiev, and Kohlhase]{stamerjohanns2009mathml}
+STAMERJOHANNS H, GINEV D, DAVID C, et~al., 2009.
+\newblock {MathML}-aware article conversion from {LaTeX}\allowbreak[J].
+\newblock Towards a Digital Mathematics Library, 16\penalty0 (2): 109--120.
+
+\bibitem[Walls\ et~al.(2013)Walls, Barichivich, and Brown]{walls2013drought}
+WALLS S~C, BARICHIVICH W~J, BROWN M~E, 2013.
+\newblock Drought, deluge and declines: the impact of precipitation extremes on
+  amphibians in a changing climate\allowbreak[J/OL].
+\newblock Biology, 2\penalty0 (1): 399--418\allowbreak[2013-11-04].
+\newblock \url{http://www.mdpi.com/2079-7737/2/1/399}.
+\newblock \doi{10.3390/biology2010399}.
+
+\bibitem[Wikibook(2014)]{wikibook2014latex}
+WIKIBOOK, 2014.
+\newblock http://en.wikibooks.org/wiki/latex\allowbreak[M].
+\newblock [S.l.]: On-line Resources.
+
+\bibitem[ДубровинА.~И(1906)]{Dubrovin1906}
+ДубровинА.~И, 1906.
+\newblock Открытое письмо Председателя
+  Главного Совета Союза Русского Народа
+  Санкт-Петербургскому Антонию,
+  Первенствующему члену Священного
+  Синода\allowbreak[J].
+\newblock Вече: 1--3.
+
+\end{thebibliography}

@@ -21,7 +21,7 @@
 %---------------------------------------------------------------------------%
 %->> Document settings
 %---------------------------------------------------------------------------%
-\usepackage[authoryear,myhdr,list]{Style/artratex}% document settings
+\usepackage[numbers,myhdr,list]{Style/artratex}% document settings
 %- usage: \usepackage[option1,option2,...,optionN]{artratex}
 %- Multiple optional arguments:
 %- [bibtex|biber]% set bibliography processor and package
@@ -40,6 +40,9 @@
 %- [list]% provide enhanced list environments for algorithm and coding
 %- [math]% enable some extra math packages
 \usepackage{Style/artracom}% user defined commands
+
+% -----Haibo Hao thesis----
+\usepackage{url}
 %---------------------------------------------------------------------------%
 %->> Document inclusion
 %---------------------------------------------------------------------------%
@@ -73,7 +76,7 @@
 %-
 \cleardoublepage%
 \appendix% initialize the environment
-\input{Tex/Appendix}% appendix content
+%\input{Tex/Appendix}% appendix content
 %-
 %-> Backmatter: bibliography, glossary, index
 %-
