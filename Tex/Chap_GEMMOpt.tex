@@ -49,9 +49,24 @@
 
 根据A，B矩阵是否转置，我们的SGEMM kernel可分4种情况，NN，NT，TN，TT(N表示不转置，T表示转置)。在我们的分析中，主要考虑了两种类型的指令v\_mac和ds\_read\_bxx。在SGEMM中，还有其他的“辅助”指令对GFLOPS并没有贡献。“辅助”指令包括全局内存地址计算指令，shared memory地址计算指令等。同时，我们也没有考虑barrier指令对性能的影响。任何barrier指令都会降低程序性能。
 
+\subsection{汇编调优的必要性}
+使用高级语言(如OpenCL，CUDA)编写GPU程序的好处是开发速度快、易维护，但其对指令的控制能力相对较弱。同时，程序编制人员对编译器的具体行为无法预测。有时，编程人员对OpenCL或CUDA kernel所进行的手工优化可能会被编译器忽略掉。所以，有时候，我们的GPU程序性能会取决于编译器是否友好。
+
+通过编写汇编kernel，编程人员可以直接跳过编译器，面向GPU硬件指令编程。这使得我们有机会进行更细粒度的程序调优。我们可以通过数据预取，寄存器双缓冲，shared memory双缓冲，bank冲突消除，指令重排等手法进行矩阵乘调优。其中OpenCL和汇编都可以使用数据预取，寄存器双缓冲和shared memory双缓冲和bank冲突消除这些手法进行程序优化。但只有通过汇编，我们才能进行细粒度的指令重排。在大量乘加指令之间的合适位置插入访存指令，尽可能用计算掩盖访存延迟。使得矩阵乘主循环中v\_mac指令通量接近v\_mac通量的上界。
+
+图\ref{fig:opencl_gemm_1_1}展示了OpenCL实现的矩阵乘不同优化方法的性能比较。
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.80\textwidth]{opencl_gemm_1_1}
+	\bicaption{矩阵乘OpenCL实现性能比较}{Comparison of GEMM performance implemented by OpenCL}
+	\label{fig:opencl_gemm_1_1}
+\end{figure}
+
+外积法直接实现shared memory bank冲突分析：
 
 \subsection{优化内存访问}
-汇编语言的访存优化和用高级语言(如CUDA，OpenCL)优化访存比较类似。一个wavefront（ warp）中线程的全局访存请求可以合并成一到多个内存事务(memory transactions)。合并的方式和具体的GPU访存模式有关。为了高效的访问全局内存，通常我们安排一个wavefront中的线程访问全局内存中一段连续内存区域的数据。这样容易进行全局访存合并。在SGEMM程序的主循环中，主要的指令为v\_mac和ds\_read，为了提高v\_mac指令的百分比，减少ds\_read指令的数目就变得尤为关键。前面的介绍中，我们讲过可以通过使用DS\_READ\_B64或DS\_READ\_B128来减少DS\_READ指令数量。在shared memory中，线程读取A，B子矩阵也应该可以进行访存合并，我们安排每个线程可以读取连续的A，B子矩阵，一个wavefront中的线程可合并访问shared memory。同时，为了减少甚至消除shared memory的bank冲突和满足DS\_READ指令对齐的要求，在必要的时候，我们需要在shared memory中合理的进行填充。
+汇编语言的访存优化和用高级语言(如CUDA，OpenCL)优化访存比较类似。一个wavefront(warp)中线程的全局访存请求可以合并成一到多个内存事务(memory transactions)。合并的方式和具体的GPU访存模式有关。为了高效的访问全局内存，通常我们安排一个wavefront中的线程访问全局内存中一段连续内存区域的数据。这样容易进行全局访存合并。在SGEMM程序的主循环中，主要的指令为v\_mac和ds\_read，为了提高v\_mac指令的百分比，减少ds\_read指令的数目就变得尤为关键。前面的介绍中，我们讲过可以通过使用DS\_READ\_B64或DS\_READ\_B128来减少DS\_READ指令数量。在shared memory中，线程读取A，B子矩阵也应该可以进行访存合并，我们安排每个线程可以读取连续的A，B子矩阵，一个wavefront中的线程可合并访问shared memory。同时，为了减少甚至消除shared memory的bank冲突和满足DS\_READ指令对齐的要求，在必要的时候，我们需要在shared memory中合理的进行填充。
 
 
 \subsection{循环展开}
@@ -124,7 +139,7 @@ ds\_read\_b128指令：从shared memory中预取数据到寄存器。
 
 (2) 从全局内存读取数据到寄存器：尽可能地早放置
 
-t\_buffer\_load\_xywz指令：从全局内存预取数据到寄存器。
+t\_buffer\_load\_xyzw指令：从全局内存预取数据到寄存器。
 
 一个block有64个线程，每个线程计算8x8个输出，总共可以计算64x64个输出。t\_buffer\_load\_xyzw指令一次可以从全局内存读取4个元素，计算64x64的输出，循环展开8次，需要8x64个A中对应元素和8x64个B中对应元素。因此每个线程需要(8x64+8x64)/(4x64) = 4条t\_buffer\_load\_xyzw指令。
 

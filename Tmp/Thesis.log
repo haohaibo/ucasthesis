@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.26)  28 APR 2018 20:54
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.26)  1 MAY 2018 21:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1112,80 +1112,68 @@ File: ctex-cs4size.clo 2017/04/01 v2.4.9 cs4size option (CTEX)
 . Defining command \CTeX with sig. '' on line 1437.
 .................................................
 
-(c:/texlive/2017/texmf-dist/tex/latex/ctex/fontset/ctex-fontset-windows.def
-File: ctex-fontset-windows.def 2017/04/01 v2.4.9 Windows fonts definition (CTEX
-)
-
-(c:/texlive/2017/texmf-dist/tex/latex/ctex/fontset/ctex-fontset-windowsnew.def
-File: ctex-fontset-windowsnew.def 2017/04/01 v2.4.9 Windows fonts definition fo
-r Vista or later version (CTEX)
-\g__fontspec_family_SimSun_int=\count149
+(c:/texlive/2017/texmf-dist/tex/latex/ctex/fontset/ctex-fontset-adobe.def
+File: ctex-fontset-adobe.def 2017/04/01 v2.4.9 Adobe fonts definition (CTEX)
+\g__fontspec_family_AdobeSongStd-Light_int=\count149
 .................................................
 . fontspec info: "no-font-shape"
 . 
-. Could not resolve font "KaiTi/B" (it probably doesn't exist).
+. Could not resolve font "AdobeKaitiStd-Regular/B" (it probably doesn't
+. exist).
 .................................................
 .................................................
 . fontspec info: "no-font-shape"
 . 
-. Could not resolve font "SimHei/I" (it probably doesn't exist).
+. Could not resolve font "AdobeHeitiStd-Regular/I" (it probably doesn't
+. exist).
 .................................................
 .................................................
 . fontspec info: "no-font-shape"
 . 
-. Could not resolve font "SimSun/BI" (it probably doesn't exist).
+. Could not resolve font "AdobeSongStd-Light/BI" (it probably doesn't exist).
 .................................................
 .................................................
 . fontspec info: "defining-font"
 . 
-. Font family 'SimSun(0)' created for font 'SimSun' with options
-. [Script={CJK},BoldFont={SimHei},ItalicFont={KaiTi}].
+. Font family 'AdobeSongStd-Light(0)' created for font 'AdobeSongStd-Light'
+. with options
+. [Script={CJK},BoldFont={AdobeHeitiStd-Regular},ItalicFont={AdobeKaitiStd-Regu
+lar}].
 .  
 .  This font family consists of the following NFSS series/shapes:
 .  
-. - 'normal' (m/n) with NFSS spec.: <->"SimSun/OT:script=hani;language=DFLT;"
+. - 'normal' (m/n) with NFSS spec.:
+. <->"AdobeSongStd-Light/OT:script=hani;language=DFLT;"
 . - 'small caps'  (m/sc) with NFSS spec.: 
-. - 'bold' (bx/n) with NFSS spec.: <->"SimHei/OT:script=hani;language=DFLT;"
+. - 'bold' (bx/n) with NFSS spec.:
+. <->"AdobeHeitiStd-Regular/OT:script=hani;language=DFLT;"
 . - 'bold small caps'  (bx/sc) with NFSS spec.: 
-. - 'italic' (m/it) with NFSS spec.: <->"KaiTi/OT:script=hani;language=DFLT;"
+. - 'italic' (m/it) with NFSS spec.:
+. <->"AdobeKaitiStd-Regular/OT:script=hani;language=DFLT;"
 . - 'italic small caps'  (m/itsc) with NFSS spec.: 
 .................................................
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
-. Defining command \songti with sig. '' on line 110.
+. Defining command \songti with sig. '' on line 99.
 .................................................
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
-. Defining command \heiti with sig. '' on line 111.
+. Defining command \heiti with sig. '' on line 100.
 .................................................
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
-. Defining command \fangsong with sig. '' on line 112.
+. Defining command \fangsong with sig. '' on line 101.
 .................................................
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
-. Defining command \kaishu with sig. '' on line 113.
+. Defining command \kaishu with sig. '' on line 102.
 .................................................
-.................................................
-. LaTeX info: "xparse/define-command"
-. 
-. Defining command \lishu with sig. '' on line 114.
-.................................................
-.................................................
-. LaTeX info: "xparse/define-command"
-. 
-. Defining command \youyuan with sig. '' on line 115.
-.................................................
-.................................................
-. LaTeX info: "xparse/define-command"
-. 
-. Defining command \yahei with sig. '' on line 116.
-.................................................
-))) (c:/texlive/2017/texmf-dist/tex/latex/ctex/config/ctex.cfg
+))
+(c:/texlive/2017/texmf-dist/tex/latex/ctex/config/ctex.cfg
 File: ctex.cfg 2017/04/01 v2.4.9 Configuration file (CTEX)
 )
 (c:/texlive/2017/texmf-dist/tex/generic/ifxetex/ifxetex.sty
@@ -1388,48 +1376,52 @@ LaTeX Info: Redefining \not on input line 2099.
 *************************************************
 * xeCJK warning: "CJKfamily-redef"
 * 
-* Redefining CJKfamily `\CJKrmdefault' (SimSun(0)).
+* Redefining CJKfamily `\CJKrmdefault' (AdobeSongStd-Light(0)).
 *************************************************
 .................................................
 . fontspec info: "no-font-shape"
 . 
-. Could not resolve font "KaiTi/B" (it probably doesn't exist).
+. Could not resolve font "AdobeKaitiStd-Regular/B" (it probably doesn't
+. exist).
 .................................................
 .................................................
 . fontspec info: "no-font-shape"
 . 
-. Could not resolve font "SimSun/I" (it probably doesn't exist).
+. Could not resolve font "AdobeSongStd-Light/I" (it probably doesn't exist).
 .................................................
 .................................................
 . fontspec info: "no-font-shape"
 . 
-. Could not resolve font "SimSun/BI" (it probably doesn't exist).
+. Could not resolve font "AdobeSongStd-Light/BI" (it probably doesn't exist).
 .................................................
 .................................................
 . fontspec info: "defining-font"
 . 
-. Font family 'SimSun(1)' created for font 'SimSun' with options
-. [Script={CJK},AutoFakeBold={4},ItalicFont={KaiTi}].
+. Font family 'AdobeSongStd-Light(1)' created for font 'AdobeSongStd-Light'
+. with options
+. [Script={CJK},AutoFakeBold={4},ItalicFont={AdobeKaitiStd-Regular}].
 .  
 .  This font family consists of the following NFSS series/shapes:
 .  
-. - 'normal' (m/n) with NFSS spec.: <->"SimSun/OT:script=hani;language=DFLT;"
+. - 'normal' (m/n) with NFSS spec.:
+. <->"AdobeSongStd-Light/OT:script=hani;language=DFLT;"
 . - 'small caps'  (m/sc) with NFSS spec.: 
 . - 'bold' (bx/n) with NFSS spec.:
-. <->"SimSun/OT:script=hani;language=DFLT;embolden=4;"
+. <->"AdobeSongStd-Light/OT:script=hani;language=DFLT;embolden=4;"
 . - 'bold small caps'  (bx/sc) with NFSS spec.: 
-. - 'italic' (m/it) with NFSS spec.: <->"KaiTi/OT:script=hani;language=DFLT;"
+. - 'italic' (m/it) with NFSS spec.:
+. <->"AdobeKaitiStd-Regular/OT:script=hani;language=DFLT;"
 . - 'italic small caps'  (m/itsc) with NFSS spec.: 
 .................................................
 *************************************************
 * xeCJK warning: "CJKfamily-redef"
 * 
-* Redefining CJKfamily `\CJKsfdefault' (Microsoft YaHei).
+* Redefining CJKfamily `\CJKsfdefault' (AdobeHeitiStd-Regular).
 *************************************************
 *************************************************
 * xeCJK warning: "CJKfamily-redef"
 * 
-* Redefining CJKfamily `\CJKttdefault' (FangSong).
+* Redefining CJKfamily `\CJKttdefault' (AdobeFangsongStd-Regular).
 *************************************************
 .................................................
 . fontspec info: "defining-font"
@@ -1929,34 +1921,38 @@ LaTeX Info: Redefining \nameref on input line 53.
 File: ucas_logo.pdf Graphic file (type QTm)
 
 <use  "ucas_logo.pdf" >
-\g__fontspec_family_SimHei_int=\count271
+\g__fontspec_family_AdobeHeitiStd-Regular_int=\count271
 .................................................
 . fontspec info: "no-font-shape"
 . 
-. Could not resolve font "SimHei/I" (it probably doesn't exist).
-.................................................
-.................................................
-. fontspec info: "no-font-shape"
-. 
-. Could not resolve font "SimHei/BI" (it probably doesn't exist).
+. Could not resolve font "AdobeHeitiStd-Regular/I" (it probably doesn't
+. exist).
 .................................................
 .................................................
 . fontspec info: "no-font-shape"
 . 
-. Could not resolve font "SimHei/I" (it probably doesn't exist).
+. Could not resolve font "AdobeHeitiStd-Regular/BI" (it probably doesn't
+. exist).
+.................................................
+.................................................
+. fontspec info: "no-font-shape"
+. 
+. Could not resolve font "AdobeHeitiStd-Regular/I" (it probably doesn't
+. exist).
 .................................................
 .................................................
 . fontspec info: "defining-font"
 . 
-. Font family 'SimHei(0)' created for font 'SimHei' with options
-. [Script={CJK},AutoFakeBold={4}].
+. Font family 'AdobeHeitiStd-Regular(0)' created for font
+. 'AdobeHeitiStd-Regular' with options [Script={CJK},AutoFakeBold={4}].
 .  
 .  This font family consists of the following NFSS series/shapes:
 .  
-. - 'normal' (m/n) with NFSS spec.: <->"SimHei/OT:script=hani;language=DFLT;"
+. - 'normal' (m/n) with NFSS spec.:
+. <->"AdobeHeitiStd-Regular/OT:script=hani;language=DFLT;"
 . - 'small caps'  (m/sc) with NFSS spec.: 
 . - 'bold' (bx/n) with NFSS spec.:
-. <->"SimHei/OT:script=hani;language=DFLT;embolden=4;"
+. <->"AdobeHeitiStd-Regular/OT:script=hani;language=DFLT;embolden=4;"
 . - 'bold small caps'  (bx/sc) with NFSS spec.: 
 .................................................
 LaTeX Font Info:    Try loading font information for U+ntxmia on input line 35.
@@ -2002,27 +1998,27 @@ File: se-ascii-print.def 2016/05/16 v1.11 stringenc: Printable ASCII characters
 
 ]) [3] [4] (Tmp/Thesis.toc [5
 
-])
+] [6])
 \tf@toc=\write4
 \openout4 = `Thesis.toc'.
 
- [6] (Tmp/Thesis.lof
-[7
+ [7] [8
 
-])
+]
+(Tmp/Thesis.lof [9])
 \tf@lof=\write5
 \openout5 = `Thesis.lof'.
 
- [8] (Tmp/Thesis.lot)
+ [10] (Tmp/Thesis.lot)
 \tf@lot=\write6
 \openout6 = `Thesis.lot'.
 
- (./Tex/Prematter.tex) [9
+ (./Tex/Prematter.tex) [11
 
-] [10
+] [12
 
-] (./Tex/Mainmatter.tex
-(./Tex/Chap_Intro.tex
+]
+(./Tex/Mainmatter.tex (./Tex/Chap_Intro.tex
 第1章
 [1
 
@@ -2039,10 +2035,11 @@ File: parallelprogram.png Graphic file (type QTm)
 (./Tex/Chap_Background.tex [6]
 第2章
 
-Overfull \hbox (10.54552pt too wide) in paragraph at lines 12--13
-[]\TU/SimSun(1)/m/n/12.045 在 计 算 单 元 的 设 计 上，| \TU/entextsf/m/n/12.045 AMD \TU/
-SimSun(1)/m/n/12.045 和 \TU/entextsf/m/n/12.045 NVIDIA GPU \TU/SimSun(1)/m/n/12.
-045 的 计 算 单 元 都 采 用 了 \TU/entextsf/m/n/12.045 SIMD(Single
+Overfull \hbox (12.30972pt too wide) in paragraph at lines 12--13
+[]\TU/AdobeSongStd-Light(1)/m/n/12.045 在 计 算 单 元 的 设 计 上，| \TU/entextsf/m/n/12.
+045 AMD \TU/AdobeSongStd-Light(1)/m/n/12.045 和 \TU/entextsf/m/n/12.045 NVIDIA G
+PU \TU/AdobeSongStd-Light(1)/m/n/12.045 的 计 算 单 元 都 采 用 了 \TU/entextsf/m/n/12.0
+45 SIMD(Single
  []
 
 [7
@@ -2063,10 +2060,10 @@ File: cpu_trend.png Graphic file (type QTm)
 <use  "cpu_trend.png" > [13
 
 ] [14] [15]
-Overfull \hbox (13.95393pt too wide) in paragraph at lines 63--64
-[]\TU/SimSun(1)/m/n/12.045 这 两 种 硬 件 多 线 程 技 术 都 十 分 常 见。|  在 \TU/entextsf/m/n/
-12.045 Tera \TU/SimSun(1)/m/n/12.045 公 司 设 计 的 超 级 计 算 机 \TU/entextsf/m/n/12.04
-5 MTA(Multi-
+Overfull \hbox (14.00099pt too wide) in paragraph at lines 63--64
+[]\TU/AdobeSongStd-Light(1)/m/n/12.045 这 两 种 硬 件 多 线 程 技 术 都 十 分 常 见。|  在 \TU/e
+ntextsf/m/n/12.045 Tera \TU/AdobeSongStd-Light(1)/m/n/12.045 公 司 设 计 的 超 级 计 算 
+机 \TU/entextsf/m/n/12.045 MTA(Multi-
  []
 
 [16]
@@ -2100,40 +2097,41 @@ File: opencl_model_relation.png Graphic file (type QTm)
  <use  "opencl_model_relation.png" >
 [33]
 File: opencl_memory_gpu.png Graphic file (type QTm)
- <use  "opencl_memory_gpu.png" > [34] [35] [36]
+ <use  "opencl_memory_gpu.png" > [34] [35]
 File: gpu_addr.png Graphic file (type QTm)
- <use  "gpu_addr.png" >
+ <use  "gpu_addr.png" > [36]
 File: gpu_mem_channel.png Graphic file (type QTm)
 
-<use  "gpu_mem_channel.png" > [37] [38]
+<use  "gpu_mem_channel.png" >
 File: nvidia_3_gpus.png Graphic file (type QTm)
- <use  "nvidia_3_gpus.png" > [39]
+ <use  "nvidia_3_gpus.png" > [37] [38]
 File: amd_vega_arch.png Graphic file (type QTm)
 
-<use  "amd_vega_arch.png" > [40]
+<use  "amd_vega_arch.png" > [39]
 File: amd_cs.png Graphic file (type QTm)
- <use  "amd_cs.png" > [41]
+ <use  "amd_cs.png" > [40]
 File: amd_gpu_memory.png Graphic file (type QTm)
 
 <use  "amd_gpu_memory.png" >
-Overfull \hbox (10.54552pt too wide) in paragraph at lines 356--357
-[]\TU/SimSun(1)/m/n/12.045 在 计 算 单 元 的 设 计 上，| \TU/entextsf/m/n/12.045 AMD \TU/
-SimSun(1)/m/n/12.045 和 \TU/entextsf/m/n/12.045 NVIDIA GPU \TU/SimSun(1)/m/n/12.
-045 的 计 算 单 元 都 采 用 了 \TU/entextsf/m/n/12.045 SIMD(Single
+Overfull \hbox (12.30972pt too wide) in paragraph at lines 357--358
+[]\TU/AdobeSongStd-Light(1)/m/n/12.045 在 计 算 单 元 的 设 计 上，| \TU/entextsf/m/n/12.
+045 AMD \TU/AdobeSongStd-Light(1)/m/n/12.045 和 \TU/entextsf/m/n/12.045 NVIDIA G
+PU \TU/AdobeSongStd-Light(1)/m/n/12.045 的 计 算 单 元 都 采 用 了 \TU/entextsf/m/n/12.0
+45 SIMD(Single
  []
 
-[42] [43]
+[41] [42]
 File: v_mac_throughput.png Graphic file (type QTm)
  <use  "v_mac_throughput.png" >
 File: mem_bandwidth.png Graphic file (type QTm)
- <use  "mem_bandwidth.png" > [44])
-(./Tex/Chap_GEMMGPU.tex [45] [46
-
-]
+ <use  "mem_bandwidth.png" > [43])
+(./Tex/Chap_GEMMGPU.tex [44]
 第5章
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 29.
-[47]
+[45
+
+]
 File: outer_product.png Graphic file (type QTm)
  <use  "outer_product.png" >
 File: thread_to_data.png Graphic file (type QTm)
@@ -2144,13 +2142,15 @@ File: global_A.png Graphic file (type QTm)
 File: global_B.png Graphic file (type QTm)
  <use  "global_B.png" >
 File: writeS.png Graphic file (type QTm)
- <use  "writeS.png" > [48]
-[49]
+ <use  "writeS.png" > [46]
+[47]
 File: readS.png Graphic file (type QTm)
  <use  "readS.png" >
 File: threadblock.png Graphic file (type QTm)
- <use  "threadblock.png" > [50] [51])
-(./Tex/Chap_GEMMOpt.tex [52]
+ <use  "threadblock.png" > [48])
+(./Tex/Chap_GEMMOpt.tex [49] [50
+
+]
 第6章
 
 Overfull \hbox (52.9118pt too wide) in paragraph at lines 8--20
@@ -2159,43 +2159,45 @@ Overfull \hbox (52.9118pt too wide) in paragraph at lines 8--20
 
 File: ffma_percentage.png Graphic file (type QTm)
 <use  "ffma_percentage.png" >
-Overfull \hbox (10.71823pt too wide) in paragraph at lines 37--38
-\TU/SimSun(1)/m/n/12.045 令 百 分 比 越 高。|  如 果 我 们 采 用 的 寄 存 器 分 块 大 小 为 \TU/entex
-tsf/m/n/12.045 6\TU/SimSun(1)/m/n/12.045 ，|  则 \TU/entextsf/m/n/12.045 FFMA/DS_
-READ_B32=4:1\TU/SimSun(1)/m/n/12.045 ，|
+Overfull \hbox (25.59644pt too wide) in paragraph at lines 37--38
+\TU/AdobeSongStd-Light(1)/m/n/12.045 指 令 百 分 比 越 高。|  如 果 我 们 采 用 的 寄 存 器 分 块 大
+ 小 为 \TU/entextsf/m/n/12.045 6\TU/AdobeSongStd-Light(1)/m/n/12.045 ，|  则 \TU/en
+textsf/m/n/12.045 FFMA/DS_READ_B32=4:1\TU/AdobeSongStd-Light(1)/m/n/12.045 ，|
  []
 
-[53
-
-] [54]
+[51] [52]
+File: opencl_gemm_1_1.png Graphic file (type QTm)
+ <use  "opencl_gemm_1_1.png" > [53]
 File: loop_unroll.png Graphic file (type QTm)
- <use  "loop_unroll.png" > [55]
+ <use  "loop_unroll.png" > [54]
 File: reg_double_buffer.png Graphic file (type QTm)
- <use  "reg_double_buffer.png" >
-File: load_balance.png Graphic file (type QTm)
 
-<use  "load_balance.png" > [56] [57]
+<use  "reg_double_buffer.png" >
+File: load_balance.png Graphic file (type QTm)
+ <use  "load_balance.png" > [55] [56]
 File: bank_conflict.png Graphic file (type QTm)
- <use  "bank_conflict.png" > [58]
-Overfull \hbox (28.76909pt too wide) in paragraph at lines 133--134
-\TU/SimSun(1)/m/n/12.045 对 应 的 \TU/entextsf/m/n/12.045 t_buffer_load_xyzw \TU/S
-imSun(1)/m/n/12.045 指 令 结 果 返 回，|  所 以 \TU/entextsf/m/n/12.045 ds_read_b128 \TU
-/SimSun(1)/m/n/12.045 指 令 和 \TU/entextsf/m/n/12.045 t_buffer_load_xyzw
+
+<use  "bank_conflict.png" > [57]
+Overfull \hbox (30.5333pt too wide) in paragraph at lines 146--147
+\TU/AdobeSongStd-Light(1)/m/n/12.045 对 应 的 \TU/entextsf/m/n/12.045 t_buffer_loa
+d_xyzw \TU/AdobeSongStd-Light(1)/m/n/12.045 指 令 结 果 返 回，|  所 以 \TU/entextsf/m/n
+/12.045 ds_read_b128 \TU/AdobeSongStd-Light(1)/m/n/12.045 指 令 和 \TU/entextsf/m/
+n/12.045 t_buffer_load_xyzw
  []
 
 File: hgemm_perf.png Graphic file (type QTm)
-<use  "hgemm_perf.png" > [59]) (./Tex/Chap_Conclusion.tex [60]
-第7章
-[61
+<use  "hgemm_perf.png" > [58]) (./Tex/Chap_Conclusion.tex [59] [60
 
-])) [62] (Tmp/Thesis.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 65--68
+]
+第7章
+[61])) [62] (Tmp/Thesis.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 71--74
 []\TU/entextrm/m/n/10.53937 GRAY S.  Assembler for nvidia maxwell architecture,
  2014[J].  URL
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 84--87
+Underfull \hbox (badness 10000) in paragraph at lines 90--93
 []\TU/entextrm/m/n/10.53937 XIUXIA Z.  Assembler for nvidia kepler architecture
 , 2016[J].  URL
  []
@@ -2224,12 +2226,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 32801 strings out of 493005
- 610232 string characters out of 6137956
- 653614 words of memory out of 5000000
- 36310 multiletter control sequences out of 15000+600000
+ 32784 strings out of 493005
+ 613080 string characters out of 6137956
+ 653574 words of memory out of 5000000
+ 36303 multiletter control sequences out of 15000+600000
  23593 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  63i,12n,94p,10526b,644s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Tmp/Thesis.pdf (83 pages).
+Output written on Tmp/Thesis.pdf (85 pages).

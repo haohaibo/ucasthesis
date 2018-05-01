@@ -95,6 +95,7 @@ wavefront拥有的线程数在不同系列的GPUs上会有不同。例如，一�
 对于CPU，OpenCL运行时使用LLVM AS将代码编译成x86二进制代码。OpenCL运行时会自动确定CPU的核心数，并将OpenCL kernel交由核心执行。
 
 对于GPU，OpenCL运行时对不完整的AMD IL做后处理，变成完整的AMD IL。这个过程会从宏定义库中添加针对特定GPU的宏定义。之后，OpenCL运行时会移除不必要的函数，将完整的IL代码交由着色器编译器，编译成针对特定GPU的二进制代码。
+
 平台模型：
 
 OpenCL平台包含一个主机端和一到多个OpenCL设备。一个OpenCL设备包含一到多个CUs(Compute Units)，一个CU包含一到多个PEs(Processing Elements)。
@@ -123,6 +124,7 @@ OpenCL平台包含一个主机端和一到多个OpenCL设备。一个OpenCL设�
 前面部分主要介绍了如何获取选择平台和平台上的设备，并获取平台和该平台上设备的信息。虽然看起来很冗长，但对我们理解OpenCL的平台模型很有帮助。
 
 执行模型：
+
 为了主机端可以向设备发送命令和数据，我们要创建一个context。
 
 Context介绍：
@@ -249,7 +251,7 @@ Channel冲突：
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.50\textwidth]{gpu_addr}
+	\includegraphics[width=0.80\textwidth]{gpu_addr}
 	\bicaption{硬件地址字节分布}{Hardware address byte distribution}
 	\label{fig:gpu_addr}
 \end{figure}
@@ -277,7 +279,7 @@ channel\_within\_quadrant = 2 * pipe[0]
 NVIDIA GPUs由许多SMs(Streaming Multiprocessor)构成。每个SM包含多个SPs(Streaming Processor)(每个SP是基本的计算单元)，调度器，和SFUs(Specital Functional Unit)，LD/ST(Load/Store)单元，寄存器文件和统一共享内存/L1 cache。一个SM中的SPs共享寄存器文件和shared memory。NVIDIA GTX280,GTX580和GTX680三代GPU的比较(如图\ref{fig:nvidia_3_gpus})
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.50\textwidth]{nvidia_3_gpus}
+	\includegraphics[width=0.80\textwidth]{nvidia_3_gpus}
 	\bicaption{NVIDIA三代GPU的比较}{Comparison of NVIDIA Three Gen. GPUs}
 	\label{fig:nvidia_3_gpus}
 \end{figure}
@@ -288,17 +290,16 @@ NVIDIA GPUs由许多SMs(Streaming Multiprocessor)构成。每个SM包含多个SP
 在一个SM中，只有有限个线程可以并发的执行，称为active线程。一方面，一个SM中SPs越多，我们就需要更多的active线程来掩盖延迟。但另一方面，SM中的寄存器的数量和shared memory的大小等硬件资源又会限制SM中active线程的数量。从Fermi GPU到Kepler GPU每个SP可用的寄存器数量和shared memory大小在变少，因此单个SP支持的active线程数在减少。对于Fermi和Kepler GK104指令级，每个线程可用63个寄存器。因为在指令编码中，编码寄存器的段为6 bit。
 
 \subsection{AMD GPU微架构}
- AMD GPU计算部件由多个Compute Unit(计算单元)组成，对应于NVIDIA的SM(Streaming Multi-processor)， (从SIMD0~SIMD3)四个SIMD构成一个Compute Unit。每个SIMD有自己40-bit的程序计数器，和10个wavefronts(对应NVIDIA的warp)的指令缓存。一个Compute Unit(计算单元)可以最多可同时运行40个wavefronts，每个SIMD最多有10个wavefronts。Vega10 GPU增加了半精度浮点运算部件。
+ AMD GPU计算部件由多个Compute Unit(计算单元)组成，对应于NVIDIA的SM(Streaming Multi-processor)， (从SIMD0$\sim$SIMD3)四个SIMD构成一个Compute Unit。每个SIMD有自己40-bit的程序计数器，和10个wavefronts(对应NVIDIA的warp)的指令缓存。一个Compute Unit(计算单元)可以最多可同时运行40个wavefronts，每个SIMD最多有10个wavefronts。Vega10 GPU增加了半精度浮点运算部件。
 
 
 
 \subsubsection{AMD GCN Data Parellel Processor阵列结构}
- AMD GCN处理器实现了并行微架构，不仅为计算机图形应用提供了一个优秀的平台，而且也为通用数据并行应用提供了一个极好的平台。 任何需要高带宽或计算密集型的数据密集型应用程序都可以在AMD GCN处理器上运行。
-GCN架构包括数据并行处理器(DPP)阵列，命令处理器，存储器控制器和其他逻辑。 GCN命令处理器读取主机写入系统内存地址空间中的内存映射GCN寄存器的命令。 当命令完成时，命令处理器将硬件生成的中断发送给主机。 GCN内存控制器可直接访问所有GCN设备内存和系统内存的主机指定区域。 为了满足读取和写入请求，存储器控制器执行直接存储器存取（DMA）控制器的功能，包括基于存储器中所请求数据的格式计算存储器地址偏移量。 在GCN环境中，一个完整的应用程序包括两部分：(1)在主处理器上运行的程序，以及(2)在GCN处理器上运行的程序，称为kernel。
+ AMD GCN处理器实现了并行微架构，不仅为计算机图形应用提供了一个优秀的平台，而且也为通用数据并行应用提供了一个极好的平台。 任何需要高带宽或计算密集型的数据密集型应用程序都可以在AMD GCN处理器上运行。GCN架构包括数据并行处理器(DPP)阵列，命令处理器，存储器控制器和其他逻辑。 GCN命令处理器读取主机写入系统内存地址空间中的内存映射GCN寄存器的命令。 当命令完成时，命令处理器将硬件生成的中断发送给主机。 GCN内存控制器可直接访问所有GCN设备内存和系统内存的主机指定区域。 为了满足读取和写入请求，存储器控制器执行直接存储器存取（DMA）控制器的功能，包括基于存储器中所请求数据的格式计算存储器地址偏移量。 在GCN环境中，一个完整的应用程序包括两部分：(1)在主处理器上运行的程序，以及(2)在GCN处理器上运行的程序，称为kernel。
 下图展示了AMD Vega GPU内部结构
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.50\textwidth]{amd_vega_arch}
+	\includegraphics[width=0.80\textwidth]{amd_vega_arch}
 	\bicaption{AMD VEGA GPU结构图}{AMD VEGA architecture}
 	\label{fig:amd_vega_arch}
 \end{figure}
@@ -345,7 +346,7 @@ GCN处理器由以下部分组成：
 AMD GCN流处理器可以在不同的work-item之间共享数据。 数据共享可以显着提升性能。下图展示了AMD GCN处理器内存层次结构。
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.50\textwidth]{amd_gpu_memory}
+	\includegraphics[width=0.80\textwidth]{amd_gpu_memory}
 	\bicaption{AMD GPU内存层次结构}{AMD GPU memory hierarchy}
 	\label{fig:amd_gpu_memory}
 \end{figure}
@@ -378,7 +379,7 @@ GPU上的指令级并行。对于AMD GPU每个时钟周期可发射多条向量�
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{v_mac_throughput}
-	\bicaption{AMD Fiji GPU浮点通量测试}{AMD GPU memory hierarchy}
+	\bicaption{AMD Fiji GPU浮点通量测试}{AMD Fiji GPU floating point throughput}
 	\label{fig:v_mac_throughput}
 \end{figure}
 
@@ -391,7 +392,7 @@ GPU上的指令级并行。对于AMD GPU每个时钟周期可发射多条向量�
 	\label{fig:mem_bandwidth}
 \end{figure}
 
-我们探测得的AMD Fiji R9 Nano GPU的内存带宽为341GB/s。Fiji GPU的理论内存带宽为512GB/s，所以实测浮点性能为341/512 = 66.6\%。
+我们探测得的AMD Fiji R9 Nano GPU的内存带宽为341GB/s。Fiji GPU的理论内存带宽为512GB/s，所以实测内存带宽为341/512 = 66.6\%。
 
 
 
