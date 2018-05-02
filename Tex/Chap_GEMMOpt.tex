@@ -235,6 +235,14 @@
 \subsection{消除shared memory bank冲突}
 AMD GPU shared memory有32个bank。当不同的线程访问不同的bank时，线程可以同时读；当不同的线程访问同一个bank的同一个位置时，可以进行广播；当不同的线程访问同一个bank的不同位置时，会产生bank冲突，需要多个时钟周期来完成。所以，bank冲突会减小访存带宽，对性能影响很大。
 
+在前面的6.3.1小结中，我们分析了外积法的原始实现中，有4-way shared memory bank冲突。通过观察可以发现，产生shared memory bank冲突的原因是在一个threadblock中，所有线程对shared memory的访问跨越了2个bank，导致不同的线程访问同一个的bank的不同entry这种情况发生。接下来，我们将展示如何通过分配线程的计算任务来消除shared memory bank冲突。消除shared memory bank冲突的方法是安排一个thread block中的所有线程对shared memory的一次访问限制在一个bank中。图\ref{fig:gemm_no_bank_conflict}展示了通过消除shared memory bank冲突所带来的性能提升。
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.80\textwidth]{gemm_no_bank_conflict}
+	\bicaption{shared memory bank冲突消除带来的性能提升}{Performance improvements with shared memory bank conflict elimination}
+	\label{fig:gemm_no_bank_conflict}
+\end{figure}
+
 下图中小方格中的数字表示一个block中的64个线程，我们将64个线程看成一个2维的线程数组tid.x 取值从0~7， tid.y取值从0~7
 
 小方格中的数字对(tid.x,tid.y)对应的线程号为tid = tid.y * 8 + tid.x
