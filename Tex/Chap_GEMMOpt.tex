@@ -115,7 +115,7 @@
 \subsection{shared memory双缓冲}
 在前面的矩阵乘GPU算法描述中，讲述了shared memory的使用方法。首先将数据从全局内存读入寄存器，然后从寄存器写回到shared memory，最后再从shared memory读取数据到寄存器，并在寄存器中做计算。
 
-为了更有效地利用shared memory，我们采用shared memory双缓冲。如算法\ref{alg:gemm_sharedmem}所示，首先从全局内存预取数据到寄存器，然后从寄存器写回到shared memory。在从shared memory读取数据到寄存器并做计算之前，从全局内存预取下一次要计算的数据到寄存器。在OpenCL的实现中，shared memory双缓冲带来了$\sim$7.8\%的性能提升(如图\ref{fig:gemm_shared_double_buffer})。
+为了更有效地利用shared memory，我们采用shared memory双缓冲。如算法\ref{alg:gemm_sharedmem_v1}所示，首先从全局内存预取数据到寄存器，然后从寄存器写回到shared memory。在从shared memory读取数据到寄存器并做计算之前，从全局内存预取下一次要计算的数据到寄存器。在OpenCL的实现中，shared memory双缓冲带来了$\sim$7.8\%的性能提升(如图\ref{fig:gemm_shared_double_buffer})。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.80\textwidth]{gemm_shared_double_buffer}
@@ -125,7 +125,7 @@
 
 \begin{algorithm}[htbp]
 	\small
-	\caption{GEMM algorithm with shared memory double buffer}\label{alg:gemm_sharedmem}
+	\caption{GEMM algorithm with shared memory double buffer variant1}\label{alg:gemm_sharedmem_v1}
 	\begin{algorithmic}[1]
 		%\Procedure{Euclid}{$a,b$}\Comment{The g.c.d. of a and b}
 		\State $A, B, C$\Comment{matrix A, B, C}
@@ -157,6 +157,53 @@
 						\State $regC += regA \cdot regB$
 					\EndFor
 			\EndIf
+		\EndFor\label{gemmendfor}
+		\State $C \gets regC$\Comment{Store C from registers to global memory}
+		%\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+两种shared memory双缓冲实现方式的的比较，第一种算法\ref{alg:gemm_sharedmem_v1}实现中，barrier CLK\_GLOBAL\_MEM\_FENCE语句放在全局内存读语句之后；第二种算法\ref{alg:gemm_sharedmem_v2}实现中，barrier CLK\_GLOBAL\_MEM\_FENCE语句放在寄存器写入数据到shared memory之前。从直观理解上第二种算法\ref{alg:gemm_sharedmem_v2}的性能应该优于第二种，因为第二种实现中将给全局内存到寄存器的数据读操作的延迟留出了更多的等待时间。但在AMD ROCm平台上实测的结果是第一种实现要好于第二种(图\ref{fig:gemm_shared_double_buffer_v2})。从这里可以看出，编程人员有时对GPU编译器的行为无法做出预测，影响了更为细致的调优工作的开展。
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.80\textwidth]{gemm_shared_double_buffer_v2}
+	\bicaption{两种shared memory双缓冲实现的性能比较}{Performance comparison of two shared memory double buffering implementations}
+	\label{fig:gemm_shared_double_buffer_v2}
+\end{figure}
+
+\begin{algorithm}[htbp]
+	\small
+	\caption{GEMM algorithm with shared memory double buffer veriant2}\label{alg:gemm_sharedmem_v2}
+	\begin{algorithmic}[1]
+		%\Procedure{Euclid}{$a,b$}\Comment{The g.c.d. of a and b}
+		\State $A, B, C$\Comment{matrix A, B, C}
+		\State $regA[task\_size],regB[task\_size],regC[task\_size]$\Comment{Allocate register for compute}
+		\State $tileA[tile\_length*NUM\_UNROLL],tileB[tile\_length*NUM\_UNROLL]$\Comment{Shared memory double buffer}
+		\State $tileA'[tile\_length*NUM\_UNROLL],tileB'[tile\_length*NUM\_UNROLL]$
+		\State $loadA[tile\_length*NUM\_UNROLL/threadblock]$\Comment{Register for global memory load}
+		\State $loadB[tile\_length*NUM\_UNROLL/threadblock]$
+		\State $regC \gets 0$
+		\State $loadA \gets A, loadB \gets B $\Comment{Pre load tile of A, B from global to register}
+		\For   {$i = 0$; $i < K/NUM\_UNROLL$; $++i$}
+		\If    {$i \% 2 == 0$}
+		\State barrier CLK\_GLOBAL\_MEM\_FENCE
+		\State $tileA \gets loadA, tileB \gets loadB$
+		\State barrier CLK\_LOCAL\_MEM\_FENCE
+		\State $loadA \gets A, loadB \gets B $\Comment{Load the next tile of A, B from global to register}
+		\For   {$k = 0$; $k<NUM\_UNROLL$;$++k$}\Comment{Loop Unroll}
+		\State $regA \gets tileA, regB \gets tileB$
+		\State $regC += regA \cdot regB$
+		\EndFor
+		\Else
+		\State barrier CLK\_GLOBAL\_MEM\_FENCE  
+		\State $tileA' \gets loadA, tileB' \gets loadB$
+		\State barrier CLK\_LOCAL\_MEM\_FENCE
+		\State $loadA \gets A, loadB \gets B $\Comment{Load the next tile of A, B from global to register}
+		\State barrier CLK\_GLOBAL\_MEM\_FENCE
+		\For   {$k = 0$; $k<NUM\_UNROLL$;$++k$}\Comment{Loop Unroll}
+		\State $regA \gets tileA', regB \gets tileB'$
+		\State $regC += regA \cdot regB$
+		\EndFor
+		\EndIf
 		\EndFor\label{gemmendfor}
 		\State $C \gets regC$\Comment{Store C from registers to global memory}
 		%\EndProcedure
