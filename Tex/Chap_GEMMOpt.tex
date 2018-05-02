@@ -157,7 +157,6 @@
 						\State $regC += regA \cdot regB$
 					\EndFor
 			\EndIf
-			\State barrier CLK\_LOCAL\_MEM\_FENCE
 		\EndFor\label{gemmendfor}
 		\State $C \gets regC$\Comment{Store C from registers to global memory}
 		%\EndProcedure
