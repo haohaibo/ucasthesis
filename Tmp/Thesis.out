@@ -50,18 +50,18 @@
 \BOOKMARK [2][-]{subsection.6.3.2}{6.3.2 优化内存访问}{section.6.3}% 50
 \BOOKMARK [2][-]{subsection.6.3.3}{6.3.3 循环展开}{section.6.3}% 51
 \BOOKMARK [2][-]{subsection.6.3.4}{6.3.4 数据预取}{section.6.3}% 52
-\BOOKMARK [2][-]{subsection.6.3.5}{6.3.5 寄存器双缓冲}{section.6.3}% 53
-\BOOKMARK [2][-]{subsection.6.3.6}{6.3.6 线程负载均衡}{section.6.3}% 54
-\BOOKMARK [2][-]{subsection.6.3.7}{6.3.7 消除shared memory bank冲突}{section.6.3}% 55
-\BOOKMARK [2][-]{subsection.6.3.8}{6.3.8 指令重排}{section.6.3}% 56
-\BOOKMARK [1][-]{section.6.4}{6.4 矩阵乘性能测试}{chapter.6}% 57
-\BOOKMARK [1][-]{section.6.5}{6.5 矩阵乘性能分析}{chapter.6}% 58
-\BOOKMARK [2][-]{subsection.6.5.1}{6.5.1 矩阵乘潜在性能峰值}{section.6.5}% 59
-\BOOKMARK [2][-]{subsection.6.5.2}{6.5.2 Roofline模型}{section.6.5}% 60
+\BOOKMARK [2][-]{subsection.6.3.5}{6.3.5 shared memory双缓冲}{section.6.3}% 53
+\BOOKMARK [2][-]{subsection.6.3.6}{6.3.6 寄存器双缓冲}{section.6.3}% 54
+\BOOKMARK [2][-]{subsection.6.3.7}{6.3.7 线程负载均衡}{section.6.3}% 55
+\BOOKMARK [2][-]{subsection.6.3.8}{6.3.8 消除shared memory bank冲突}{section.6.3}% 56
+\BOOKMARK [2][-]{subsection.6.3.9}{6.3.9 指令重排}{section.6.3}% 57
+\BOOKMARK [1][-]{section.6.4}{6.4 矩阵乘性能测试}{chapter.6}% 58
+\BOOKMARK [1][-]{section.6.5}{6.5 矩阵乘性能分析}{chapter.6}% 59
+\BOOKMARK [2][-]{subsection.6.5.1}{6.5.1 矩阵乘潜在性能峰值}{section.6.5}% 60
 \BOOKMARK [1][-]{section.6.6}{6.6 本章小结}{chapter.6}% 61
 \BOOKMARK [0][-]{chapter.7}{第7章  结束语}{}% 62
 \BOOKMARK [1][-]{section.7.1}{7.1 本文工作总结}{chapter.7}% 63
 \BOOKMARK [1][-]{section.7.2}{7.2 下一步工作}{chapter.7}% 64
-\BOOKMARK [0][-]{section*.51}{参考文献}{}% 65
-\BOOKMARK [0][-]{appendix*.53}{致谢}{}% 66
-\BOOKMARK [0][-]{appendix*.54}{作者简介}{}% 67
+\BOOKMARK [0][-]{section*.55}{参考文献}{}% 65
+\BOOKMARK [0][-]{appendix*.57}{致谢}{}% 66
+\BOOKMARK [0][-]{appendix*.58}{作者简介}{}% 67

@@ -1,13 +1,15 @@
 \chapter{矩阵乘GPU实现}\label{chap:GEMMGPU}
 
-我们使用外积(outer product)法计算矩阵乘。因为外积法比內积法(inner product)在GPU上的并行性好。例如，我们要计算下面的矩阵乘法C=AxB。使用內积法，我们需要按照下面的公式计算：
+%我们使用外积(outer product)法计算矩阵乘。因为外积法比內积法(inner product)在GPU上的并行性好。例如，我们要计算下面的矩阵乘法C=AxB。使用內积法，我们需要按照下面的公式计算：
+本文使用外积(outer product)法计算矩阵乘。因为外积法比內积法(inner product)在GPU上的并行性好。例如，要计算下面的矩阵乘矩阵$C=A \times B$。使用內积法，需要按照下面的公式计算：
 
 \begin{equation}
 \label{eq:innerproduct}
 C[i][j]=\sum_{k}A[i][k]B[k][j]
 \end{equation}
 
-我们可以并行的计算所有的乘法，但不能并行的计算加法。即使我们可以使用reduction来快速计算加法，但仍然会产生很多空闲的线程。这样，由于任务划分的不均衡，会使得计算性能大大降低。然而，如果我们用外积法来代替內积法，将会很大程度上缓解负载不均衡带来的性能损失。下面是外积法的计算公式：
+%我们可以并行的计算所有的乘法，但不能并行的计算加法。即使我们可以使用reduction来快速计算加法，但仍然会产生很多空闲的线程。这样，由于任务划分的不均衡，会使得计算性能大大降低。然而，如果我们用外积法来代替內积法，将会很大程度上缓解负载不均衡带来的性能损失。下面是外积法的计算公式：
+采用內积法可以并行的计算所有的乘法，但不能并行的计算加法。即使可以使用reduction来快速计算加法，但仍然会产生很多空闲的线程。这样，由于任务划分的不均衡，会使得计算性能大大降低。然而，如果用外积法来代替內积法，将会很大程度上缓解负载不均衡带来的性能损失。下面是外积法的计算公式：
 
 \begin{equation}
 \label{eq:outerproduct}
@@ -16,33 +18,61 @@ C^{(k)}=A[:][k]B[k][:], C=\sum_{k}C^{(k)}
 
 在计算A[:][k]B[k][:]时，每个线程只需负责读取A的一个小块和B的一个小块，来计算对应C的一个小块；每个线程可以独立的将当前计算得到的C的一小块的部分和累加到对应C的一小块上。当C的部分和全部都累加起来时，我们一次性写回C到全局内存。
 
-在算法设计上，我们采用外积法， A矩阵列优先存储，B矩阵行优先存储， 图\ref{fig:outer_product}为一个block中的线程读取A，B中的数据块， 和对应到C矩阵的输出
+%在算法设计上，我们采用外积法， A矩阵列优先存储，B矩阵行优先存储， 图\ref{fig:outer_product}为一个block中的线程读取A，B中的数据块， 和对应到C矩阵的输出
+在算法设计上，本文采用外积法， A矩阵列优先存储，B矩阵行优先存储， 图\ref{fig:outer_product}为一个block中的线程读取A，B中的数据块， 和对应到C矩阵的输出
 
-问题定义： C = A * B， A大小为MxK, B为KxN, C为MxN 
+%问题定义： C = A * B， A大小为MxK, B为KxN, C为MxN 
+问题定义： $C = A * B$， A大小为$M \times K$, B为$K \times N$, C为$M \times N$
 
 矩阵乘外积法： 我们用A矩阵的一列乘以B矩阵的一行，沿着K方向做累加，可以计算出结果C(图\ref{fig:outer_product})。
 
 \section{矩阵乘外积法算法描述}
+
+%\begin{algorithm}[htbp]
+%	\small
+%	\caption{GEMM algorithm}\label{alg:gemm}
+%	\begin{algorithmic}[1]
+%		%\Procedure{Euclid}{$a,b$}\Comment{The g.c.d. of a and b}
+%		\State preload block of A, B
+%		\While{one more valid block of A, B exists}
+%		\State load block of A, B from global memory to registers
+%		\State store block of A, B from registers to shared memory
+%		\State load block of A, B from shared memory to registers
+%		\State compute block of C in registers
+%		\EndWhile\label{gemmendwhile}
+%		\State store C from registers to global memory
+%		%\EndProcedure
+%	\end{algorithmic}
+%\end{algorithm}
 
 \begin{algorithm}[htbp]
 	\small
 	\caption{GEMM algorithm}\label{alg:gemm}
 	\begin{algorithmic}[1]
 		%\Procedure{Euclid}{$a,b$}\Comment{The g.c.d. of a and b}
-		\State preload block of A, B
+		\State $A, B, C$\Comment{matrix A, B, C}
+		\State $regA[task\_size],regB[task\_size],regC[task\_size]$\Comment{Allocate register for compute}
+		\State $tileA[tile\_size],tileB[tile\_size]$\Comment{Allocate shared memory for tile of A, B}
+		\State $regC \gets 0$
 		\While{one more valid block of A, B exists}
-		\State load block of A, B from global memory to registers
-		\State store block of A, B from registers to shared memory
-		\State load block of A, B from shared memory to registers
-		\State compute block of C in registers
+%		\State load block of A, B from global memory to registers
+%		\State store block of A, B from registers to shared memory
+%		\State load block of A, B from shared memory to registers
+%		\State compute block of C in registers
+        \State $tileA \gets A, tileB \gets B $\Comment{Load tile of A, B from global to shared}
+        \State barrier
+        \For   {$k = 0$; $k<NUM\_UNROLL$;$++k$}\Comment{Loop Unroll}
+        \State $regA \gets tileA, regB \gets tileB$
+        \State $regC += regA \cdot regB$
+        \EndFor
+        \State barrier
 		\EndWhile\label{gemmendwhile}
-		\State store C from registers to global memory
+		\State $C \gets regC$\Comment{Store C from registers to global memory}
 		%\EndProcedure
 	\end{algorithmic}
 \end{algorithm}
 
-
-在算法执行上，我们经过下面的步骤：
+在算法\ref{alg:gemm}执行上，我们经过下面的步骤：
 
 (1)	数据预取， 从全局内存读取A,B矩阵数据块到寄存器
 
@@ -85,14 +115,14 @@ C^{(k)}=A[:][k]B[k][:], C=\sum_{k}C^{(k)}
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{global_A}
-	\bicaption{从全局内存读取A矩阵数据到寄存器}{Thread-to-data mapping}
+	\bicaption{从全局内存读取A矩阵数据到寄存器}{Read A-matrix data from global memory to registers}
 	\label{fig:global_A}
 \end{figure}
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{global_B}
-	\bicaption{从全局内存读取B矩阵数据到寄存器}{Thread-to-data mapping}
+	\bicaption{从全局内存读取B矩阵数据到寄存器}{Read B-matrix data from global memory to registers}
 	\label{fig:global_B}
 \end{figure}
 
@@ -105,7 +135,7 @@ B(表示保存B矩阵数据的寄存器) : 从全局内存读B数据到寄存器
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{writeS}
-	\bicaption{写回A，B数据到共享内存}{Thread-to-data mapping}
+	\bicaption{写回A,B数据到共享内存}{Write A,B to shared memory}
 	\label{fig:writeS}
 \end{figure}
 
@@ -116,7 +146,7 @@ B(表示保存B矩阵数据的寄存器) : 从全局内存读B数据到寄存器
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{readS}
-	\bicaption{从共享内存读取A,B数据到寄存器}{Thread-to-data mapping}
+	\bicaption{从共享内存读取A,B数据到寄存器}{Read A,B from shared memory to registers}
 	\label{fig:readS}
 \end{figure}
 
@@ -125,7 +155,7 @@ B(表示保存B矩阵数据的寄存器) : 从全局内存读B数据到寄存器
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{threadblock}
-	\bicaption{一个threadblock中的计算任务}{Thread-to-data mapping}
+	\bicaption{一个threadblock中的计算任务}{Computation tasks in a threadblock}
 	\label{fig:threadblock}
 \end{figure}
 

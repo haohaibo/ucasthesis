@@ -96,64 +96,64 @@ wavefront拥有的线程数在不同系列的GPUs上会有不同。例如，一�
 
 对于GPU，OpenCL运行时对不完整的AMD IL做后处理，变成完整的AMD IL。这个过程会从宏定义库中添加针对特定GPU的宏定义。之后，OpenCL运行时会移除不必要的函数，将完整的IL代码交由着色器编译器，编译成针对特定GPU的二进制代码。
 
-平台模型：
+%平台模型：
+%
+%OpenCL平台包含一个主机端和一到多个OpenCL设备。一个OpenCL设备包含一到多个CUs(Compute Units)，一个CU包含一到多个PEs(Processing Elements)。
 
-OpenCL平台包含一个主机端和一到多个OpenCL设备。一个OpenCL设备包含一到多个CUs(Compute Units)，一个CU包含一到多个PEs(Processing Elements)。
-
-平台模型是开发可在不同硬件平台上运行的程序的一个关键。在一个系统中，可能同时包含AMD GPU和NVIDIA GPU。
+%平台模型是开发可在不同硬件平台上运行的程序的一个关键。在一个系统中，可能同时包含AMD GPU和NVIDIA GPU。
 
 编程人员可以使用平台模型API来选择平台和计算设备。平台模型提供了一个抽象的设备体系结构，编程人员可以根据这个抽象体系结构来编写kernel。硬件厂商会将这个抽象体系结构映射到具体的物理硬件上。平台模型将设备定义为一组CUs(Compute Units)，每个CU相对独立。每个CU由一组PEs(Processing Elements)组成。我们以2017年AMD新出Vega10架构为例，Vega10计算卡包含64个CUs，每个CU包含4个宽度为16的SIMD部件，所以一个CU的硬件向量宽度为64。我们可以计算出一张Vega10计算卡可以一次总共执行64x16x4=4096个指令。再根据Vega10的计算时钟频率最大为1.5GHz，每个时钟周期可以做2个浮点操作，我们可以计算出Vega10的理论单精度浮点峰值为64x16x4x2x1.5GHz=12288.0 Gflop/s。
-获取平台和设备信息：
-
-我们可以调用clGetPlatformIDs()函数来获取系统的平台信息。
-
-获取了每个平台的ID号之后，我们通过调用clGetPlatformInfo()函数来获取每个平台的硬件厂商信息。
-
-当我们选好平台后，接下来就可以调用clGetDeviceIDs()选择该平台的一个具体设备。
-
-在本次实验中，我们的一个CPU连接两个AMD vega10 GPU。
-
-我们接下来就可以选择在该平台每个设备的ID号后，可以通过调用clGetDeviceInfo()获取该平台每个设备的信息。
-
-本次实验使用的是AMD vega10 GPU，又称gfx900。
-
-对于vega10 GPU，有64个CUs。
-
-更多信息在此就不一一列举。
-
-前面部分主要介绍了如何获取选择平台和平台上的设备，并获取平台和该平台上设备的信息。虽然看起来很冗长，但对我们理解OpenCL的平台模型很有帮助。
-
-执行模型：
-
-为了主机端可以向设备发送命令和数据，我们要创建一个context。
-
-Context介绍：
-
-在OpenCL中，context是一个抽象环境。在这个抽象环境中，我们可以协调kernel的执行和管理kernel的内存。并且可以对kernel的执行进行跟踪。
-
-OpenCL运行时(runtime)使用contexts来管理各种对象，例如命令队列(command queues)，内存，程序(program)和kernel等对象；并且使用contexts中指定的设备来运行kernel。
-
-在OpenCL中，查询平台和设备信息，创建context的过程看起来很冗长。然而，当我们写好这些代码后，我们就可以在之后的项目中重用这部分代码。
-
-命令队列(command-queues)：
-
-设备端执行任务的方式是，主机端向设备端发送命令(commands)，设备根据该命令来执行任务。这里的命令(commands)包括执行kernel，数据传输，同步操作。
-
-主机端请求设备端执行任务，需要通过命令队列(command-queues)这种通信机制。当我们选定设备，并且创建了与选定设备关联的context之后，我们需要针对选定的每一个设备创建一个与之对应的命令队列(command-queues)。每个命令队列只能和一个设备关联。因为一个context中可能关联多个设备。在当前的context中，主机端向具体某一个设备发送命令时，就需要一个与该设备关联的命令队列。
-当主机端需要某一个设备执行某种操作时，主机端需要将相应的命令提交到对应的命令队列中。
-
-事件(Events)：
-
-OpenCL中的事件是与命令的状态相关联的对象。命令队列中的命令会产生事件，其他命令在执行之前需要等待某个事件。
-设备端队列(device-side enqueuing)：
-
-从另一个角度来看我们的异构计算平台。我们可以将之看成master-worker模型。在该模型中，主机端(master)发送命令给设备端(worker)。通过master-worker模型，主机端和设备端可以协作工作。然而，在很多情况下，特别是在运行有前后依赖的算法时，主机端并不能静态的确定向设备端分发的任务数。例如在组合优化中，搜索区域的大小可能会决定下次work-groups的数目。然而，搜索区域的大小只能从上一次的迭代中获知。在之前的OpenCL版本中，为了给下一次运行的kernel设置合适的并行粒度，需要设备端和主机端进行通信来确定。为了去除这样的通信要求和提高系统性能，OpenCL 2.0在执行模型中增加了设备端队列(device-side enqueuing)。
-在设备端正在执行的kernel可以将另外一个kernel放入该设备端队列。在这种情形下，我们称正在执行的kernel为父kernel，放入设备端的kernel为子kernel。当父kernel和所有子kernel都已执行完，父kernel在被标记为已完成。但父kernel和子kernel的执行可以是异步的。
-
-Kernels和OpenCL编程模型：
-
-前面介绍的执行模型是为了管理OpenCL命令的执行。OpenCL命令用来描述数据的传输和kernel的执行。OpenCL kernel是OpenCL应用中实际在设备上执行的那部分程序。和CPU上的许多并发模型类似，OpenCL kernel在语法上看起来和标准的C函数类似。这里的主要区别是OpenCL kernel有一组额外的关键字和OpenCL kernels所实现的并发模型。   
-当使用操作系统提供的线程接口编写并发程序时，我们需要考虑实际的可用物理资源（如CPU物理核数）。当我们创建的线程超过CPU硬件线程数时，就需要考虑线程创建、线程间切换所带来的开销。而当使用OpenCL编写并发程序时，我们经常需要考虑如何采用最好的并行粒度来编写并行程序。
+%获取平台和设备信息：
+%
+%我们可以调用clGetPlatformIDs()函数来获取系统的平台信息。
+%
+%获取了每个平台的ID号之后，我们通过调用clGetPlatformInfo()函数来获取每个平台的硬件厂商信息。
+%
+%当我们选好平台后，接下来就可以调用clGetDeviceIDs()选择该平台的一个具体设备。
+%
+%在本次实验中，我们的一个CPU连接两个AMD vega10 GPU。
+%
+%我们接下来就可以选择在该平台每个设备的ID号后，可以通过调用clGetDeviceInfo()获取该平台每个设备的信息。
+%
+%本次实验使用的是AMD vega10 GPU，又称gfx900。
+%
+%对于vega10 GPU，有64个CUs。
+%
+%更多信息在此就不一一列举。
+%
+%前面部分主要介绍了如何获取选择平台和平台上的设备，并获取平台和该平台上设备的信息。虽然看起来很冗长，但对我们理解OpenCL的平台模型很有帮助。
+%
+%执行模型：
+%
+%为了主机端可以向设备发送命令和数据，我们要创建一个context。
+%
+%Context介绍：
+%
+%在OpenCL中，context是一个抽象环境。在这个抽象环境中，我们可以协调kernel的执行和管理kernel的内存。并且可以对kernel的执行进行跟踪。
+%
+%OpenCL运行时(runtime)使用contexts来管理各种对象，例如命令队列(command queues)，内存，程序(program)和kernel等对象；并且使用contexts中指定的设备来运行kernel。
+%
+%在OpenCL中，查询平台和设备信息，创建context的过程看起来很冗长。然而，当我们写好这些代码后，我们就可以在之后的项目中重用这部分代码。
+%
+%命令队列(command-queues)：
+%
+%设备端执行任务的方式是，主机端向设备端发送命令(commands)，设备根据该命令来执行任务。这里的命令(commands)包括执行kernel，数据传输，同步操作。
+%
+%主机端请求设备端执行任务，需要通过命令队列(command-queues)这种通信机制。当我们选定设备，并且创建了与选定设备关联的context之后，我们需要针对选定的每一个设备创建一个与之对应的命令队列(command-queues)。每个命令队列只能和一个设备关联。因为一个context中可能关联多个设备。在当前的context中，主机端向具体某一个设备发送命令时，就需要一个与该设备关联的命令队列。
+%当主机端需要某一个设备执行某种操作时，主机端需要将相应的命令提交到对应的命令队列中。
+%
+%事件(Events)：
+%
+%OpenCL中的事件是与命令的状态相关联的对象。命令队列中的命令会产生事件，其他命令在执行之前需要等待某个事件。
+%设备端队列(device-side enqueuing)：
+%
+%从另一个角度来看我们的异构计算平台。我们可以将之看成master-worker模型。在该模型中，主机端(master)发送命令给设备端(worker)。通过master-worker模型，主机端和设备端可以协作工作。然而，在很多情况下，特别是在运行有前后依赖的算法时，主机端并不能静态的确定向设备端分发的任务数。例如在组合优化中，搜索区域的大小可能会决定下次work-groups的数目。然而，搜索区域的大小只能从上一次的迭代中获知。在之前的OpenCL版本中，为了给下一次运行的kernel设置合适的并行粒度，需要设备端和主机端进行通信来确定。为了去除这样的通信要求和提高系统性能，OpenCL 2.0在执行模型中增加了设备端队列(device-side enqueuing)。
+%在设备端正在执行的kernel可以将另外一个kernel放入该设备端队列。在这种情形下，我们称正在执行的kernel为父kernel，放入设备端的kernel为子kernel。当父kernel和所有子kernel都已执行完，父kernel在被标记为已完成。但父kernel和子kernel的执行可以是异步的。
+%
+%Kernels和OpenCL编程模型：
+%
+%前面介绍的执行模型是为了管理OpenCL命令的执行。OpenCL命令用来描述数据的传输和kernel的执行。OpenCL kernel是OpenCL应用中实际在设备上执行的那部分程序。和CPU上的许多并发模型类似，OpenCL kernel在语法上看起来和标准的C函数类似。这里的主要区别是OpenCL kernel有一组额外的关键字和OpenCL kernels所实现的并发模型。   
+%当使用操作系统提供的线程接口编写并发程序时，我们需要考虑实际的可用物理资源（如CPU物理核数）。当我们创建的线程超过CPU硬件线程数时，就需要考虑线程创建、线程间切换所带来的开销。而当使用OpenCL编写并发程序时，我们经常需要考虑如何采用最好的并行粒度来编写并行程序。
 
 在OpenCL中，并发的最小粒度是work-item。每个work-item执行kernel函数。在向量加这个例子中，我们将循环的每一次映射到一个work-item。然后，让OpenCL运行时(runtime)来产生要计算的元素一样多的work-items。OpenCL运行时将work-items映射到GPU具体硬件计算单元上。从概念上来看，这种并行方式非常类似于MapReduce中的map操作。Map操作具有其天然的并行性。也类似于OpenMP中对for循环进行数据并行。
 
@@ -167,9 +167,9 @@ Kernels和OpenCL编程模型：
 
 在实际计算时，我们通常将NDRange映射到输入数据或者输出数据。在本文的矩阵乘实现中，我们将NDRange映射到输出数据，即C矩阵。
 
-编译和参数处理：
-
-一个OpenCL程序可能由多个OpenCL C kernel组成。例如，在代数求解器应用中，在一个OpenCL程序中可能包含向量加，矩阵乘和矩阵转置这几个kernel。在运行时(runtime)通过一系列API调用对OpenCL源程序进行编译。运行时(runtime)编译给系统提供了针对特定计算设备进行OpenCL kernel优化的可能，也让OpenCL kernel在之前未知的OpenCL兼容的设备上运行成为可能。由于OpenCL程序运行时(runtime)编译的特性，如果我们的OpenCL程序要在AMD，NVIDIA，Intel等这些硬件厂商提供的设备上运行时，我们不需要预先针对不同硬件平台进行预编译。
+%编译和参数处理：
+%
+%一个OpenCL程序可能由多个OpenCL C kernel组成。例如，在代数求解器应用中，在一个OpenCL程序中可能包含向量加，矩阵乘和矩阵转置这几个kernel。在运行时(runtime)通过一系列API调用对OpenCL源程序进行编译。运行时(runtime)编译给系统提供了针对特定计算设备进行OpenCL kernel优化的可能，也让OpenCL kernel在之前未知的OpenCL兼容的设备上运行成为可能。由于OpenCL程序运行时(runtime)编译的特性，如果我们的OpenCL程序要在AMD，NVIDIA，Intel等这些硬件厂商提供的设备上运行时，我们不需要预先针对不同硬件平台进行预编译。
 
 创建kernel的过程：
 
@@ -193,11 +193,11 @@ OpenCL kernel对象的具体二进制表示是和硬件厂商相关的。对于A
 
 NVIDIA也采用了类似的方法，将kernel代码首先编译成PTX(Parallel Thread eXecution)这种中间表示。这种中间表示的好处是可以让GPU ISA这样一代代演进，而不用考虑向后兼容的问题。因为GPU体系结构还处在一个非常快速的发展时期。
 
-OpenCL内存模型：
-
-不同计算设备的内存子系统会有很大不同。为了使得OpenCL代码具有可移植性，OpenCL定义了一个抽象的内存模型。编程人员可以基于该抽象内存模型来编写程序。不同的硬件厂商将此抽象内存模型映射到其具体设备的内存层次结构上。
-
-对于OpenCL kernel来说，通常我们需要向kernel传入一些参数，kernel会输出一些参数。在kernel执行前，我们要将输入数据从主机端内存拷贝到设备端内存。为了将数据从主机端拷贝到设备端，我们需要将其封装成一个内存对象。同样，对于输出数据，我们也需要将其封装成一个内存对象。OpenCL定义了三种内存对象：buffer，images和pipes。在本文的矩阵乘中，用到buffers对象，所以我们主要介绍buffer内存对象。Buffer内存对象等价于C语言中我们用malloc()分配的数组空间。
+%OpenCL内存模型：
+%
+%不同计算设备的内存子系统会有很大不同。为了使得OpenCL代码具有可移植性，OpenCL定义了一个抽象的内存模型。编程人员可以基于该抽象内存模型来编写程序。不同的硬件厂商将此抽象内存模型映射到其具体设备的内存层次结构上。
+%
+%对于OpenCL kernel来说，通常我们需要向kernel传入一些参数，kernel会输出一些参数。在kernel执行前，我们要将输入数据从主机端内存拷贝到设备端内存。为了将数据从主机端拷贝到设备端，我们需要将其封装成一个内存对象。同样，对于输出数据，我们也需要将其封装成一个内存对象。OpenCL定义了三种内存对象：buffer，images和pipes。在本文的矩阵乘中，用到buffers对象，所以我们主要介绍buffer内存对象。Buffer内存对象等价于C语言中我们用malloc()分配的数组空间。
 
 OpenCL将内存分为两部分：主机端内存和设备端内存。主机端内存和设备端内存间的数据移动通过调用相应OpenCL API完成。
 
@@ -295,8 +295,17 @@ NVIDIA GPUs由许多SMs(Streaming Multiprocessor)构成。每个SM包含多个SP
 
 
 \subsubsection{AMD GCN Data Parellel Processor阵列结构}
- AMD GCN处理器实现了并行微架构，不仅为计算机图形应用提供了一个优秀的平台，而且也为通用数据并行应用提供了一个极好的平台。 任何需要高带宽或计算密集型的数据密集型应用程序都可以在AMD GCN处理器上运行。GCN架构包括数据并行处理器(DPP)阵列，命令处理器，存储器控制器和其他逻辑。 GCN命令处理器读取主机写入系统内存地址空间中的内存映射GCN寄存器的命令。 当命令完成时，命令处理器将硬件生成的中断发送给主机。 GCN内存控制器可直接访问所有GCN设备内存和系统内存的主机指定区域。 为了满足读取和写入请求，存储器控制器执行直接存储器存取（DMA）控制器的功能，包括基于存储器中所请求数据的格式计算存储器地址偏移量。 在GCN环境中，一个完整的应用程序包括两部分：(1)在主处理器上运行的程序，以及(2)在GCN处理器上运行的程序，称为kernel。
-下图展示了AMD Vega GPU内部结构
+ AMD GCN处理器是一种并行微架构，不仅可用于计算机图形应用，而且也可用于通用数据并行应用。任何需要高带宽或计算密集型的数据密集型应用程序都可以在AMD GCN处理器上运行。
+ 
+ GCN架构包括数据并行处理器(DPP Data Parallel Processer)阵列，命令处理器，存储器控制器和其他逻辑。GCN命令处理器读取主机写入系统内存地址空间中的命令。当命令完成时，命令处理器将硬件生成的中断发送给主机端。 GCN内存控制器可直接访问所有GCN设备内存和主机指定的系统内存区域。存储器控制器使用DMA的方式进行数据的读取和写入。
+ 
+ 在GCN结构中，一个完整的应用程序包括两部分：
+ 
+ (1)在主机端运行的程序
+ 
+ (2)在GCN处理器上运行的程序，称之为kernel。
+ 
+下图展示了AMD Vega GPU内部结构。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.80\textwidth]{amd_vega_arch}
@@ -311,46 +320,52 @@ GCN程序由主机命令控制，包括
 (2)指定GCN GPU要在其上运行的数据域，
 
 (3)发送命令让GCN GPU开始执行程序。
+%
+%GCN驱动程序在主机上运行。
+%
+%DPP阵列是GCN处理器的核心。该数组被组织为一组计算单元流水线，每个流水线独立于其他计算单元流水线，并行运行在浮点部件或整数部件上。计算单元流水线可以处理数据，或通过内存控制器将数据传输到内存或从内存传输数据。当DPP接收到一个请求时，计算单元管道从内存加载指令和数据，开始执行，直到内核结束。内核正在运行时，GCN硬件会自动将指令从内存提取到片上高速缓存中; GCN软件在这方面没有任何作用。GCN内核可以将数据从片外存储器加载到片上通用寄存器(GPR)和高速缓存中。
+%
+%AMD GCN硬件可以检测浮点异常并生成中断。 特别是，他们在硬件中检测IEEE浮点异常; 这些可以被记录用于执行后分析。 上图中从命令处理器到主机的软件中断代表硬件生成的用于信号命令完成和相关管理功能的中断。
+%
+%GCN处理器通过跟踪潜在的数百个work-item的不同执行阶段，以及将计算操作与内存访问操作进行重叠来隐藏内存延迟。
+%
+%DPP阵列是GCN处理器的核心。该数组被组织为一组计算单元流水线，每个流水线独立于其他计算单元流水线，并行运行在浮点部件或整数部件上。计算单元流水线可以处理数据，或通过内存控制器将数据传输到内存或从内存传输数据。当DPP接收到一个请求时，计算单元管道从内存加载指令和数据，开始执行，直到内核结束。内核正在运行时，GCN硬件会自动将指令从内存提取到片上高速缓存中; GCN软件在这方面没有任何作用。GCN内核可以将数据从片外存储器加载到片上通用寄存器(GPR)和高速缓存中。
+%
+%AMD GCN硬件可以检测浮点异常并生成中断。 特别是，他们在硬件中检测IEEE浮点异常; 这些可以被记录用于执行后分析。 上图中从命令处理器到主机的软件中断代表硬件生成的用于信号命令完成和相关管理功能的中断。
 
-GCN驱动程序在主机上运行。
-
-DPP阵列是GCN处理器的核心。 该数组被组织为一组计算单元流水线，每个流水线独立于其他计算单元流水线，并行运行在浮点数据或整数数据流上。 计算单元流水线可以处理数据，或通过内存控制器将数据传输到内存或从内存传输数据。当DPP接收到一个请求时，计算单元管道从内存加载指令和数据，开始执行，直到内核结束。 内核正在运行时，GCN硬件会自动将指令从内存提取到片上高速缓存中; GCN软件在这方面没有任何作用。 GCN内核可以将数据从片外存储器加载到片上通用寄存器（GPR）和高速缓存中。
-
-AMD GCN硬件可以检测浮点异常并生成中断。 特别是，他们在硬件中检测IEEE浮点异常; 这些可以被记录用于执行后分析。 上图中从命令处理器到主机的软件中断代表硬件生成的用于信号命令完成和相关管理功能的中断。GCN处理器通过跟踪潜在的数百个work-item的不同执行阶段，以及将计算操作与内存访问操作进行重叠来隐藏内存延迟。
-
-下图显示了GCN应用程序的数据流。
+GCN处理器通过跟踪大量work-item的不同执行阶段，通过线程间切换，将计算操作与内存访问操作进行重叠来隐藏访存延迟。
+下\ref{fig:amd_cs}展示了GCN应用程序的数据流动。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{amd_cs}
-	\bicaption{GCN GPU程序数据流图}{GCN GPU program data flow diagram}
+	\bicaption{GCN GPU程序数据流动}{GCN GPU program data flow diagram}
 	\label{fig:amd_cs}
 \end{figure}
 
-GCN kernel是由GCN处理器执行的程序。从概念上讲，kernel在每个work-item上都是独立执行的，但实际上GCN处理器将64个work-item分组到一个wavefront中，wavefront一次执行所有64个work-itme上的kernel。
+GCN kernel是由GCN处理器执行的程序。从概念上讲，kernel在每个work-item上都是独立执行的，但实际上GCN处理器将64个work-item分组到一个wavefront中，wavefront并行执行所有64个work-item的指令。
 
 GCN处理器由以下部分组成：
 
-•	一个标量ALU，对每个wavefront操作一个值(对所有work-itme通用)。
+•	一个标量ALU，为一个CU的所有work-item所共用。
 
-•	矢量ALU，它对每个work-item的唯一值进行操作。
+•	4个向量ALU，向量ALU的宽度为16，一个work-item在其中的一个lane中执行。
 
-•	Local Data Share允许workgroup中的work-itme进行通信和共享数据。
+•	一个Local Data Share，使得workgroup中的work-item可以进行通信和数据共享。
 
-•	标量访存，可以通过Cache在SGPR和内存之间传输数据。
+•	标量访存部件，可以通过Cache在SGPR和内存之间传输数据。
 
-•	向量访存，可以在VGPR和存储器之间传输数据
+•	向量访存部件，可以在VGPR和存储器之间传输数据。
 
-所有内核控制流都使用标量ALU指令处理。这包括if / else，分支和循环。标量ALU(SALU)和访存指令适用于整个wavefront。向量访存和ALU指令一次对wavefront的所有work-itme进行操作。为了支持分支和条件执行，每个wavefront都有一个EXECUTE掩码，用于确定哪些work-item在当时处于活动状态，哪些处于休眠状态。活动的work-item执行矢量指令，休眠的工作项将该指令视为NOP。可以随时通过Scalar ALU指令更改EXEC掩码。向量访存指令在VGPR和存储器之间传输数据。每个work-item都提供自己的内存地址并提供或接收唯一的数据。这些也受到EXEC掩码的约束。
-
+%所有内核控制流都使用标量ALU指令处理。这包括if / else，分支和循环。标量ALU(SALU)和访存指令适用于整个wavefront。向量访存和ALU指令一次对wavefront的所有work-itme进行操作。为了支持分支和条件执行，每个wavefront都有一个EXECUTE掩码，用于确定哪些work-item在当时处于活动状态，哪些处于休眠状态。活动的work-item执行矢量指令，休眠的work-item将该指令视为NOP。可以随时通过Scalar ALU指令更改EXEC掩码。向量访存指令在VGPR和存储器之间传输数据。每个work-item都提供自己的内存地址并提供或接收唯一的数据。这些也受到EXEC掩码的约束。
 \subsubsection{AMD GPU内存层次结构}
-AMD GCN流处理器可以在不同的work-item之间共享数据。 数据共享可以显着提升性能。下图展示了AMD GCN处理器内存层次结构。
+AMD GCN流处理器可以在不同的work-item之间共享数据。数据共享可以显著提升性能。图\ref{fig:amd_gpu_memory}展示了AMD GCN处理器内存层次结构。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.80\textwidth]{amd_gpu_memory}
 	\bicaption{AMD GPU内存层次结构}{AMD GPU memory hierarchy}
 	\label{fig:amd_gpu_memory}
 \end{figure}
-每个CU都有一个64 kB的片上内存LDS(Local Data Share)，可以实现一个work-group中不同work-item或一个wavefront中不同work-item之间的低延迟通信。每个LDS有32个banks，每个bank具有4个字节的512个条目。AMD GCN处理器为每个CU有64kB LDS; 这为CU提供了64kB的低延迟带宽。
+每个CU都有一个64kB的片上内存LDS(Local Data Share)，可以实现一个work-group中不同work-item或一个wavefront中不同work-item之间的低延迟通信。每个LDS有32个banks，每个bank的宽度为4字节。AMD GCN处理器的每个CU有64kB LDS，为其提供了64kB的片上低延迟带宽。
 
 
 \subsection{AMD GPU和NVIDIA GPU架构的比较}
@@ -367,8 +382,6 @@ AMD GCN流处理器可以在不同的work-item之间共享数据。 数据共享
 GPU上的指令级并行。对于AMD GPU每个时钟周期可发射多条向量指令，每个向量指令将被分发到不同的向量单元。AMD GPU的指令可以超标量执行，在同一个CU上，可以同时执行访存指令，计算指令和其他占用不同部件的操作。这样可以提高GPU执行指令的通量。AMD Radeon R9 290X有44个CUs，每个CU包含4个向量单元，共176个向量单元。NVIDIA GeForce GTX 780有12个SMX，每个SMX有12个向量单元，共144个向量单元。这两种GPU都有高速片上内存，在OpenCL的术语中，称之为局部内存。以一个线程块(work-group)为单位进行分配。
 
 相比于CPU中线程的概念，GPU中的线程非常轻量级，可以做非常快速的线程切换。GPU大量轻量级线程的特点，使其可多任务快速切换和实现高吞吐量。线程的运行上，GPU会简单很多，是顺序发射，没有CPU中线程的多发射和乱序执行。由于GPU有大量向量部件，通过产生大量轻型线程来充分利用这些部件。所以，GPU是面向通量计算的处理器。
-
-
 
 
 \section{AMD GPU微基准测试}
@@ -393,8 +406,6 @@ GPU上的指令级并行。对于AMD GPU每个时钟周期可发射多条向量�
 \end{figure}
 
 我们探测得的AMD Fiji R9 Nano GPU的内存带宽为341GB/s。Fiji GPU的理论内存带宽为512GB/s，所以实测内存带宽为341/512 = 66.6\%。
-
-
 
 \section{本章小结}
 本章从GPU体系结构和OpenCL编程模型两方面对GPU架构进行了详细的描述。并探测了AMD GPU的浮点指令通量和内存带宽，为后面矩阵乘GPU调优做铺垫。

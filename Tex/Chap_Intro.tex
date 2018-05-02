@@ -1,14 +1,22 @@
 \chapter{引言}\label{chap:introduction}
-当前，一颗GPU芯片上集成的核心数越来越多，GPU体系结构也在非常快速的演变。目前主要的高端GPU芯片厂商有NVIDIA和AMD。主流的GPUs架构有NVIDIA Kepler，Maxwell，Pascal和Volta GPU；AMD Fiji，Vega10，Vega20 GPU。由于每一代的GPU架构都会发生变化，我们就需要在新的架构上重新做优化工作。不幸的是，我们没有可用的性能上界分析方法和工具。在实际中，开发人员通过算法的分析和积累的经验，采用多种优化手段来编写高效的kernel。Kernel编写人员可能会通过性能分析工具(如NVVP\citepns{profiler2011nvidia})的分析结果来指导进一步的优化。然而，这样并不能知道现在优化的结果距离性能上界还有多远。
+%当前，一颗GPU芯片上集成的核心数越来越多，GPU体系结构也在非常快速的演变。目前主要的高端GPU芯片厂商有NVIDIA和AMD。主流的GPUs架构有NVIDIA Kepler，Maxwell，Pascal和Volta GPU；AMD Fiji，Vega10，Vega20 GPU。由于每一代的GPU架构都会发生变化，我们就需要在新的架构上重新做优化工作。不幸的是，我们没有可用的性能上界分析方法和工具。在实际中，开发人员通过算法的分析和积累的经验，采用多种优化手段来编写高效的kernel。Kernel编写人员可能会通过性能分析工具(如NVVP\citepns{profiler2011nvidia})的分析结果来指导进一步的优化。然而，这样并不能知道现在优化的结果距离性能上界还有多远。
+%
+%对于AMD GPU，其官方并没有提供良好的性能分析工具。本文通过手工汇编优化的手法，在Fiji 和Vega GPU上实现的矩阵乘性能达到95\%。
+%矩阵乘是BLAS Level3的标准子程序，是科学计算中的核心数学计算。提高矩阵乘的性能对加速BLAS数学库具有重要意义。
+%
+%本章首先阐述多核处理器的发展历程，从中引出GPU并行体系结构，讨论GPU并行程序设计的方法，然后阐明本文的研究动机，列出本文的主要贡献和组织结构。
 
-对于AMD GPU，其官方并没有提供良好的性能分析工具。本文通过手工汇编优化的手法，在Fiji 和Vega GPU上实现的矩阵乘性能达到95\%。
-矩阵乘是BLAS Level3的标准子程序，是科学计算中的核心数学计算。提高矩阵乘的性能对加速BLAS数学库具有重要意义。
+随着摩尔定律的即将终结，后摩尔时代计算机体系结构的发展成为了人们关注的重点。当前的数据在经历着爆炸式增长，传统的CPU已经无法满足实际应用场景对计算性能的极致追求。当前处理器主频已经接近上限，无法简单地通过提高主频来获得计算性能的提升，处理器设计朝着多核、众核的方向发展。GPU便是一种众核并行处理器。
+
+当前，一颗GPU芯片上集成的核心数越来越多，GPU体系结构也在非常快速的演变。目前主要的高端GPU芯片厂商有NVIDIA和AMD。主流的GPUs架构有NVIDIA Maxwell，Pascal和Volta GPU；AMD Fiji，Vega GPU。由于每一代的GPU架构都会发生变化，编程人员就需要在新的架构上重新做优化工作。不幸的是，我们没有可用的性能上界分析方法和工具。在实际中，开发人员通过算法的分析和积累的经验，采用多种优化手段来编写高效的kernel。Kernel编写人员可能会通过性能分析工具(如NVVP\citepns{profiler2011nvidia})的分析结果来指导进一步的优化。然而，这样并不能知道现在优化的结果距离性能上界还有多远。
+
+对于AMD GPU，其官方并没有提供良好的性能分析工具。本文通过手工汇编优化的手法，在Fiji 和Vega GPU上实现的矩阵乘性能达到95\%。矩阵乘是BLAS Level3的标准子程序，是科学计算中的核心数学计算。提高矩阵乘的性能对加速BLAS数学库具有重要意义。
 
 本章首先阐述多核处理器的发展历程，从中引出GPU并行体系结构，讨论GPU并行程序设计的方法，然后阐明本文的研究动机，列出本文的主要贡献和组织结构。
 
 \section{通用并行处理器概述}
 
-通用并行处理器(GPGPU General Purpose Graphic Processing Units)是近些年提出的概念，通用并行处理器从图形处理(GPU Graphic Processing Units)发展而来。早期的图形处理器只为图形和游戏的渲染而设计，最早进入该领域的厂商有NVIDIA和ATI。AMD为了增强其图形处理器的设计能力，在2006年以54亿美元收购ATI，成为一家同时具有CPU和GPU研发能力的芯片公司。之后，随着并行计算的需求越来越多，GPU也设计出符合这种趋势的SIMD或SIMT架构。NVIDIA和AMD分别采用CUDA(Compute Unified Device Architecture)和OpenCL这两种编程模型来简化并行程序设计的复杂度。自此，GPU不仅可用于图形和游戏渲染的能力，而且也可用于通用并行计算。GPU正往GPGPU方向发展。
+通用并行处理器(GPGPU General Purpose Graphic Processing Units)是近些年提出的概念，通用并行处理器从图形处理(GPU Graphic Processing Units)发展而来。早期的图形处理器只为图形和游戏的渲染而设计，最早进入该领域的厂商有NVIDIA和ATI。AMD为了增强其图形处理器的设计能力，在2006年以54亿美元收购ATI，成为一家同时具有CPU和GPU研发能力的芯片公司。之后，随着并行计算的需求越来越多，GPU也设计出符合这种趋势的SIMD或SIMT架构。NVIDIA和AMD分别采用CUDA(Compute Unified Device Architecture)和OpenCL这两种编程模型来简化并行程序设计的复杂度。自此，GPU不仅用于图形和游戏渲染，而且也可用于通用并行计算。GPU正往GPGPU方向发展。
 
 现代GPU在产品线上，分为两种，一种是图形处理卡，另一种是计算卡。其中计算卡没有图形输出接口，在设计上去掉了用于图形渲染的相关部件。NVIDIA GPU在产品线上分为Geforce系列和Tesla系列。Geforce GPU既可用于图形渲染也可用于通用并行计算。Tesla系列只能用于通用并行计算，同时Tesla计算卡要比Geforce图形卡价格高很多。AMD GPU在产品线上有Vega56，Vega64系列图形卡和INSTINCT系列计算卡。当前NVIDIA占据着绝大部分GPU市场，具有垄断地位。在前几个月，NVIDIA刚刚公布的用户手册中，就宣布禁止在数据中心使用Geforce系列显卡，使得数据中心的建设成本极大增高。随着大数据，深度学习的兴起，传统CPU计算已经无法满足现有应用对计算的需求，GPGPU应运而生。大数据应用对处理器吞吐量要求很高，而GPGPU是一种面向通量计算的可编程加速器，非常适用于现有的应用。通用并行计算也从只做传统的科学计算，到现在的将通用并行计算技术用于大数据和深度学习领域。NVIDIA GPU架构历经了Tesla，Fermi，Kepler，Maxwell，Pascal和Volta架构的演变（如图\ref{fig:nvidia_gpu_roadmap}）。
 
@@ -72,7 +80,7 @@ DNN(Deep Neural Network)是深度学习的一个主要方向。由于DNN的强�
 
  (3) 基于对NVIDIA GPU矩阵乘算法以及优化手法的理解，将该方法结合AMD新一代GPU Fiji和Vega10架构的特点，提出AMD GPU矩阵乘算法以及调优方法。
 
- (4) 实现了面向AMD GPU体系结构的通用矩阵乘计算，通过对AMD GPU架构的理解，进行矩阵乘的调优，提高了AMD GPU矩阵乘的效率。。
+ (4) 实现了面向AMD GPU体系结构的通用矩阵乘计算，通过对AMD GPU架构的理解，进行矩阵乘的调优，提高了AMD GPU矩阵乘的效率。
 
  (5) 针对AMD GPU体系结构的特点，分析了AMD GPU矩阵乘的性能上界。
 

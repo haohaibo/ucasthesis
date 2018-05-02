@@ -15,13 +15,13 @@ GPU(Graphics Processing Units)设计之初是为了做图形渲染。在图像�
 
 对于AMD GPU和NVIDIA GPU体系结构，采用了SIMD的编程模型，每个线程是SIMD中的一项。NVIDIA称之为“SIMT(Single Instruction, Multiple Thread)”或者“SPMD(Single Program, Multiple Data)”。对于AMD GPU，一个wavefront有一个程序计数器，指令的分支由专门的寄存器做掩码来标记，控制每个线程的行为。
 
-通过上面的比较，我们可以看出，AMD GPU和NVIDIA GPU都采用了SIMD结构，不同的是AMD GPU所计算的向量的宽度为64，NVIDIA GPU所计算的向量宽度为32。由此可以窥见SIMD结构代表着现代GPU的主流设计方向。
+通过上面的比较，可以看出，AMD GPU和NVIDIA GPU都采用了SIMD结构，不同的是AMD GPU所计算的向量的宽度为64，NVIDIA GPU所计算的向量宽度为32。由此可以窥见SIMD结构代表着现代GPU的主流设计方向。
 
 
 
 
 \section{GPU线程执行模型}
-本文旨在基于AMD GPU平台，对矩阵乘算法进行实现和优化。为了实现更高效的矩阵乘，我们必须深入分析GPU体系结构的组织方式和GPU程序的编程和执行模型。
+本文旨在基于AMD GPU平台，对矩阵乘算法进行实现和优化。为了实现更高效的矩阵乘，编程人员必须深入分析GPU体系结构的组织方式和GPU程序的编程和执行模型。
 
 GPU程序的逻辑调度和执行单元是block，在术语上，NVIDIA称为thread block或block，AMD称为work-group。一个block中的所有线程共享一个shared memory。在硬件上，一个block执行时位于某一个SMX(CU)中。Block的执行不能跨SMX(CU)。一个block包含一到多个warp(wavefront)。一到多个block组成一个grid(NDRange)。如图\ref{fig:thread_model}展示了AMD GPU线程的组织方式。一个warp有32个线程，wavefront有64个线程，OpenCL中称为work-item。
 
@@ -59,9 +59,9 @@ GPU程序的逻辑调度和执行单元是block，在术语上，NVIDIA称为thr
 	\label{fig:warp_if_else}
 \end{figure}
 
-由此，我们可以看出在设计GPU程序时，尽量减少指令分支。因为分支将导致程序“串行”执行，极大降低了执行速度。
+由此，可以看出在设计GPU程序时，尽量减少指令分支。因为分支将导致程序“串行”执行，极大降低了执行速度。
 
-在接下来的章节里，我们将讨论如何设计GPU程序，以使线程的执行步调尽可能一致。从而提高执行速度。
+在接下来的章节里，将讨论如何设计GPU程序，以使线程的执行步调尽可能一致。从而提高执行速度。
 
 \section{现有矩阵乘调优工作}
 在本小节中，我们先给出矩阵乘的标准数学表达，然后介绍现有矩阵乘在多核处理器上的研究工作。

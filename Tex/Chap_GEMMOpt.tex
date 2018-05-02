@@ -52,7 +52,7 @@
 \subsection{汇编调优的必要性}
 使用高级语言(如OpenCL，CUDA)编写GPU程序的好处是开发速度快、易维护，但其对指令的控制能力相对较弱。同时，程序编制人员对编译器的具体行为无法预测。有时，编程人员对OpenCL或CUDA kernel所进行的手工优化可能会被编译器忽略掉。所以，有时候，我们的GPU程序性能会取决于编译器是否友好。
 
-通过编写汇编kernel，编程人员可以直接跳过编译器，面向GPU硬件指令编程。这使得我们有机会进行更细粒度的程序调优。我们可以通过数据预取，寄存器双缓冲，shared memory双缓冲，bank冲突消除，指令重排等手法进行矩阵乘调优。其中OpenCL和汇编都可以使用数据预取，寄存器双缓冲和shared memory双缓冲和bank冲突消除这些手法进行程序优化。但只有通过汇编，我们才能进行细粒度的指令重排。在大量乘加指令之间的合适位置插入访存指令，尽可能用计算掩盖访存延迟。使得矩阵乘主循环中v\_mac指令通量接近v\_mac通量的上界。
+通过编写汇编kernel，编程人员可以直接跳过编译器，面向GPU硬件指令编程。这使得我们有机会进行更细粒度的程序调优。我们可以通过数据预取，寄存器双缓冲，shared memory双缓冲，bank冲突消除，指令重排等手法进行矩阵乘调优。其中OpenCL和汇编都可以使用数据预取，寄存器双缓冲和shared memory双缓冲和bank冲突消除这些手法进行程序优化。但只有通过汇编，我们才能进行细粒度的指令重排。在大量乘加指令之间的合适位置插入访存指令，尽可能用计算掩盖访存延迟。使得矩阵乘主循环中v\_mac指令通量接近v\_mac通量上界。
 
 图\ref{fig:opencl_gemm_1_1}展示了OpenCL实现的矩阵乘不同优化方法的性能比较。
 
@@ -63,7 +63,35 @@
 	\label{fig:opencl_gemm_1_1}
 \end{figure}
 
-外积法直接实现shared memory bank冲突分析：
+从图\ref{fig:opencl_gemm_1_1}可以看出，最简单的矩阵乘GPU实现其浮点效率最低(图中橙色的gemm original)。gemm original实现没有使用shared memory，采用內积法每个线程计算一个输出。中间两条曲线表示使用shared memory，分块大小分别为8x8和16x16。由于矩阵乘在计算过程中有很多数据重用，利用数据重用的特点，将要计算的数据预先读入shared memory。在真正计算时从shared memory中取数据，可以减小数据读延迟。图\ref{fig:gemm_inner_product_tile}展示了使用shared memory分块的內积法矩阵乘。可以看出，计算C矩阵分块的同一行时，需要重复读A矩阵分块的同一行4个元素；同理，计算C矩阵分块的同一列时，要重复读B矩阵分块的同一列4个元素。全局内存读的次数减少4倍。分块大小为8时，全局内存读次数将减少8倍。所以在内存带宽受限时，提高shared memory分块大小可以减少全局内存读，降低内存带宽压力，提高计算性能。从图\ref{fig:opencl_gemm_1_1}中可以看出16x16分块的性能高于8x8分块。
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.60\textwidth]{gemm_inner_product_tile}
+	\bicaption{內积法矩阵乘shared memory分块图示说明}{Illustration of inner-product GEMM with shared memory block}
+	\label{fig:gemm_inner_product_tile}
+\end{figure}
+
+外积法矩阵乘的shared memory bank冲突分析：
+
+图\ref{fig:shared_memory_bank_dist}展示了shared memory bank的分布情况。这里首先介绍一下AMD GPU shared memory的bank设计，shared memory有32的bank，每个bank的宽度为4字节。图\ref{fig:shared_memory_bank_dist}中绿色部分表示bank编号，蓝色部分表示一个block中A矩阵在shared memory中的分布情况，蓝色部分的同一列位于相同的bank。图中用其他颜色标注的部分，表示每个线程要读取的数据，例如(0,xxx)表示tid.x == 0 tid.y为0~7的线程要读取的8个元素。可以看出(0,xxx)线程和(4,xxx)线程都要读取bank0$\sim$bank7中的元素。图\ref{fig:bank0}展示了所有线程读bank0的情况。可以看出bank0的读取有4-way bank冲突。其他bank可类似分析。可以得知对于所有的bank，此时的shared memory有4-way bank冲突。
+
+%bank冲突消除：
+
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.80\textwidth]{shared_memory_bank_dist}
+	\bicaption{shared memory bank分布}{Distribution of shared memory bank}
+	\label{fig:shared_memory_bank_dist}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.80\textwidth]{bank0}
+	\bicaption{4-way shared memory bank冲突}{4-way shared memory bank conflict}
+	\label{fig:bank0}
+\end{figure}
 
 \subsection{优化内存访问}
 汇编语言的访存优化和用高级语言(如CUDA，OpenCL)优化访存比较类似。一个wavefront(warp)中线程的全局访存请求可以合并成一到多个内存事务(memory transactions)。合并的方式和具体的GPU访存模式有关。为了高效的访问全局内存，通常我们安排一个wavefront中的线程访问全局内存中一段连续内存区域的数据。这样容易进行全局访存合并。在SGEMM程序的主循环中，主要的指令为v\_mac和ds\_read，为了提高v\_mac指令的百分比，减少ds\_read指令的数目就变得尤为关键。前面的介绍中，我们讲过可以通过使用DS\_READ\_B64或DS\_READ\_B128来减少DS\_READ指令数量。在shared memory中，线程读取A，B子矩阵也应该可以进行访存合并，我们安排每个线程可以读取连续的A，B子矩阵，一个wavefront中的线程可合并访问shared memory。同时，为了减少甚至消除shared memory的bank冲突和满足DS\_READ指令对齐的要求，在必要的时候，我们需要在shared memory中合理的进行填充。
@@ -84,7 +112,57 @@
 
 从全局内存预取数据到共享内存，我们以增加一倍局部共享内存的代价来掩盖全局内存的访存延迟；从局部共享内存预取数据到寄存器，我们以增加一倍寄存器的代价来掩盖局部共享内存访存的延迟。
 
+\subsection{shared memory双缓冲}
+在前面的矩阵乘GPU算法描述中，讲述了shared memory的使用方法。首先将数据从全局内存读入寄存器，然后从寄存器写回到shared memory，最后再从shared memory读取数据到寄存器，并在寄存器中做计算。
 
+为了更有效地利用shared memory，我们采用shared memory双缓冲。如算法\ref{alg:gemm_sharedmem}所示，首先从全局内存预取数据到寄存器，然后从寄存器写回到shared memory。在从shared memory读取数据到寄存器并做计算之前，从全局内存预取下一次要计算的数据到寄存器。在OpenCL的实现中，shared memory双缓冲带来了$\sim$7.8\%的性能提升(如图\ref{fig:gemm_shared_double_buffer})。
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.80\textwidth]{gemm_shared_double_buffer}
+	\bicaption{shared memory双缓冲带来的性能提升}{Shared memory double buffering brings performance improvements}
+	\label{fig:gemm_shared_double_buffer}
+\end{figure}
+
+\begin{algorithm}[htbp]
+	\small
+	\caption{GEMM algorithm with shared memory double buffer}\label{alg:gemm_sharedmem}
+	\begin{algorithmic}[1]
+		%\Procedure{Euclid}{$a,b$}\Comment{The g.c.d. of a and b}
+		\State $A, B, C$\Comment{matrix A, B, C}
+		\State $regA[task\_size],regB[task\_size],regC[task\_size]$\Comment{Allocate register for compute}
+		\State $tileA[tile\_length*NUM\_UNROLL],tileB[tile\_length*NUM\_UNROLL]$\Comment{Shared memory double buffer}
+		\State $tileA'[tile\_length*NUM\_UNROLL],tileB'[tile\_length*NUM\_UNROLL]$
+		\State $loadA[tile\_length*NUM\_UNROLL/threadblock]$\Comment{Register for global memory load}
+		\State $loadB[tile\_length*NUM\_UNROLL/threadblock]$
+		\State $regC \gets 0$
+		\State $loadA \gets A, loadB \gets B $\Comment{Pre load tile of A, B from global to register}
+		\State barrier CLK\_GLOBAL\_MEM\_FENCE
+		\For   {$i = 0$; $i < K/NUM\_UNROLL$; $++i$}
+			\If    {$i \% 2 == 0$}
+				\State $tileA \gets loadA, tileB \gets loadB$
+				\State barrier CLK\_LOCAL\_MEM\_FENCE
+				\State $loadA \gets A, loadB \gets B $\Comment{Load the next tile of A, B from global to register}
+				\State barrier CLK\_GLOBAL\_MEM\_FENCE
+					\For   {$k = 0$; $k<NUM\_UNROLL$;$++k$}\Comment{Loop Unroll}
+						\State $regA \gets tileA, regB \gets tileB$
+						\State $regC += regA \cdot regB$
+					\EndFor
+			\Else  
+				\State $tileA' \gets loadA, tileB' \gets loadB$
+				\State barrier CLK\_LOCAL\_MEM\_FENCE
+				\State $loadA \gets A, loadB \gets B $\Comment{Load the next tile of A, B from global to register}
+				\State barrier CLK\_GLOBAL\_MEM\_FENCE
+					\For   {$k = 0$; $k<NUM\_UNROLL$;$++k$}\Comment{Loop Unroll}
+						\State $regA \gets tileA', regB \gets tileB'$
+						\State $regC += regA \cdot regB$
+					\EndFor
+			\EndIf
+			\State barrier CLK\_LOCAL\_MEM\_FENCE
+		\EndFor\label{gemmendfor}
+		\State $C \gets regC$\Comment{Store C from registers to global memory}
+		%\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
 
 \subsection{寄存器双缓冲}
 如图\ref{fig:reg_double_buffer}所示，我们可以在用寄存器A1,B1计算的同时，从局部共享内存取下一次要计算的数据到寄存器A0,B0。由于数据的预取，在进入循环前，我们已经将第一次要计算的数据读到了寄存器A0[0:7]，B0[0:7] 中。
@@ -98,13 +176,12 @@
 	\label{fig:reg_double_buffer}
 \end{figure}
 
-
 \subsection{线程负载均衡}
 对每个线程来说，我们使用4个4x4，来代替8x8的计算方式，来使得一个block中的线程可以负载均衡(如图\ref{fig:load_balance})。通过这种方式，我们可以提高一个block的计算效率。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{load_balance}
-	\bicaption{寄存器双缓冲}{Thread load balance}
+	\bicaption{线程负载均衡}{Thread load balance}
 	\label{fig:load_balance}
 \end{figure}
 
@@ -182,7 +259,7 @@ t\_buffer\_load\_xyzw指令：从全局内存预取数据到寄存器。
 	\end{center}	
 \end{table}
 
-\subsection{Roofline模型}
+%\subsection{Roofline模型}
 
 \section{本章小结}
 本章首先介绍了本次实验所使用的计算环境。然后讲述了寄存器分块的大小和读数据指令的位宽对浮点通量的影响。接下来，详细描述了矩阵乘汇编调优的过程，最后进行了矩阵乘性能上界分析。

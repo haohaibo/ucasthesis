@@ -44,12 +44,16 @@
 \setcounter{page}{1}% 开始页码
 \pagenumbering{Roman}% 页码符号
 
-当前，一颗GPU芯片上集成的核心数越来越多，GPU体系结构也在非常快速的演变。目前主要的高端GPU芯片厂商有NVIDIA和AMD。主流的GPUs架构有NVIDIA Kepler，Maxwell，Pascal和Volta GPU；AMD Fiji，Vega10，Vega20 GPU。由于每一代的GPU架构都会发生变化，我们就需要在新的架构上重新做优化工作。不幸的是，我们没有可用的性能上界分析方法和工具。在实际中，开发人员通过算法的分析和积累的经验，采用多种优化手段来编写高效的kernel。Kernel编写人员可能会通过性能分析工具(如NVVP\citepns{profiler2011nvidia})的分析结果来指导进一步的优化。然而，这样并不能知道现在优化的结果距离性能上界还有多远。
+%当前，一颗GPU芯片上集成的核心数越来越多，GPU体系结构也在非常快速的演变。目前主要的高端GPU芯片厂商有NVIDIA和AMD。主流的GPUs架构有NVIDIA Kepler，Maxwell，Pascal和Volta GPU；AMD Fiji，Vega10，Vega20 GPU。由于每一代的GPU架构都会发生变化，我们就需要在新的架构上重新做优化工作。不幸的是，我们没有可用的性能上界分析方法和工具。在实际中，开发人员通过算法的分析和积累的经验，采用多种优化手段来编写高效的kernel。Kernel编写人员可能会通过性能分析工具(如NVVP\citepns{profiler2011nvidia})的分析结果来指导进一步的优化。然而，这样并不能知道现在优化的结果距离性能上界还有多远。
+%
+%实现GPU (Graphic Processing Units)上的快速通用矩阵乘一直以来都是自动调优工具和kernel编写人员所追求的目标。在本篇文章中，我们尝试提供一种GPUs上算法性能上界的方法，并做出汇编级的基准测试。Meng等人\citepns{meng2011grophecy}提出了GPU性能预测框架，该框架基于标注代码框架。Hong和Kim提出了MWP-CWP\citepns{hong2009analytical}模型来预测CUDA应用程序性能，该模型基于NVIDIA PTX。Sim\citepns{sim2012performance}等人在2012年将MWP-CWP模型进行了扩展，使用汇编编写kernel预测程序性能。Zhang和Owen\citepns{zhang2011quantitative}基于汇编程序提出了GPU定量分析模型。由于关于GPU微架构的资料非常少，我们无法针对新一代GPU架构做出精确的GPU模拟器。但我们通过上面这些分析方法可以十分近似的预测GPU程序的性能。Roofline\citepns{williams2009roofline}模型是应用最广的用来评估优化效果的模型，本文将采用该模型对SGEMM做性能分析。
+%
+%对于AMD GPU，其官方并没有提供良好的性能分析工具。但AMD GPU有可用的LLVM汇编器。本文通过手工汇编优化的手法，在Fiji 和Vega GPU上实现的矩阵乘性能达到95\%。
+当前，一颗GPU芯片上集成的核心数越来越多，GPU体系结构也在非常快速的演变。目前主要的高端GPU芯片厂商有NVIDIA和AMD。主流的GPUs架构有NVIDIA Maxwell，Pascal和Volta GPU；AMD Fiji，Vega GPU。由于每一代的GPU架构都会发生变化，编程人员就需要在新的架构上重新做优化工作。不幸的是，我们没有可用的性能上界分析方法和工具。在实际中，开发人员通过算法的分析和积累的经验，采用多种优化手段来编写高效的kernel。Kernel编写人员可能会通过性能分析工具(如NVVP\citepns{profiler2011nvidia})的分析结果来指导进一步的优化。然而，这样并不能知道现在优化的结果距离性能上界还有多远。
 
-实现GPU (Graphic Processing Units)上的快速通用矩阵乘一直以来都是自动调优工具和kernel编写人员所追求的目标。在本篇文章中，我们尝试提供一种GPUs上算法性能上界的方法，并做出汇编级的基准测试。Meng等人\citepns{meng2011grophecy}提出了GPU性能预测框架，该框架基于标注代码框架。Hong和Kim提出了MWP-CWP\citepns{hong2009analytical}模型来预测CUDA应用程序性能，该模型基于NVIDIA PTX。Sim\citepns{sim2012performance}等人在2012年将MWP-CWP模型进行了扩展，使用汇编编写kernel预测程序性能。Zhang和Owen\citepns{zhang2011quantitative}基于汇编程序提出了GPU定量分析模型。由于关于GPU微架构的资料非常少，我们无法针对新一代GPU架构做出精确的GPU模拟器。但我们通过上面这些分析方法可以十分近似的预测GPU程序的性能。Roofline\citepns{williams2009roofline}模型是应用最广的用来评估优化效果的模型，本文将采用该模型对SGEMM做性能分析。
+实现GPU (Graphic Processing Units)上的快速通用矩阵乘一直以来都是自动调优工具和kernel编写人员所追求的目标。在本篇文章中，尝试提供一种GPUs上算法性能上界的分析方法，并做出汇编级的基准测试。Meng等人\citepns{meng2011grophecy}提出了GPU性能预测框架，该框架基于代码标注。Hong和Kim提出了MWP-CWP\citepns{hong2009analytical}模型来预测CUDA应用程序性能，该模型基于NVIDIA PTX。Sim\citepns{sim2012performance}等人在2012年将MWP-CWP模型进行了扩展，使用汇编编写kernel预测程序性能。Zhang和Owen\citepns{zhang2011quantitative}基于汇编程序提出了GPU定量分析模型。由于关于GPU微架构的资料非常少，我们无法针对新一代GPU架构做出精确的GPU模拟器。但我们通过上面这些分析方法可以十分近似的预测GPU程序的性能。Roofline\citepns{williams2009roofline}模型是应用最广的用来评估处理器上程序的计算瓶颈和访存瓶颈的模型，本文将采用该模型对SGEMM做性能分析。
 
-对于AMD GPU，其官方并没有提供良好的性能分析工具。但AMD GPU有可用的LLVM汇编器。本文通过手工汇编优化的手法，在Fiji 和Vega GPU上实现的矩阵乘性能达到95\%。
-
+对于AMD GPU，其官方并没有提供良好的性能分析工具。但AMD GPU有可用的LLVM汇编器。本文通过分析AMD GPU微架构细节，采用寄存器分块，双缓冲，bank冲突消除，指令重排等手工汇编优化的手法，在AMD Fiji 和Vega GPU上实现的矩阵乘性能达到95\%。并分析了AMD GPU矩阵乘的性能上界。
 
 \keywords{矩阵乘，AMD GPU，汇编，延迟掩盖，性能分析}% 中文关键词
 %-
