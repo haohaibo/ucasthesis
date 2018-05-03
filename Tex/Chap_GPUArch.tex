@@ -4,9 +4,7 @@
 \subsection{OpenCL程序语言介绍}
 OpenCL是一种异构并行编程语言，OpenCL标准最初由苹果公司提出，同时参与的公司有AMD，IBM，Qualcomm，Intel和NVIDIA。最后由Khronos Group进行标准化和发布。Khronos Group在2008年发布了OpenCL标准的第一版，OpenCL 1.0。OpenCL 1.0定义了主机端的编程接口和设备端的编写kernel的语言。OpenCL语言基于C语言发展而来。随后发布的OpenCL 1.1和1.2标准增加了OpenCL与OpenGL的互操作性。在2013年，正式发布了OpenCL 2.0标准。新标准在一定程度上简化了并行程序的开发。OpenCL的API在设计上就做的尽可能通用，以使其可以运行在不同的平台上；并且也足够底层，以使其可以在不同的平台上都可以获得较高的性能。
 
-OpenCL程序在不同的平台具有可移植性，按照OpenCL标准编写的程序，可以在不同的硬件平台上运行。
-
-用OpenCL C语言编写在OpenCL设备上运行程序。OpenCL C在C99的基础上发展而来。其设计的目标是可在不同的OpenCL硬件平台(如GPU、FPGA、DSP等)上编写并执行可数据并行的程序。同时OpenCL C也实现了一组原子和同步操作。虽然OpenCL API本身是基于C的API，但也可以绑定到其他语言，例如Python，C++，Java等。另外，很多专用的库如数学库，计算机视觉库）也都集成了OpenCL的实现，来提升异构系统的计算性能。
+OpenCL程序在不同的平台具有可移植性，按照OpenCL标准编写的程序，可以在不同的硬件平台上运行。用OpenCL C语言可以编写在OpenCL设备上运行程序。OpenCL C在C99的基础上发展而来。其设计的目标是可在不同的OpenCL硬件平台(如GPU、FPGA、DSP等)上编写并执行可数据并行的程序。同时OpenCL C也实现了一组原子和同步操作。虽然OpenCL API本身是基于C的API，但也可以绑定到其他语言，例如Python，C++，Java等。另外，很多专用的库如数学库，计算机视觉库）也都集成了OpenCL的实现，来提升异构系统的计算性能。
 
 所以，我们可以看到OpenCL的目标是做通用并行计算。
 OpenCL 标准包含4部分，分别是平台模型，执行模型，kernel编程模型和内存模型。
@@ -33,9 +31,7 @@ Kernel编程模型：描述了如何将并发模型映射到具体的物理设�
 
 
 \subsection{AMD ROCm软硬件系统}
-本文主要针对AMD GPU架构做分析和性能调优。所以，我们就介绍AMD GPU的OpenCL实现。AMD APP(Accelerated Parallel Processing)是AMD最先提出的并行加速处理概念。AMD APP利用AMD GPU强大的处理能力来做高性能计算和数据并行处理。AMD ROCm系统包含AMD GPU、AMD多核CPU和与之相关的软件栈。
-
-下图是AMD ROCm编译工具链。
+本文主要针对AMD GPU架构做分析和性能调优。所以，我们就介绍AMD GPU的OpenCL实现。AMD APP(Accelerated Parallel Processing)是AMD最先提出的并行加速处理概念。AMD APP利用AMD GPU强大的处理能力来做高性能计算和数据并行处理。AMD ROCm系统包含AMD GPU、AMD多核CPU和与之相关的软件栈。图\ref{fig:rocm_llvm}是AMD ROCm编译工具链。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{rocm_llvm}
@@ -46,6 +42,7 @@ Kernel编程模型：描述了如何将并发模型映射到具体的物理设�
 AMD ROCm软件栈为用户和软件开发人员提供完整，灵活的软件开发工具来提升AMD GPU处理器的计算性能。AMD ROCm软件栈是一个开放的系统和一个标准的平台。AMD ROCm开放平台的策略让AMD的技术合作伙伴可以开发和提供第三方开发工具。
 
 AMD ROCm提供的工具包括：
+
 (1)  OpenCL编译器和运行时
 
 (2)  调试和性能分析工具----AMD CodeXL
@@ -55,8 +52,7 @@ AMD ROCm提供的工具包括：
 最新的AMD GPUs使用同一着色器架构可以在相同的硬件上交替运行不同的kernel。可编程GPU可以执行不同的用户程序，这些程序对图形编程人员称之为shaders，对于做通用计算的人称之为kernels。这些GPUs计算设备可以使用数据并行编程模型做通用计算，而不做图形渲染。AMD ROCM的编程模型将一组数据存放在内存中，这些数据可以被大量的计算单元(Compute Units)所访问。
 
 \subsection{OpenCL线程模型}
-Kernel的每个实例运行在Compute Unit(以下简称CU)上，称为work-item。work-items被映射到一个N维的索引空间，称为NDRange。
-下面是AMD OpenCL线程模型和线程到CU的映射关系图示：
+Kernel的每个实例运行在Compute Unit(以下简称CU)上，称为work-item。work-items被映射到一个N维的索引空间，称为NDRange。图\ref{fig:opencl_thread_model}展示了AMD OpenCL线程模型和线程到CU的映射关系。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{opencl_thread_model}
@@ -64,11 +60,7 @@ Kernel的每个实例运行在Compute Unit(以下简称CU)上，称为work-item�
 	\label{fig:opencl_thread_model}
 \end{figure}
 
-一个work-group被分发到某一个CU上。Work-group中的work-item被一个CU中PE(Processing Element)所处理。一个PE在同一时刻只能处理一个work-item；但一个CU可以处理多个work-group。
-
-OpenCL将所有要发射的线程映射到一个N维的索引空间。软件开发人员可以设定如何将work-items划分到work-group中。AMD GPU硬件调度的基本单元是wavefront，一个wavefront有64个线程(work-items)。一个work-group由整数倍个wavefront构成。
-
-下面是work-item,wavefront和NDRange之间的映射关系图示：
+一个work-group被分发到某一个CU上。Work-group中的work-item被一个CU中PE(Processing Element)所处理。一个PE在同一时刻只能处理一个work-item；但一个CU可以处理多个work-group。OpenCL将所有要发射的线程映射到一个N维的索引空间。软件开发人员可以设定如何将work-items划分到work-group中。AMD GPU硬件调度的基本单元是wavefront，一个wavefront有64个线程(work-items)。一个work-group由整数倍个wavefront构成。图\ref{fig:thread_model}展示了work-item,wavefront和NDRange之间的映射关系。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{thread_model}
@@ -76,25 +68,15 @@ OpenCL将所有要发射的线程映射到一个N维的索引空间。软件开�
 	\label{fig:thread_model}
 \end{figure}
 
-其中，wavefront是硬件上的概念，即AMD GPU硬件设计上的64个线程为一个基本调度单元。Work-group和NDRange是编写程序时的逻辑概念。
+其中，wavefront是硬件上的概念，即AMD GPU硬件设计上的64个线程为一个基本调度单元。Work-group和NDRange是编写程序时的逻辑概念。一个work-item在每个时钟周期会发射一条指令。多个work-item构成一个wavefront，作为一个基本调度单元。一个wavefront中至多有4个work-item组成流水线执行，来隐藏访存和计算延迟。例如，AMD GCN架构的GPU的实际处理宽度是16。每4个时钟周期发射一个宽度为64的指令。wavefront拥有的线程数在不同系列的GPUs上会有不同。例如，一些低端GPUs，如AMD Radeon HD54XX系列的GPU，一个wavefront有32个线程。在更新的高端GPUs上，一个wavefront有64个线程。每个CU的执行相互独立，在不同的CU上可以执行不同的指令。
 
-一个work-item在每个时钟周期会发射一条指令。多个work-item构成一个wavefront，作为一个基本调度单元。一个wavefront中至多有4个work-item组成流水线执行，来隐藏访存和计算延迟。例如，AMD GCN架构的GPU的实际处理宽度是16。每4个时钟周期发射一个宽度为64的指令。
-
-wavefront拥有的线程数在不同系列的GPUs上会有不同。例如，一些低端GPUs，如AMD Radeon HD54XX系列的GPU，一个wavefront有32个线程。在更新的高端GPUs上，一个wavefront有64个线程。
-
-每个CU的执行相互独立。所以，在不同的CU上，可以执行不同的指令。
-
-下面讨论一下wavefront和work-group的关系。编程人员定义一个work-group，可以包含一到多个wavefronts。一个wavefront有自己的程序计数器(PC)，所以每个wavefront都有自己的程序控制流。一个work-group包含的wavefront中的线程是线性排序的。例如，在64线程wavefront的GPUs上，线程0~63映射到wavefront0，线程64~127映射到wavefront1，按这样的顺序映射下去。为了充分利用硬件资源，我们要计算的数据个数最好是64的整数倍。
+下面讨论一下wavefront和work-group的关系。编程人员定义一个work-group，可以包含一到多个wavefronts。一个wavefront有自己的程序计数器(PC)，所以每个wavefront都有自己的程序控制流。一个work-group包含的wavefront中的线程是线性排序的。例如，在64线程wavefront的GPUs上，线程0$\sim$63映射到wavefront0，线程64$\sim$127映射到wavefront1，按这样的顺序映射下去。为了充分利用硬件资源，要计算的数据个数最好是64的整数倍。
 
 对于每个work-group，GPU会在单个CU上产生该work-group所需的wavefronts个数。如果一个wavefront中有非活跃的线程，那么这些线程所映射的GPU硬件计算核心将会空闲。出现这种情况的一个例子是我们的work-group的大小不是wavefront大小的整数倍。例如，如果一个work-group的大小是32，只使用了wavefront中的一半线程，那么就会有另外32个线程空闲。
 
-在一个wavefront中，如果程序出现分支。Wavefront将会把有所的情况组合起来，顺序的执行。例如，一个wavefront中的一个分支包含两条路径，那么wavefront会先执行第一条路径，接下来执行第二条路径。分支的总执行时间是每个路径的执行时间的累加。例如，程序中有一个二分支结构，分支A和B，每个分支单独执行所需的时间都是t。只要wavefront中有一个线程在分支处和其他线程不同，那么整个wavefront执行完这段分支的时间就是2t。我们再举一个循环的例子，如果一个循环的单次执行时间是t。在一个wavefront中，有63个线程只执行这个循环的一次，另外一个线程执行该循环100次。那么整个wavefront执行完该循环的时间为100t。
+在一个wavefront中，如果程序出现分支，wavefront将会把有所的情况组合起来，顺序的执行。例如，一个wavefront中的一个分支包含两条路径，那么wavefront会先执行第一条路径，接下来执行第二条路径。分支的总执行时间是每个路径的执行时间的累加。例如，程序中有一个二分支结构，分支A和B，每个分支单独执行所需的时间都是t。只要wavefront中有一个线程在分支处和其他线程不同，那么整个wavefront执行完这段分支的时间就是2t。我们再举一个循环的例子，如果一个循环的单次执行时间是t。在一个wavefront中，有63个线程只执行这个循环的一次，另外一个线程执行该循环100次。那么整个wavefront执行完该循环的时间为100t。
 
-编译和运行OpenCL程序，OpenCL编译工具链提供了一个可以同时编译CPUs和GPUs代码的通用框架。CPUs和GPUs代码共用编译器前端和部分高级的编译转换。编译器后端则针对不同的设备(CPU或GPU)做了专门的优化。
-
-对于CPU，OpenCL运行时使用LLVM AS将代码编译成x86二进制代码。OpenCL运行时会自动确定CPU的核心数，并将OpenCL kernel交由核心执行。
-
-对于GPU，OpenCL运行时对不完整的AMD IL做后处理，变成完整的AMD IL。这个过程会从宏定义库中添加针对特定GPU的宏定义。之后，OpenCL运行时会移除不必要的函数，将完整的IL代码交由着色器编译器，编译成针对特定GPU的二进制代码。
+OpenCL编译工具链提供了一个可以同时编译CPUs和GPUs代码的通用框架。CPUs和GPUs代码共用编译器前端和部分高级的编译转换。编译器后端则针对不同的设备(CPU或GPU)做了专门的优化。对于CPU，OpenCL运行时使用LLVM AS将代码编译成x86二进制代码。OpenCL运行时会自动确定CPU的核心数，并将OpenCL kernel交由核心执行。对于GPU，OpenCL运行时对不完整的AMD IL做后处理，变成完整的AMD IL。这个过程会从宏定义库中添加针对特定GPU的宏定义。之后，OpenCL运行时会移除不必要的函数，将完整的IL代码交由着色器编译器，编译成针对特定GPU的二进制代码。
 
 %平台模型：
 %
@@ -102,7 +84,7 @@ wavefront拥有的线程数在不同系列的GPUs上会有不同。例如，一�
 
 %平台模型是开发可在不同硬件平台上运行的程序的一个关键。在一个系统中，可能同时包含AMD GPU和NVIDIA GPU。
 
-编程人员可以使用平台模型API来选择平台和计算设备。平台模型提供了一个抽象的设备体系结构，编程人员可以根据这个抽象体系结构来编写kernel。硬件厂商会将这个抽象体系结构映射到具体的物理硬件上。平台模型将设备定义为一组CUs(Compute Units)，每个CU相对独立。每个CU由一组PEs(Processing Elements)组成。我们以2017年AMD新出Vega10架构为例，Vega10计算卡包含64个CUs，每个CU包含4个宽度为16的SIMD部件，所以一个CU的硬件向量宽度为64。我们可以计算出一张Vega10计算卡可以一次总共执行64x16x4=4096个指令。再根据Vega10的计算时钟频率最大为1.5GHz，每个时钟周期可以做2个浮点操作，我们可以计算出Vega10的理论单精度浮点峰值为64x16x4x2x1.5GHz=12288.0 Gflop/s。
+编程人员可以使用平台模型API来选择平台和计算设备。平台模型提供了一个抽象的设备体系结构，编程人员可以根据这个抽象体系结构来编写kernel。硬件厂商会将这个抽象体系结构映射到具体的物理硬件上。平台模型将设备定义为一组CUs(Compute Units)，每个CU相对独立。每个CU由一组PEs(Processing Elements)组成。以2017年AMD新出Vega10架构为例，Vega10计算卡包含64个CUs，每个CU包含4个宽度为16的SIMD部件，所以一个CU的硬件向量宽度为64。由此可以计算出一张Vega10计算卡可以一次总共执行64x16x4=4096个指令。再根据Vega10的计算时钟频率最大为1.5GHz，每个时钟周期可以做2个浮点操作，可以计算出Vega10的理论单精度浮点峰值为64x16x4x2x1.5GHz=12288.0 Gflop/s。
 %获取平台和设备信息：
 %
 %我们可以调用clGetPlatformIDs()函数来获取系统的平台信息。
@@ -155,17 +137,13 @@ wavefront拥有的线程数在不同系列的GPUs上会有不同。例如，一�
 %前面介绍的执行模型是为了管理OpenCL命令的执行。OpenCL命令用来描述数据的传输和kernel的执行。OpenCL kernel是OpenCL应用中实际在设备上执行的那部分程序。和CPU上的许多并发模型类似，OpenCL kernel在语法上看起来和标准的C函数类似。这里的主要区别是OpenCL kernel有一组额外的关键字和OpenCL kernels所实现的并发模型。   
 %当使用操作系统提供的线程接口编写并发程序时，我们需要考虑实际的可用物理资源（如CPU物理核数）。当我们创建的线程超过CPU硬件线程数时，就需要考虑线程创建、线程间切换所带来的开销。而当使用OpenCL编写并发程序时，我们经常需要考虑如何采用最好的并行粒度来编写并行程序。
 
-在OpenCL中，并发的最小粒度是work-item。每个work-item执行kernel函数。在向量加这个例子中，我们将循环的每一次映射到一个work-item。然后，让OpenCL运行时(runtime)来产生要计算的元素一样多的work-items。OpenCL运行时将work-items映射到GPU具体硬件计算单元上。从概念上来看，这种并行方式非常类似于MapReduce中的map操作。Map操作具有其天然的并行性。也类似于OpenMP中对for循环进行数据并行。
-
-下图是NDRange，work-group，work-item之间的对应关系
+在OpenCL中，并发的最小粒度是work-item。每个work-item执行kernel函数。OpenCL运行时将work-items映射到GPU具体硬件计算单元上。从概念上来看，这种并行方式非常类似于MapReduce中的map操作。Map操作具有其天然的并行性。也类似于OpenMP中对for循环进行数据并行。图\ref{fig:thread_map}展示了NDRange，work-group，work-item之间的对应关系。在实际计算时，通常将NDRange映射到输入数据或者输出数据。在本文的矩阵乘实现中，将NDRange映射到输出数据，即C矩阵。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{thread_map}
 	\bicaption{NDRange，work-group，work-item对应关系}{Relationship between NDRange, work-group and work-item}
 	\label{fig:thread_map}
 \end{figure}
-
-在实际计算时，我们通常将NDRange映射到输入数据或者输出数据。在本文的矩阵乘实现中，我们将NDRange映射到输出数据，即C矩阵。
 
 %编译和参数处理：
 %
@@ -181,9 +159,7 @@ wavefront拥有的线程数在不同系列的GPUs上会有不同。例如，一�
 
 4.	通过调用clCreateKernel()，创建kernel对象cl\_kernel。
 
-OpenCL kernel对象的具体二进制表示是和硬件厂商相关的。对于AMD运行时(runtime)，主要有两种设备：x86CPU和GPUs。对于x86CPU，clBuildProgram()产生可以直接在x86CPU上执行的x86指令。对于GPU，则产生AMD GPU的中间表示语言，之后用just-in-time技术将中间语言编译成具体GPU指令集体系结构的二进制代码。
-
-下图展示了OpenCL各种模型之间的关系。
+OpenCL kernel对象的具体二进制表示是和硬件厂商相关的。对于AMD运行时(runtime)，主要有两种设备：x86CPU和GPUs。对于x86 CPU，clBuildProgram()产生可以直接在x86 CPU上执行的x86指令。对于GPU，则产生AMD GPU的中间表示语言，之后用just-in-time技术将中间语言编译成具体GPU指令集体系结构的二进制代码。图\ref{fig:opencl_model_relation}展示了OpenCL各种模型之间的关系。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{opencl_model_relation}
@@ -199,13 +175,7 @@ NVIDIA也采用了类似的方法，将kernel代码首先编译成PTX(Parallel T
 %
 %对于OpenCL kernel来说，通常我们需要向kernel传入一些参数，kernel会输出一些参数。在kernel执行前，我们要将输入数据从主机端内存拷贝到设备端内存。为了将数据从主机端拷贝到设备端，我们需要将其封装成一个内存对象。同样，对于输出数据，我们也需要将其封装成一个内存对象。OpenCL定义了三种内存对象：buffer，images和pipes。在本文的矩阵乘中，用到buffers对象，所以我们主要介绍buffer内存对象。Buffer内存对象等价于C语言中我们用malloc()分配的数组空间。
 
-OpenCL将内存分为两部分：主机端内存和设备端内存。主机端内存和设备端内存间的数据移动通过调用相应OpenCL API完成。
-
-OpenCL设备端将内存分为4个区域。整个kernel可以访问的全局内存(Global memory)和常量内存(Constant memory)，一个线程块可以访问的局部内存(Local memory)，一个线程可以访问的私有内存(Private memory)。这几个内存区域在逻辑上是分离的，kernel开发人员可以显式的控制数据在这几个内存区域移动。
-
-当我们将数据从主机端拷贝到设备端时，数据就拷贝到了设备端的全局内存。也只有设备端全局内存的数据的才可拷贝回主机端的主存。
-
-局部内存通常映射到片上内存。片上内存相比全局内存延迟更低，带宽更高。每个线程的私有内存通常映射到寄存器中。
+OpenCL将内存分为两部分：主机端内存和设备端内存。主机端内存和设备端内存间的数据移动通过调用相应OpenCL API完成。OpenCL设备端将内存分为4个区域。整个kernel可以访问的全局内存(Global memory)和常量内存(Constant memory)，一个线程块可以访问的局部内存(Local memory)，一个线程可以访问的私有内存(Private memory)。这几个内存区域在逻辑上是分离的，kernel开发人员可以显式的控制数据在这几个内存区域移动。当我们将数据从主机端拷贝到设备端时，数据就拷贝到了设备端的全局内存。也只有设备端全局内存的数据的才可拷贝回主机端的主存。局部内存通常映射到片上内存。片上内存相比全局内存延迟更低，带宽更高。每个线程的私有内存通常映射到寄存器中。
 
 \begin{figure}[htbp]
 	\centering
@@ -214,36 +184,34 @@ OpenCL设备端将内存分为4个区域。整个kernel可以访问的全局内�
 	\label{fig:opencl_memory_gpu}
 \end{figure}
 
-图中的虚线表示大部分情况下OpenCL中的线程私有内存对应到AMD GPU的寄存器。但也存在一些私有内存在溢出的情况下会对应到AMD GPU的片外内存。
+图\ref{fig:opencl_memory_gpu}中的虚线表示大部分情况下OpenCL中的线程私有内存对应到AMD GPU的寄存器。但也存在一些私有内存在溢出的情况下会对应到AMD GPU的片外内存。
 
 
 \section{OpenCL程序在AMD GCN GPUs上的性能和调优}
-我们现在来讨论AMD GCN(Graphics Core Next)架构GPUs上的程序性能和调优方法。AMD GCN架构的GPUs包括Fiji，Vega10和Vega20等。
+接下来讨论AMD GCN(Graphics Core Next)架构GPUs上的程序性能和调优方法。AMD GCN架构的GPUs包括Fiji，Vega10和Vega20等。
 
 \subsection{优化全局访存}
 首先，我们先介绍一下GPU的组成结构。AMD GCN GPU由多个CU构成。每个CU包含局部内存(片上内存)，L1 cache，寄存器和4个SIMD单元。每个SIMD包含16个计算核心。一个线程会在一个计算核心上执行，一个CU会运行一到多个work-groups。在GPUs上，硬件调度以wavefront 64个线程为基本调度单元，一个wavefront中64个线程执行相同的指令，但操作不同的数据。是一种典型的SIMD执行方式。
 
 每个CU包含64KB的片上内存，16KB的读/写L1 cache，4个向量单元和1个标量单元。每个work-group可以最大分配32KB片上内存。每一个向量单元包含512个标量寄存器(SGPRs)，用以处理一个wavefront中的分支，常量等操作。每个标量单元包含256个向量寄存器(VGPRs)。向量寄存器本质上也是标量寄存器，只是每个寄存器在长度上由1扩展到64。每个向量单元包含16个计算核心。
 
-每个CU的L1 Cache为16KB，所以总的L1 Cache大小为15KB*(\# of CUs)。对于AMD Radeon HB7970 GPU，包含32个CUs，总共有512KB的L1 Cache。我们可以计算出L1的带宽为：
+每个CU的L1 Cache为16KB，所以总的L1 Cache大小为$15KB\times \#CUs$。对于AMD Radeon HB7970 GPU，包含32个CUs，总共有512KB的L1 Cache。下面\ref{eq:L1bandwidth}给出L1峰值带宽的计算公式。对于AMD Radeon HD7970 GPU，由此可以计算出L1的带宽理论峰值约为$\sim$1.9TB/s。
+\begin{equation}
+\label{eq:L1bandwidth}
+\begin{aligned}
+&L1\ peak\ bandwidth = \\
+&\#CUs\times (4threads/clock) \times (128 bits/thread) \times (1byte/8bits) \times Engine\ Clock
+\end{aligned}
+\end{equation}
+%L1峰值带宽 = 
+%
+%\#CUs*(4threads/clock)*(128 bits/thread)*(1byte/8bits)*Engine Clock
 
-L1峰值带宽 = 
 
-\#CUs*(4threads/clock)*(128 bits/thread)*(1byte/8bits)*Engine Clock
-
-对于AMD Radeon HD7970 GPU，其理论峰值约为$\sim$1.9TB/s。
 
 如果两个访存请求指向同一个内存控制器，在硬件上这两个请求会顺序执行。我们成为channel冲突。与之类似，如果两个访存请求映射到同一个内存bank，那么这两个请求也会顺序执行，我们称之为bank冲突。从软件开发人员的角度来看，channel冲突和bank冲突没有太大区别。如果数据请求的步长是2的幂次方的一个较大的数，那么往往会发生channel冲突。发生冲突的步长依赖于具体的芯片。如果一个步长在有8个channel的芯片上发生channel冲突，那么这个步长也可能会在有4个bank的芯片上导致bank冲突。
 
-在本论文中，我们用bank冲突来统一指代channel冲突或bank冲突。
-
-Channel冲突：
-
-我们刚才讨论到，如果访存步长是一个较大的2的幂次方的一个数。那么往往会发生channel冲突。对于CPU来说，也会遇到同样的问题，访存步长为较大的2的幂次方的一个数，会使得访问的数据落在较少的Cache lines中，产生较多的cache不命中。
-
-对于很多kernels来说，channel冲突对性能影响非常大。这时，我们就很有必要理解并解决channel冲突。
-
-在GPU程序编写中，最好的方式是安排相邻的线程来读/写相邻的内存地址。这时一种避免channel冲突的方法。
+在本论文中，使用bank冲突来统一指代channel冲突或bank冲突。刚才讨论到，如果访存步长是一个较大的2的幂次方的一个数，那么往往会发生channel冲突。对于CPU来说，也会遇到同样的问题，访存步长为较大的2的幂次方的一个数，会使得访问的数据落在较少的Cache lines中，产生较多的cache不命中。对于很多kernels来说，channel冲突对性能影响非常大。这时，我们就很有必要理解并解决channel冲突。在GPU程序编写中，最好的方式是安排相邻的线程来读/写相邻的内存地址。这时一种避免channel冲突的方法。
 
 当应用程序可以完全控制数据的访存模式时，软件开发人员就需要合理的组织数据结构，使得bank冲突最小化。
 

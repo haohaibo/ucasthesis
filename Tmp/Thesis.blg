@@ -4,49 +4,44 @@ The top-level auxiliary file: ./Tmp/Thesis.aux
 The style file: Biblio/gbt7714-unsrt.bst
 Database file #1: Biblio/ref.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
-Warning--empty year in grayassembler
-Warning--empty year in xiuxiaassembler
-Warning--empty year in grayassembler
-Warning--empty year in xiuxiaassembler
-You've used 15 entries,
+You've used 6 entries,
             3424 wiz_defined-function locations,
-            850 strings with 8350 characters,
-and the built_in function-call counts, 90501 in all, are:
-= -- 9411
-> -- 9230
-< -- 9200
-+ -- 3020
-- -- 101
-* -- 470
-:= -- 9939
-add.period$ -- 45
-call.type$ -- 15
-change.case$ -- 61
-chr.to.int$ -- 2734
-cite$ -- 19
-duplicate$ -- 323
-empty$ -- 914
-format.name$ -- 209
-if$ -- 26083
+            803 strings with 6792 characters,
+and the built_in function-call counts, 40857 in all, are:
+= -- 4260
+> -- 4160
+< -- 4154
++ -- 1369
+- -- 48
+* -- 221
+:= -- 4479
+add.period$ -- 18
+call.type$ -- 6
+change.case$ -- 26
+chr.to.int$ -- 1244
+cite$ -- 6
+duplicate$ -- 139
+empty$ -- 404
+format.name$ -- 90
+if$ -- 11770
 int.to.chr$ -- 1
-int.to.str$ -- 16
+int.to.str$ -- 7
 missing$ -- 0
-newline$ -- 84
-num.names$ -- 45
-pop$ -- 4063
+newline$ -- 39
+num.names$ -- 18
+pop$ -- 1861
 preamble$ -- 1
-purify$ -- 15
+purify$ -- 6
 quote$ -- 0
-skip$ -- 10762
+skip$ -- 4814
 stack$ -- 0
-substring$ -- 3036
-swap$ -- 37
-text.length$ -- 127
+substring$ -- 1414
+swap$ -- 18
+text.length$ -- 58
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 141
-warning$ -- 4
-while$ -- 173
+type$ -- 51
+warning$ -- 0
+while$ -- 78
 width$ -- 0
-write$ -- 222
-(There were 4 warnings)
+write$ -- 97

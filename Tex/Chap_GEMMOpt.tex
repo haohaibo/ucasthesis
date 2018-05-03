@@ -1,15 +1,17 @@
 \chapter{矩阵乘优化与性能评估}\label{chap:GEMMOpt}
 
 \section{实验配置}
+
+本文实验的测试环境包括AMD Fiji服务器和AMD Vega服务器，其中每个服务器都是单节点。每个计算节点的软硬件主要参数如表\ref{tab:hardwareplatform}所示。
 \begin{table}[htbp]
 	\bicaption{实验平台软硬件主要参数}{Experimental platform hardware main parameters}
 	\label{tab:hardwareplatform}
 	\begin{center}
 		\begin{tabular}{ | l | p{6cm} | p{6cm} |}
 			\hline
-			服务器 & ICT NCIC AMD Fiji服务器 & 曙光VEGA服务器 \\ \hline
-			GPU & Fiji R9 Nano & 2 Vega10 \\ \hline
-			CPU & Intel(R) Xeon(R) CPU E5-2680 v3 @ 2.50GHz & 2 AMD EPYC 7451 24-Core Processor \\ \hline
+			服务器 & AMD Fiji服务器 & AMD Vega服务器 \\ \hline
+			GPU & Fiji R9 Nano & 2 x Vega10 \\ \hline
+			%CPU & Intel(R) Xeon(R) CPU E5-2680 v3 @ 2.50GHz & 2 AMD EPYC 7451 24-Core Processor \\ \hline
 			内存 & 251GB DDRM & 251GB DDRM \\ \hline
 			操作系统 & Ubuntu16.04 & Ubuntu16.04 \\ \hline
 			操作系统内核 & rocm-1.7 & rocm-1.7 \\ \hline
@@ -19,8 +21,6 @@
 		\end{tabular}
 	\end{center}	
 \end{table}
-
-本文实验的测试环境包括ICT NCIC AMD Fiji服务器和曙光VEGA服务器。每个计算节点的软硬件主要参数如表\ref{tab:hardwareplatform}所示。
 
 
 \section{矩阵乘性能调优}
