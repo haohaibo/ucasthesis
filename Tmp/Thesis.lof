@@ -40,20 +40,20 @@
 \contentsline {figure}{\numberline {5.7}{\ignorespaces 一个threadblock中的计算任务\relax }}{47}{figure.caption.41}
 \addvspace {10.0pt}
 \contentsline {figure}{\numberline {6.1}{\ignorespaces v\_mac指令百分比随着寄存器分块大小的变化趋势\relax }}{50}{figure.caption.43}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces 矩阵乘OpenCL实现性能比较\relax }}{51}{figure.caption.44}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces 矩阵乘OpenCL实现性能比较\relax }}{52}{figure.caption.44}
 \contentsline {figure}{\numberline {6.3}{\ignorespaces 內积法矩阵乘shared memory分块图示说明\relax }}{53}{figure.caption.45}
 \contentsline {figure}{\numberline {6.4}{\ignorespaces shared memory bank分布\relax }}{53}{figure.caption.46}
-\contentsline {figure}{\numberline {6.5}{\ignorespaces 4-way shared memory bank冲突\relax }}{53}{figure.caption.47}
-\contentsline {figure}{\numberline {6.6}{\ignorespaces 循环展开图示\relax }}{54}{figure.caption.48}
-\contentsline {figure}{\numberline {6.7}{\ignorespaces shared memory双缓冲带来的性能提升\relax }}{55}{figure.caption.49}
-\contentsline {figure}{\numberline {6.8}{\ignorespaces 两种shared memory双缓冲实现的性能比较\relax }}{57}{figure.caption.50}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces 4-way shared memory bank冲突\relax }}{54}{figure.caption.47}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces 循环展开图示\relax }}{55}{figure.caption.48}
+\contentsline {figure}{\numberline {6.7}{\ignorespaces shared memory双缓冲带来的性能提升\relax }}{56}{figure.caption.49}
+\contentsline {figure}{\numberline {6.8}{\ignorespaces 两种shared memory双缓冲实现的性能比较\relax }}{56}{figure.caption.50}
 \contentsline {figure}{\numberline {6.9}{\ignorespaces 寄存器双缓冲\relax }}{59}{figure.caption.51}
-\contentsline {figure}{\numberline {6.10}{\ignorespaces 线程负载均衡\relax }}{59}{figure.caption.52}
-\contentsline {figure}{\numberline {6.11}{\ignorespaces shared memory bank冲突消除带来的性能提升\relax }}{60}{figure.caption.53}
+\contentsline {figure}{\numberline {6.10}{\ignorespaces 线程负载均衡\relax }}{60}{figure.caption.52}
+\contentsline {figure}{\numberline {6.11}{\ignorespaces shared memory bank冲突消除带来的性能提升\relax }}{61}{figure.caption.53}
 \contentsline {figure}{\numberline {6.12}{\ignorespaces shared memory 双缓冲，无bank冲突的性能表现\relax }}{61}{figure.caption.54}
-\contentsline {figure}{\numberline {6.13}{\ignorespaces shared memory bank冲突消除\relax }}{61}{figure.caption.55}
+\contentsline {figure}{\numberline {6.13}{\ignorespaces shared memory bank冲突消除\relax }}{62}{figure.caption.55}
 \contentsline {figure}{\numberline {6.14}{\ignorespaces 矩阵乘性能变化趋势\relax }}{63}{figure.caption.56}
-\contentsline {figure}{\numberline {6.15}{\ignorespaces 矩阵乘性能变化趋势\relax }}{63}{figure.caption.57}
+\contentsline {figure}{\numberline {6.15}{\ignorespaces 矩阵乘性能变化趋势\relax }}{64}{figure.caption.57}
 \addvspace {10.0pt}
 \addvspace {10.0pt}
 \addvspace {10.0pt}

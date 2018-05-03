@@ -185,8 +185,8 @@
 \@writefile{lot}{\addvspace {10.0pt}}
 \newlabel{chap:GEMMOpt}{{6}{49}{矩阵乘优化与性能评估}{chapter.6}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {6.1}实验配置}{49}{section.6.1}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces 实验平台硬件主要参数\relax }}{49}{table.caption.42}}
-\newlabel{tab:hardwareplatform}{{6.1}{49}{实验平台硬件主要参数\relax }{table.caption.42}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces 实验平台软硬件主要参数\relax }}{49}{table.caption.42}}
+\newlabel{tab:hardwareplatform}{{6.1}{49}{实验平台软硬件主要参数\relax }{table.caption.42}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {6.2}矩阵乘性能调优}{49}{section.6.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}寄存器分块对v\_mac指令占比的影响}{49}{subsection.6.2.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces v\_mac指令百分比随着寄存器分块大小的变化趋势\relax }}{50}{figure.caption.43}}
@@ -194,61 +194,62 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1.1}使用更宽的数据读指令}{50}{subsubsection.6.2.1.1}}
 \@writefile{toc}{\contentsline {section}{\numberline {6.3}汇编层次调优}{50}{section.6.3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}汇编调优的必要性}{51}{subsection.6.3.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces 矩阵乘OpenCL实现性能比较\relax }}{51}{figure.caption.44}}
-\newlabel{fig:opencl_gemm_1_1}{{6.2}{51}{矩阵乘OpenCL实现性能比较\relax }{figure.caption.44}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces 矩阵乘OpenCL实现性能比较\relax }}{52}{figure.caption.44}}
+\newlabel{fig:opencl_gemm_1_1}{{6.2}{52}{矩阵乘OpenCL实现性能比较\relax }{figure.caption.44}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces 內积法矩阵乘shared memory分块图示说明\relax }}{53}{figure.caption.45}}
 \newlabel{fig:gemm_inner_product_tile}{{6.3}{53}{內积法矩阵乘shared memory分块图示说明\relax }{figure.caption.45}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6.4}{\ignorespaces shared memory bank分布\relax }}{53}{figure.caption.46}}
 \newlabel{fig:shared_memory_bank_dist}{{6.4}{53}{shared memory bank分布\relax }{figure.caption.46}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.5}{\ignorespaces 4-way shared memory bank冲突\relax }}{53}{figure.caption.47}}
-\newlabel{fig:bank0}{{6.5}{53}{4-way shared memory bank冲突\relax }{figure.caption.47}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}优化内存访问}{54}{subsection.6.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}优化内存访问}{53}{subsection.6.3.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.5}{\ignorespaces 4-way shared memory bank冲突\relax }}{54}{figure.caption.47}}
+\newlabel{fig:bank0}{{6.5}{54}{4-way shared memory bank冲突\relax }{figure.caption.47}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3.3}循环展开}{54}{subsection.6.3.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.6}{\ignorespaces 循环展开图示\relax }}{54}{figure.caption.48}}
-\newlabel{fig:loop_unroll}{{6.6}{54}{循环展开图示\relax }{figure.caption.48}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.4}数据预取}{55}{subsection.6.3.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.4}数据预取}{54}{subsection.6.3.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.6}{\ignorespaces 循环展开图示\relax }}{55}{figure.caption.48}}
+\newlabel{fig:loop_unroll}{{6.6}{55}{循环展开图示\relax }{figure.caption.48}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3.5}shared memory双缓冲}{55}{subsection.6.3.5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.7}{\ignorespaces shared memory双缓冲带来的性能提升\relax }}{55}{figure.caption.49}}
-\newlabel{fig:gemm_shared_double_buffer}{{6.7}{55}{shared memory双缓冲带来的性能提升\relax }{figure.caption.49}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces GEMM algorithm with shared memory double buffer variant1\relax }}{56}{algorithm.2}}
-\newlabel{alg:gemm_sharedmem_v1}{{2}{56}{GEMM algorithm with shared memory double buffer variant1\relax }{algorithm.2}{}}
-\newlabel{gemmendfor}{{30}{56}{GEMM algorithm with shared memory double buffer variant1\relax }{algorithm.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.8}{\ignorespaces 两种shared memory双缓冲实现的性能比较\relax }}{57}{figure.caption.50}}
-\newlabel{fig:gemm_shared_double_buffer_v2}{{6.8}{57}{两种shared memory双缓冲实现的性能比较\relax }{figure.caption.50}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.6}寄存器双缓冲}{57}{subsection.6.3.6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.6}寄存器双缓冲}{55}{subsection.6.3.6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.7}{\ignorespaces shared memory双缓冲带来的性能提升\relax }}{56}{figure.caption.49}}
+\newlabel{fig:gemm_shared_double_buffer}{{6.7}{56}{shared memory双缓冲带来的性能提升\relax }{figure.caption.49}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.8}{\ignorespaces 两种shared memory双缓冲实现的性能比较\relax }}{56}{figure.caption.50}}
+\newlabel{fig:gemm_shared_double_buffer_v2}{{6.8}{56}{两种shared memory双缓冲实现的性能比较\relax }{figure.caption.50}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces GEMM algorithm with shared memory double buffer variant1\relax }}{57}{algorithm.2}}
+\newlabel{alg:gemm_sharedmem_v1}{{2}{57}{GEMM algorithm with shared memory double buffer variant1\relax }{algorithm.2}{}}
+\newlabel{gemmendfor}{{30}{57}{GEMM algorithm with shared memory double buffer variant1\relax }{algorithm.2}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces GEMM algorithm with shared memory double buffer veriant2\relax }}{58}{algorithm.3}}
 \newlabel{alg:gemm_sharedmem_v2}{{3}{58}{GEMM algorithm with shared memory double buffer veriant2\relax }{algorithm.3}{}}
 \newlabel{gemmendfor}{{30}{58}{GEMM algorithm with shared memory double buffer veriant2\relax }{algorithm.3}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6.9}{\ignorespaces 寄存器双缓冲\relax }}{59}{figure.caption.51}}
 \newlabel{fig:reg_double_buffer}{{6.9}{59}{寄存器双缓冲\relax }{figure.caption.51}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3.7}线程负载均衡}{59}{subsection.6.3.7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.10}{\ignorespaces 线程负载均衡\relax }}{59}{figure.caption.52}}
-\newlabel{fig:load_balance}{{6.10}{59}{线程负载均衡\relax }{figure.caption.52}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.8}消除shared memory bank冲突}{60}{subsection.6.3.8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.11}{\ignorespaces shared memory bank冲突消除带来的性能提升\relax }}{60}{figure.caption.53}}
-\newlabel{fig:gemm_no_bank_conflict}{{6.11}{60}{shared memory bank冲突消除带来的性能提升\relax }{figure.caption.53}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.8}消除shared memory bank冲突}{59}{subsection.6.3.8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.10}{\ignorespaces 线程负载均衡\relax }}{60}{figure.caption.52}}
+\newlabel{fig:load_balance}{{6.10}{60}{线程负载均衡\relax }{figure.caption.52}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.11}{\ignorespaces shared memory bank冲突消除带来的性能提升\relax }}{61}{figure.caption.53}}
+\newlabel{fig:gemm_no_bank_conflict}{{6.11}{61}{shared memory bank冲突消除带来的性能提升\relax }{figure.caption.53}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6.12}{\ignorespaces shared memory 双缓冲，无bank冲突的性能表现\relax }}{61}{figure.caption.54}}
 \newlabel{fig:gemm_shared_db_no_bank_conflict}{{6.12}{61}{shared memory 双缓冲，无bank冲突的性能表现\relax }{figure.caption.54}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.13}{\ignorespaces shared memory bank冲突消除\relax }}{61}{figure.caption.55}}
-\newlabel{fig:bank_conflict}{{6.13}{61}{shared memory bank冲突消除\relax }{figure.caption.55}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.9}指令重排}{61}{subsection.6.3.9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.13}{\ignorespaces shared memory bank冲突消除\relax }}{62}{figure.caption.55}}
+\newlabel{fig:bank_conflict}{{6.13}{62}{shared memory bank冲突消除\relax }{figure.caption.55}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.9}指令重排}{62}{subsection.6.3.9}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.9.1}指令重排的几个原则}{62}{subsubsection.6.3.9.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.4}矩阵乘性能测试}{62}{section.6.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.4}矩阵乘性能测试}{63}{section.6.4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6.14}{\ignorespaces 矩阵乘性能变化趋势\relax }}{63}{figure.caption.56}}
 \newlabel{fig:hgemm_perf}{{6.14}{63}{矩阵乘性能变化趋势\relax }{figure.caption.56}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.15}{\ignorespaces 矩阵乘性能变化趋势\relax }}{63}{figure.caption.57}}
-\newlabel{fig:gemm_tuning}{{6.15}{63}{矩阵乘性能变化趋势\relax }{figure.caption.57}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.15}{\ignorespaces 矩阵乘性能变化趋势\relax }}{64}{figure.caption.57}}
+\newlabel{fig:gemm_tuning}{{6.15}{64}{矩阵乘性能变化趋势\relax }{figure.caption.57}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {6.5}矩阵乘性能分析}{64}{section.6.5}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.5.1}矩阵乘潜在性能峰值}{64}{subsection.6.5.1}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces 矩阵乘主循环指令构成\relax }}{64}{table.caption.58}}
-\newlabel{tab:fijiFFMA}{{6.2}{64}{矩阵乘主循环指令构成\relax }{table.caption.58}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.6}本章小结}{64}{section.6.6}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第7章\hspace  {.3em}}结束语}{65}{chapter.7}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces 矩阵乘主循环指令构成\relax }}{65}{table.caption.58}}
+\newlabel{tab:fijiFFMA}{{6.2}{65}{矩阵乘主循环指令构成\relax }{table.caption.58}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.6}本章小结}{65}{section.6.6}}
+\citation{nugteren2017clblast}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第7章\hspace  {.3em}}结束语}{67}{chapter.7}}
 \@writefile{lof}{\addvspace {10.0pt}}
 \@writefile{lot}{\addvspace {10.0pt}}
-\newlabel{chap:Conclusion}{{7}{65}{结束语}{chapter.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.1}本文工作总结}{65}{section.7.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.2}下一步工作}{65}{section.7.2}}
+\newlabel{chap:Conclusion}{{7}{67}{结束语}{chapter.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.1}本文工作总结}{67}{section.7.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.2}下一步工作}{67}{section.7.2}}
 \bibdata{Biblio/ref}
 \bibcite{profiler2011nvidia}{{1}{2011}{{Profiler}}{{}}}
 \bibcite{meng2011grophecy}{{2}{2011}{{Meng\ et~al.}}{{Meng, Morozov, Kumaran, Vishwanath, and Uram}}}
@@ -264,10 +265,11 @@
 \bibcite{zhang2017understanding}{{12}{2017}{{Zhang\ et~al.}}{{Zhang, Tan, Xue, Li, Zhou, and Chen}}}
 \bibcite{xiuxiaassembler}{{13}{}{{Xiuxia}}{{}}}
 \bibcite{xianyi2012openblas}{{14}{2012}{{Xianyi\ et~al.}}{{Xianyi, Qian, and Chothia}}}
-\@writefile{toc}{\contentsline {chapter}{参考文献}{67}{section*.59}}
-\@writefile{toc}{\contentsline {chapter}{致谢}{69}{appendix*.61}}
+\bibcite{nugteren2017clblast}{{15}{2017}{{Nugteren}}{{}}}
+\@writefile{toc}{\contentsline {chapter}{参考文献}{69}{section*.59}}
+\@writefile{toc}{\contentsline {chapter}{致谢}{71}{appendix*.61}}
 \@writefile{lof}{\addvspace {10.0pt}}
 \@writefile{lot}{\addvspace {10.0pt}}
-\@writefile{toc}{\contentsline {chapter}{作者简介}{71}{appendix*.62}}
+\@writefile{toc}{\contentsline {chapter}{作者简介}{73}{appendix*.62}}
 \@writefile{lof}{\addvspace {10.0pt}}
 \@writefile{lot}{\addvspace {10.0pt}}

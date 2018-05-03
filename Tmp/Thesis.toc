@@ -51,22 +51,22 @@
 \contentsline {subsubsection}{\numberline {6.2.1.1}使用更宽的数据读指令}{50}{subsubsection.6.2.1.1}
 \contentsline {section}{\numberline {6.3}汇编层次调优}{50}{section.6.3}
 \contentsline {subsection}{\numberline {6.3.1}汇编调优的必要性}{51}{subsection.6.3.1}
-\contentsline {subsection}{\numberline {6.3.2}优化内存访问}{54}{subsection.6.3.2}
+\contentsline {subsection}{\numberline {6.3.2}优化内存访问}{53}{subsection.6.3.2}
 \contentsline {subsection}{\numberline {6.3.3}循环展开}{54}{subsection.6.3.3}
-\contentsline {subsection}{\numberline {6.3.4}数据预取}{55}{subsection.6.3.4}
+\contentsline {subsection}{\numberline {6.3.4}数据预取}{54}{subsection.6.3.4}
 \contentsline {subsection}{\numberline {6.3.5}shared memory双缓冲}{55}{subsection.6.3.5}
-\contentsline {subsection}{\numberline {6.3.6}寄存器双缓冲}{57}{subsection.6.3.6}
+\contentsline {subsection}{\numberline {6.3.6}寄存器双缓冲}{55}{subsection.6.3.6}
 \contentsline {subsection}{\numberline {6.3.7}线程负载均衡}{59}{subsection.6.3.7}
-\contentsline {subsection}{\numberline {6.3.8}消除shared memory bank冲突}{60}{subsection.6.3.8}
-\contentsline {subsection}{\numberline {6.3.9}指令重排}{61}{subsection.6.3.9}
+\contentsline {subsection}{\numberline {6.3.8}消除shared memory bank冲突}{59}{subsection.6.3.8}
+\contentsline {subsection}{\numberline {6.3.9}指令重排}{62}{subsection.6.3.9}
 \contentsline {subsubsection}{\numberline {6.3.9.1}指令重排的几个原则}{62}{subsubsection.6.3.9.1}
-\contentsline {section}{\numberline {6.4}矩阵乘性能测试}{62}{section.6.4}
+\contentsline {section}{\numberline {6.4}矩阵乘性能测试}{63}{section.6.4}
 \contentsline {section}{\numberline {6.5}矩阵乘性能分析}{64}{section.6.5}
 \contentsline {subsection}{\numberline {6.5.1}矩阵乘潜在性能峰值}{64}{subsection.6.5.1}
-\contentsline {section}{\numberline {6.6}本章小结}{64}{section.6.6}
-\contentsline {chapter}{\numberline {第7章\hspace {.3em}}结束语}{65}{chapter.7}
-\contentsline {section}{\numberline {7.1}本文工作总结}{65}{section.7.1}
-\contentsline {section}{\numberline {7.2}下一步工作}{65}{section.7.2}
-\contentsline {chapter}{参考文献}{67}{section*.59}
-\contentsline {chapter}{致谢}{69}{appendix*.61}
-\contentsline {chapter}{作者简介}{71}{appendix*.62}
+\contentsline {section}{\numberline {6.6}本章小结}{65}{section.6.6}
+\contentsline {chapter}{\numberline {第7章\hspace {.3em}}结束语}{67}{chapter.7}
+\contentsline {section}{\numberline {7.1}本文工作总结}{67}{section.7.1}
+\contentsline {section}{\numberline {7.2}下一步工作}{67}{section.7.2}
+\contentsline {chapter}{参考文献}{69}{section*.59}
+\contentsline {chapter}{致谢}{71}{appendix*.61}
+\contentsline {chapter}{作者简介}{73}{appendix*.62}

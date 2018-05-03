@@ -8,45 +8,45 @@ Warning--empty year in grayassembler
 Warning--empty year in xiuxiaassembler
 Warning--empty year in grayassembler
 Warning--empty year in xiuxiaassembler
-You've used 14 entries,
+You've used 15 entries,
             3424 wiz_defined-function locations,
-            846 strings with 8248 characters,
-and the built_in function-call counts, 87087 in all, are:
-= -- 9059
-> -- 8895
-< -- 8863
-+ -- 2907
-- -- 98
-* -- 456
-:= -- 9557
-add.period$ -- 42
-call.type$ -- 14
-change.case$ -- 58
-chr.to.int$ -- 2633
-cite$ -- 18
-duplicate$ -- 303
-empty$ -- 866
-format.name$ -- 202
-if$ -- 25105
+            850 strings with 8350 characters,
+and the built_in function-call counts, 90501 in all, are:
+= -- 9411
+> -- 9230
+< -- 9200
++ -- 3020
+- -- 101
+* -- 470
+:= -- 9939
+add.period$ -- 45
+call.type$ -- 15
+change.case$ -- 61
+chr.to.int$ -- 2734
+cite$ -- 19
+duplicate$ -- 323
+empty$ -- 914
+format.name$ -- 209
+if$ -- 26083
 int.to.chr$ -- 1
-int.to.str$ -- 15
+int.to.str$ -- 16
 missing$ -- 0
-newline$ -- 79
-num.names$ -- 42
-pop$ -- 3914
+newline$ -- 84
+num.names$ -- 45
+pop$ -- 4063
 preamble$ -- 1
-purify$ -- 14
+purify$ -- 15
 quote$ -- 0
-skip$ -- 10350
+skip$ -- 10762
 stack$ -- 0
-substring$ -- 2928
-swap$ -- 36
-text.length$ -- 122
+substring$ -- 3036
+swap$ -- 37
+text.length$ -- 127
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 130
+type$ -- 141
 warning$ -- 4
-while$ -- 166
+while$ -- 173
 width$ -- 0
-write$ -- 209
+write$ -- 222
 (There were 4 warnings)
