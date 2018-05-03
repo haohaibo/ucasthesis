@@ -1,0 +1,59 @@
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces NVIDIA GPU架构演进图\relax }}{2}{figure.caption.6}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces AMD GPU架构演进图\relax }}{3}{figure.caption.7}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces 串行程序执行示意图\relax }}{3}{figure.caption.8}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces 并行程序执行示意图\relax }}{4}{figure.caption.9}
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces work-item,wavefront和NDRange之间的关系\relax }}{9}{figure.caption.10}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces NVIDIA warp执行模式\relax }}{9}{figure.caption.11}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces if-else分支控制流\relax }}{9}{figure.caption.12}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces warp(wavefront)执行if-else分支流图\relax }}{10}{figure.caption.13}
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Intel CPU发展趋势\relax }}{13}{figure.caption.15}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces AMD Puma和steamroller架构\relax }}{18}{figure.caption.16}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces AMD HD6970架构\relax }}{18}{figure.caption.17}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces NVIDIA GeForce GTX 780结构图\relax }}{22}{figure.caption.18}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces SIMD的角度看的GTX780结构图\relax }}{22}{figure.caption.19}
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces GCN GPU结构图\relax }}{26}{figure.caption.20}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces AMD ROCm编译工具链\relax }}{27}{figure.caption.21}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces AMD OpenCL线程模型\relax }}{28}{figure.caption.22}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces OpenCL线程组织方式\relax }}{29}{figure.caption.23}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces NDRange，work-group，work-item对应关系\relax }}{31}{figure.caption.24}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces OpenCL模型之间的关系\relax }}{31}{figure.caption.25}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces OpenCL模型中4种内存类型与AMD GPU内存的关系\relax }}{32}{figure.caption.26}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces 硬件地址字节分布\relax }}{34}{figure.caption.27}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces AMD GPU channel分布\relax }}{34}{figure.caption.28}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces NVIDIA三代GPU的比较\relax }}{35}{figure.caption.29}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces AMD VEGA GPU结构图\relax }}{37}{figure.caption.30}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces GCN GPU程序数据流动\relax }}{37}{figure.caption.31}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces AMD GPU内存层次结构\relax }}{38}{figure.caption.32}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces AMD Fiji GPU浮点通量测试\relax }}{40}{figure.caption.33}
+\contentsline {figure}{\numberline {4.15}{\ignorespaces AMD Fiji GPU内存带宽测试\relax }}{40}{figure.caption.34}
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces 矩阵乘外积法图示\relax }}{45}{figure.caption.35}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces 线程到数据映射\relax }}{45}{figure.caption.36}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces 从全局内存读取A矩阵数据到寄存器\relax }}{45}{figure.caption.37}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces 从全局内存读取B矩阵数据到寄存器\relax }}{46}{figure.caption.38}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces 写回A,B数据到共享内存\relax }}{46}{figure.caption.39}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces 从共享内存读取A,B数据到寄存器\relax }}{46}{figure.caption.40}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces 一个threadblock中的计算任务\relax }}{47}{figure.caption.41}
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces v\_mac指令百分比随着寄存器分块大小的变化趋势\relax }}{50}{figure.caption.43}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces 矩阵乘OpenCL实现性能比较\relax }}{51}{figure.caption.44}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces 內积法矩阵乘shared memory分块图示说明\relax }}{53}{figure.caption.45}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces shared memory bank分布\relax }}{53}{figure.caption.46}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces 4-way shared memory bank冲突\relax }}{53}{figure.caption.47}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces 循环展开图示\relax }}{54}{figure.caption.48}
+\contentsline {figure}{\numberline {6.7}{\ignorespaces shared memory双缓冲带来的性能提升\relax }}{55}{figure.caption.49}
+\contentsline {figure}{\numberline {6.8}{\ignorespaces 两种shared memory双缓冲实现的性能比较\relax }}{57}{figure.caption.50}
+\contentsline {figure}{\numberline {6.9}{\ignorespaces 寄存器双缓冲\relax }}{59}{figure.caption.51}
+\contentsline {figure}{\numberline {6.10}{\ignorespaces 线程负载均衡\relax }}{59}{figure.caption.52}
+\contentsline {figure}{\numberline {6.11}{\ignorespaces shared memory bank冲突消除带来的性能提升\relax }}{60}{figure.caption.53}
+\contentsline {figure}{\numberline {6.12}{\ignorespaces shared memory 双缓冲，无bank冲突的性能表现\relax }}{61}{figure.caption.54}
+\contentsline {figure}{\numberline {6.13}{\ignorespaces shared memory bank冲突消除\relax }}{61}{figure.caption.55}
+\contentsline {figure}{\numberline {6.14}{\ignorespaces 矩阵乘性能变化趋势\relax }}{63}{figure.caption.56}
+\contentsline {figure}{\numberline {6.15}{\ignorespaces 矩阵乘性能变化趋势\relax }}{63}{figure.caption.57}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}

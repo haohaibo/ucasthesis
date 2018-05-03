@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.26)  3 MAY 2018 00:19
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.26)  3 MAY 2018 12:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2039,4 +2039,238 @@ File: parallelprogram.png Graphic file (type QTm)
 第2章
 
 Overfull \hbox (12.30972pt too wide) in paragraph at lines 12--13
-[]\TU/A
+[]\TU/AdobeSongStd-Light(1)/m/n/12.045 在 计 算 单 元 的 设 计 上，| \TU/entextsf/m/n/12.
+045 AMD \TU/AdobeSongStd-Light(1)/m/n/12.045 和 \TU/entextsf/m/n/12.045 NVIDIA G
+PU \TU/AdobeSongStd-Light(1)/m/n/12.045 的 计 算 单 元 都 采 用 了 \TU/entextsf/m/n/12.0
+45 SIMD(Single
+ []
+
+[7
+
+]
+File: thread_model.png Graphic file (type QTm)
+ <use  "thread_model.png" >
+File: warp_model.png Graphic file (type QTm)
+ <use  "warp_model.png" >
+File: if_else.png Graphic file (type QTm)
+ <use  "if_else.png" >
+File: warp_if_else.png Graphic file (type QTm)
+
+<use  "warp_if_else.png" > [8] [9] [10] [11]) (./Tex/Chap_parallelArch.tex
+[12]
+第3章
+File: cpu_trend.png Graphic file (type QTm)
+<use  "cpu_trend.png" > [13
+
+] [14] [15]
+Overfull \hbox (14.00099pt too wide) in paragraph at lines 61--62
+[]\TU/AdobeSongStd-Light(1)/m/n/12.045 这 两 种 硬 件 多 线 程 技 术 都 十 分 常 见。|  在 \TU/e
+ntextsf/m/n/12.045 Tera \TU/AdobeSongStd-Light(1)/m/n/12.045 公 司 设 计 的 超 级 计 算 
+机 \TU/entextsf/m/n/12.045 MTA(Multi-
+ []
+
+[16]
+File: amd_cpu_core.png Graphic file (type QTm)
+ <use  "amd_cpu_core.png" > [17]
+File: amd_gpu_core.png Graphic file (type QTm)
+ <use  "amd_gpu_core.png" > [18] [19]
+[20]
+File: nvidia_gtx780.png Graphic file (type QTm)
+ <use  "nvidia_gtx780.png" >
+File: nvidia_gtx780_simd.png Graphic file (type QTm)
+ <use  "nvidia_gtx780_simd.png" > [21] [22])
+(./Tex/Chap_GPUArch.tex [23] [24
+
+]
+第4章
+[25]
+File: gcn_gpu.png Graphic file (type QTm)
+ <use  "gcn_gpu.png" > [26]
+File: rocm_llvm.png Graphic file (type QTm)
+ <use  "rocm_llvm.png" >
+File: opencl_thread_model.png Graphic file (type QTm)
+
+<use  "opencl_thread_model.png" > [27]
+File: thread_model.png Graphic file (type QTm)
+ <use  "thread_model.png" > [28] [29]
+File: thread_map.png Graphic file (type QTm)
+
+<use  "thread_map.png" > [30]
+File: opencl_model_relation.png Graphic file (type QTm)
+ <use  "opencl_model_relation.png" > [31]
+File: opencl_memory_gpu.png Graphic file (type QTm)
+
+<use  "opencl_memory_gpu.png" > [32]
+File: gpu_addr.png Graphic file (type QTm)
+ <use  "gpu_addr.png" > [33]
+File: gpu_mem_channel.png Graphic file (type QTm)
+
+<use  "gpu_mem_channel.png" >
+File: nvidia_3_gpus.png Graphic file (type QTm)
+ <use  "nvidia_3_gpus.png" > [34] [35]
+File: amd_vega_arch.png Graphic file (type QTm)
+
+<use  "amd_vega_arch.png" >
+File: amd_cs.png Graphic file (type QTm)
+ <use  "amd_cs.png" > [36]
+File: amd_gpu_memory.png Graphic file (type QTm)
+
+<use  "amd_gpu_memory.png" > [37]
+Overfull \hbox (12.30972pt too wide) in paragraph at lines 372--373
+[]\TU/AdobeSongStd-Light(1)/m/n/12.045 在 计 算 单 元 的 设 计 上，| \TU/entextsf/m/n/12.
+045 AMD \TU/AdobeSongStd-Light(1)/m/n/12.045 和 \TU/entextsf/m/n/12.045 NVIDIA G
+PU \TU/AdobeSongStd-Light(1)/m/n/12.045 的 计 算 单 元 都 采 用 了 \TU/entextsf/m/n/12.0
+45 SIMD(Single
+ []
+
+[38] [39]
+File: v_mac_throughput.png Graphic file (type QTm)
+ <use  "v_mac_throughput.png" >
+File: mem_bandwidth.png Graphic file (type QTm)
+ <use  "mem_bandwidth.png" >)
+(./Tex/Chap_GEMMGPU.tex [40] [41] [42
+
+]
+第5章
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 50.
+[43]
+File: outer_product.png Graphic file (type QTm)
+ <use  "outer_product.png" >
+File: thread_to_data.png Graphic file (type QTm)
+ <use  "thread_to_data.png" >
+File: global_A.png Graphic file (type QTm)
+
+<use  "global_A.png" >
+File: global_B.png Graphic file (type QTm)
+ <use  "global_B.png" > [44] [45]
+File: writeS.png Graphic file (type QTm)
+ <use  "writeS.png" >
+File: readS.png Graphic file (type QTm)
+
+<use  "readS.png" >
+File: threadblock.png Graphic file (type QTm)
+ <use  "threadblock.png" > [46]) (./Tex/Chap_GEMMOpt.tex
+[47] [48
+
+]
+第6章
+
+Overfull \hbox (52.9118pt too wide) in paragraph at lines 8--20
+ [] 
+ []
+
+File: ffma_percentage.png Graphic file (type QTm)
+<use  "ffma_percentage.png" >
+Overfull \hbox (25.59644pt too wide) in paragraph at lines 37--38
+\TU/AdobeSongStd-Light(1)/m/n/12.045 指 令 百 分 比 越 高。|  如 果 我 们 采 用 的 寄 存 器 分 块 大
+ 小 为 \TU/entextsf/m/n/12.045 6\TU/AdobeSongStd-Light(1)/m/n/12.045 ，|  则 \TU/en
+textsf/m/n/12.045 FFMA/DS_READ_B32=4:1\TU/AdobeSongStd-Light(1)/m/n/12.045 ，|
+ []
+
+[49] [50]
+File: opencl_gemm_1_1.png Graphic file (type QTm)
+ <use  "opencl_gemm_1_1.png" > [51]
+File: gemm_inner_product_tile.png Graphic file (type QTm)
+
+<use  "gemm_inner_product_tile.png" >
+File: shared_memory_bank_dist.png Graphic file (type QTm)
+ <use  "shared_memory_bank_dist.png" >
+File: bank0.png Graphic file (type QTm)
+
+<use  "bank0.png" > [52] [53]
+File: loop_unroll.png Graphic file (type QTm)
+ <use  "loop_unroll.png" > [54]
+File: gemm_shared_double_buffer.png Graphic file (type QTm)
+
+<use  "gemm_shared_double_buffer.png" >
+File: gemm_shared_double_buffer_v2.png Graphic file (type QTm)
+
+<use  "gemm_shared_double_buffer_v2.png" > [55] [56] [57] [58]
+File: reg_double_buffer.png Graphic file (type QTm)
+
+<use  "reg_double_buffer.png" >
+File: load_balance.png Graphic file (type QTm)
+ <use  "load_balance.png" > [59]
+File: gemm_no_bank_conflict.png Graphic file (type QTm)
+
+<use  "gemm_no_bank_conflict.png" >
+File: gemm_shared_db_no_bank_conflict.png Graphic file (type QTm)
+
+<use  "gemm_shared_db_no_bank_conflict.png" > [60]
+File: bank_conflict.png Graphic file (type QTm)
+ <use  "bank_conflict.png" >
+[61]
+Overfull \hbox (30.5333pt too wide) in paragraph at lines 292--293
+\TU/AdobeSongStd-Light(1)/m/n/12.045 对 应 的 \TU/entextsf/m/n/12.045 t_buffer_loa
+d_xyzw \TU/AdobeSongStd-Light(1)/m/n/12.045 指 令 结 果 返 回，|  所 以 \TU/entextsf/m/n
+/12.045 ds_read_b128 \TU/AdobeSongStd-Light(1)/m/n/12.045 指 令 和 \TU/entextsf/m/
+n/12.045 t_buffer_load_xyzw
+ []
+
+File: hgemm_perf.png Graphic file (type QTm)
+<use  "hgemm_perf.png" >
+File: gemm_tuning.png Graphic file (type QTm)
+ <use  "gemm_tuning.png" >
+Overfull \hbox (21.6495pt too wide) in paragraph at lines 304--311
+\TU/AdobeSongStd-Light(1)/m/n/12.045 因 为 在 \TU/entextsf/m/n/12.045 OpenCL \TU/A
+dobeSongStd-Light(1)/m/n/12.045 层 面，|  可 以 使 用 的 同 步 指 令 只 有 \TU/entextsf/m/n/1
+2.045 barrier CLK_GLOBAL_MEM_FENCE
+ []
+
+
+Overfull \hbox (12.10469pt too wide) in paragraph at lines 304--311
+\TU/AdobeSongStd-Light(1)/m/n/12.045 和 \TU/entextsf/m/n/12.045 barrier CLK_LOCA
+L_MEM_FENCE \TU/AdobeSongStd-Light(1)/m/n/12.045 这 两 种；|  而 在 汇 编 语 言 中，|  通 过 
+使 用 \TU/entextsf/m/n/12.045 s_waitcnt
+ []
+
+[62] [63]) (./Tex/Chap_Conclusion.tex [64]
+第7章
+[65
+
+])) [66] (Tmp/Thesis.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 71--74
+[]\TU/entextrm/m/n/10.53937 GRAY S.  Assembler for nvidia maxwell architecture,
+ 2014[J].  URL
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--93
+[]\TU/entextrm/m/n/10.53937 XIUXIA Z.  Assembler for nvidia kepler architecture
+, 2016[J].  URL
+ []
+
+) (./Tex/Backmatter.tex [67
+
+
+
+
+] [68
+
+] [69] [70
+
+])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 87.
+ [71
+
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 87.
+ (Tmp/Thesis.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 87.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 87.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 32847 strings out of 493005
+ 614251 string characters out of 6137956
+ 656298 words of memory out of 5000000
+ 36354 multiletter control sequences out of 15000+600000
+ 29308 words of font info for 122 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 63i,12n,94p,10526b,644s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on Tmp/Thesis.pdf (89 pages).

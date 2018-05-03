@@ -63,7 +63,9 @@
 	\label{fig:opencl_gemm_1_1}
 \end{figure}
 
-从图\ref{fig:opencl_gemm_1_1}可以看出，最简单的矩阵乘GPU实现其浮点效率最低(图中橙色的gemm original)。gemm original实现没有使用shared memory，采用內积法每个线程计算一个输出。中间两条曲线表示使用shared memory，分块大小分别为8x8和16x16。由于矩阵乘在计算过程中有很多数据重用，利用数据重用的特点，将要计算的数据预先读入shared memory。在真正计算时从shared memory中取数据，可以减小数据读延迟。图\ref{fig:gemm_inner_product_tile}展示了使用shared memory分块的內积法矩阵乘。可以看出，计算C矩阵分块的同一行时，需要重复读A矩阵分块的同一行4个元素；同理，计算C矩阵分块的同一列时，要重复读B矩阵分块的同一列4个元素。全局内存读的次数减少4倍。分块大小为8时，全局内存读次数将减少8倍。所以在内存带宽受限时，提高shared memory分块大小可以减少全局内存读，降低内存带宽压力，提高计算性能。从图\ref{fig:opencl_gemm_1_1}中可以看出16x16分块的性能高于8x8分块。
+从图\ref{fig:opencl_gemm_1_1}可以看出，最简单的矩阵乘GPU实现其浮点效率最低(图\ref{fig:opencl_gemm_1_1}中橙色的gemm original)。gemm original的实现没有使用shared memory，采用內积法每个线程计算一个输出。中间两条曲线表示使用shared memory，分块大小分别为8x8和16x16。由于矩阵乘在计算过程中有很多数据重用，利用数据重用的特点，将要计算的数据预先读入shared memory。在真正计算时从shared memory中取数据，可以减小数据读延迟。图\ref{fig:gemm_inner_product_tile}展示了使用shared memory分块的內积法矩阵乘。可以看出，计算C矩阵分块的同一行时，需要重复读A矩阵分块的同一行4个元素；同理，计算C矩阵分块的同一列时，要重复读B矩阵分块的同一列4个元素。全局内存读的次数减少4倍。分块大小为8时，全局内存读次数将减少8倍。所以在内存带宽受限时，提高shared memory分块大小可以减少全局内存读，降低内存带宽压力，提高计算性能。从图\ref{fig:opencl_gemm_1_1}中可以看出16x16分块的性能高于8x8分块。
+
+图\ref{fig:opencl_gemm_1_1}中蓝色曲线openCL block8x8 thread8x8是原始的外积法矩阵乘实现。该矩阵乘的参数配置是，一个threadblock的线程数为8x8=64，在AMD GPU上即一个wavefront的大小。每个线程计算8x8的分块，因此一个threadblock计算64x64的输出。循环展开次数为8。写回结果时，直接从寄存器写回到全局内存。可见，外积法的矩阵乘性能从整体上要优于內积法。这是由于采用內积法可以并行地计算所有的乘法，但不能并行的计算加法。即使可以使用reduction来快速计算加法，但仍然会产生很多空闲的线程。这样，由于任务划分的不均衡，会使得计算性能大大降低。然而，如果用外积法来代替內积法，将会很大程度上缓解负载不均衡带来的性能损失。曲线openCL block8x8 thread8x8 shared double buffer表示在原始外积法实现的基础上进行了shared memory双缓冲的优化，性能得到进一步的提升。
 
 \begin{figure}[htbp]
 	\centering
@@ -223,7 +225,7 @@
 \end{figure}
 
 \subsection{线程负载均衡}
-对每个线程来说，我们使用4个4x4，来代替8x8的计算方式，来使得一个block中的线程可以负载均衡(如图\ref{fig:load_balance})。通过这种方式，我们可以提高一个block的计算效率。
+对每个线程来说，我们使用4个4x4，来代替8x8的计算方式，来使得一个block中的线程可以负载均衡(如图\ref{fig:load_balance})。在进行shared memory bank冲突消除时，同时做到了线程的负载均衡。将一个threadblock的计算任务均等的划分成4份。所有线程都分别计算4份中的每一个中相应的元素。例如，0号线程分别计算4个分块的左上角的4x4的输出。通过这种方式，我们可以提高一个block的计算效率。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{load_balance}
@@ -235,7 +237,8 @@
 \subsection{消除shared memory bank冲突}
 AMD GPU shared memory有32个bank。当不同的线程访问不同的bank时，线程可以同时读；当不同的线程访问同一个bank的同一个位置时，可以进行广播；当不同的线程访问同一个bank的不同位置时，会产生bank冲突，需要多个时钟周期来完成。所以，bank冲突会减小访存带宽，对性能影响很大。
 
-在前面的6.3.1小结中，我们分析了外积法的原始实现中，有4-way shared memory bank冲突。通过观察可以发现，产生shared memory bank冲突的原因是在一个threadblock中，所有线程对shared memory的访问跨越了2个bank，导致不同的线程访问同一个的bank的不同entry这种情况发生。接下来，我们将展示如何通过分配线程的计算任务来消除shared memory bank冲突。消除shared memory bank冲突的方法是安排一个thread block中的所有线程对shared memory的一次访问限制在一个bank中。图\ref{fig:gemm_no_bank_conflict}展示了通过消除shared memory bank冲突所带来的性能提升。
+在前面的6.3.1小结中，我们分析了外积法的原始实现中，有4-way shared memory bank冲突。通过观察可以发现，产生shared memory bank冲突的原因是在一个threadblock中，所有线程对shared memory的访问跨越了2个bank，导致不同的线程访问同一个的bank的不同entry这种情况发生。接下来，我们将展示如何通过分配线程的计算任务来消除shared memory bank冲突。消除shared memory bank冲突的方法是安排一个thread block中的所有线程对shared memory的一次访问限制在一个bank中。图\ref{fig:gemm_no_bank_conflict}展示了通过消除shared memory bank冲突所带来的性能提升。从图\ref{fig:gemm_no_bank_conflict}看出，通过消除bank冲突可以带来微弱的性能提升，这里的一个原因是这里的shared memory bank冲突消除是在原始的外积法矩阵乘的基础上实现的。此时矩阵乘瓶颈还在全局访存。没有用到shared memory双缓冲，因此提升的性能不多。
+
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.80\textwidth]{gemm_no_bank_conflict}
@@ -243,7 +246,17 @@ AMD GPU shared memory有32个bank。当不同的线程访问不同的bank时，�
 	\label{fig:gemm_no_bank_conflict}
 \end{figure}
 
-下图中小方格中的数字表示一个block中的64个线程，我们将64个线程看成一个2维的线程数组tid.x 取值从0~7， tid.y取值从0~7
+
+图\ref{fig:gemm_shared_db_no_bank_conflict}展示了在外积法原始实现版本中分别加入shared memory双缓冲和bank冲突消除优化手法所带来的性能提升。
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.80\textwidth]{gemm_shared_db_no_bank_conflict}
+	\bicaption{shared memory 双缓冲，无bank冲突的性能表现}{GEMM performance with shared memory double buffering and bank conflict elimination}
+	\label{fig:gemm_shared_db_no_bank_conflict}
+\end{figure}
+
+
+图\ref{fig:bank_conflict}中小方格中的数字表示一个block中的64个线程，我们将64个线程看成一个2维的线程数组tid.x 取值从0~7， tid.y取值从0~7
 
 小方格中的数字对(tid.x,tid.y)对应的线程号为tid = tid.y * 8 + tid.x
 
@@ -286,7 +299,15 @@ t\_buffer\_load\_xyzw指令：从全局内存预取数据到寄存器。
 	\label{fig:hgemm_perf}
 \end{figure}
 
-通过实际测试，我们的矩阵乘性能峰值可达95\%。
+通过实际测试，我们的矩阵乘性能峰值可达$\sim$95\%。
+
+图\ref{fig:gemm_tuning}展示了分别采用循环展开，shared memory双缓冲，bank冲突消除，寄存器双缓冲和指令重排所带来的一步步性能提升。其中循环展开，shared memory双缓冲和寄存器双缓冲带来了大部分的性能能提升，这得益于利用shared memory和寄存器隐藏了全局内存读延迟。指令细粒度重排只有用汇编编写才能实现，因为在OpenCL层面，可以使用的同步指令只有barrier CLK\_GLOBAL\_MEM\_FENCE和barrier CLK\_LOCAL\_MEM\_FENCE这两种；而在汇编语言中，通过使用s\_waitcnt vmcnt()可以具体等待某一条访存指令的完成，同时，也没有OpenCL编译器所带来的无法预测的行为。通过利用前面讲到的指令重排的几个原则，进一步掩盖访存延迟，获得计算性能的提升。
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.80\textwidth]{gemm_tuning}
+	\bicaption{矩阵乘性能变化趋势}{GEMM performance}
+	\label{fig:gemm_tuning}
+\end{figure}
 
 \section{矩阵乘性能分析}
 \subsection{矩阵乘潜在性能峰值}
