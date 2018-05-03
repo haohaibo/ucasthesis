@@ -1,13 +1,12 @@
 \chapter{GPU微体系结构研究}\label{chap:GPUArch}
+对GPU微体系结构的研究一直是高性能计算领域的一个热点。人们对传统的x86和ARM CPU微架构已经有了较为详尽的理解。研究人员利用GEM5CPU模拟器进行处理器微结构的设计和研究，但当前针对GPU的模拟器还十分落后于工业界。因此对GPU微结构的理解可以帮助研究人员设计出更加真实的GPU模拟器，同时也使得编程人员可以设计出高效的GPU程序。
 \section{OpenCL编程模型}
+OpenCL(Open Computing Language)既是一个语言，也是一个标准，OpenCL用于异构编程领域。对于AMD GPU，OpenCL是其主要编程语言之一。
 
 \subsection{OpenCL程序语言介绍}
 OpenCL是一种异构并行编程语言，OpenCL标准最初由苹果公司提出，同时参与的公司有AMD，IBM，Qualcomm，Intel和NVIDIA。最后由Khronos Group进行标准化和发布。Khronos Group在2008年发布了OpenCL标准的第一版，OpenCL 1.0。OpenCL 1.0定义了主机端的编程接口和设备端的编写kernel的语言。OpenCL语言基于C语言发展而来。随后发布的OpenCL 1.1和1.2标准增加了OpenCL与OpenGL的互操作性。在2013年，正式发布了OpenCL 2.0标准。新标准在一定程度上简化了并行程序的开发。OpenCL的API在设计上就做的尽可能通用，以使其可以运行在不同的平台上；并且也足够底层，以使其可以在不同的平台上都可以获得较高的性能。
 
-OpenCL程序在不同的平台具有可移植性，按照OpenCL标准编写的程序，可以在不同的硬件平台上运行。用OpenCL C语言可以编写在OpenCL设备上运行程序。OpenCL C在C99的基础上发展而来。其设计的目标是可在不同的OpenCL硬件平台(如GPU、FPGA、DSP等)上编写并执行可数据并行的程序。同时OpenCL C也实现了一组原子和同步操作。虽然OpenCL API本身是基于C的API，但也可以绑定到其他语言，例如Python，C++，Java等。另外，很多专用的库如数学库，计算机视觉库）也都集成了OpenCL的实现，来提升异构系统的计算性能。
-
-所以，我们可以看到OpenCL的目标是做通用并行计算。
-OpenCL 标准包含4部分，分别是平台模型，执行模型，kernel编程模型和内存模型。
+OpenCL程序在不同的平台具有可移植性，按照OpenCL标准编写的程序，可以在不同的硬件平台上运行。用OpenCL C语言可以编写在OpenCL设备上运行程序。OpenCL C在C99的基础上发展而来。其设计的目标是可在不同的OpenCL硬件平台(如GPU、FPGA、DSP等)上编写并执行可数据并行的程序。同时OpenCL C也实现了一组原子和同步操作。虽然OpenCL API本身是基于C的API，但也可以绑定到其他语言，例如Python，C++，Java等。另外，很多专用的库如数学库，计算机视觉库）也都集成了OpenCL的实现，来提升异构系统的计算性能。所以，我们可以看到OpenCL的目标是做通用并行计算。OpenCL 标准包含4部分，分别是平台模型，执行模型，kernel编程模型和内存模型。
 
 平台模型：在OpenCL平台模型中，有一个主机端和一到多个设备端。主机端用来协调OpenCL代码的执行，设备端执行kernel代码。平台模型提供了一个抽象的硬件设备模型。
 
@@ -180,7 +179,7 @@ OpenCL将内存分为两部分：主机端内存和设备端内存。主机端�
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{opencl_memory_gpu}
-	\bicaption{OpenCL模型中4种内存类型与AMD GPU内存的关系}{The relationship between four memory types in the OpenCL model and AMD GPU memory}
+	\bicaption{OpenCL内存模型与AMD GPU内存的关系}{OpenCL memory model and AMD GPU memory}
 	\label{fig:opencl_memory_gpu}
 \end{figure}
 
@@ -191,7 +190,7 @@ OpenCL将内存分为两部分：主机端内存和设备端内存。主机端�
 接下来讨论AMD GCN(Graphics Core Next)架构GPUs上的程序性能和调优方法。AMD GCN架构的GPUs包括Fiji，Vega10和Vega20等。
 
 \subsection{优化全局访存}
-首先，我们先介绍一下GPU的组成结构。AMD GCN GPU由多个CU构成。每个CU包含局部内存(片上内存)，L1 cache，寄存器和4个SIMD单元。每个SIMD包含16个计算核心。一个线程会在一个计算核心上执行，一个CU会运行一到多个work-groups。在GPUs上，硬件调度以wavefront 64个线程为基本调度单元，一个wavefront中64个线程执行相同的指令，但操作不同的数据。是一种典型的SIMD执行方式。
+首先介绍一下GPU的组成结构，AMD GCN GPU由多个CU构成。每个CU包含局部内存(片上内存)，L1 cache，寄存器和4个SIMD单元。每个SIMD包含16个计算核心。一个线程会在一个计算核心上执行，一个CU会运行一到多个work-groups。在GPUs上，硬件调度以wavefront 64个线程为基本调度单元，一个wavefront中64个线程执行相同的指令，但操作不同的数据。是一种典型的SIMD执行方式。
 
 每个CU包含64KB的片上内存，16KB的读/写L1 cache，4个向量单元和1个标量单元。每个work-group可以最大分配32KB片上内存。每一个向量单元包含512个标量寄存器(SGPRs)，用以处理一个wavefront中的分支，常量等操作。每个标量单元包含256个向量寄存器(VGPRs)。向量寄存器本质上也是标量寄存器，只是每个寄存器在长度上由1扩展到64。每个向量单元包含16个计算核心。
 
@@ -209,13 +208,10 @@ OpenCL将内存分为两部分：主机端内存和设备端内存。主机端�
 
 
 
-如果两个访存请求指向同一个内存控制器，在硬件上这两个请求会顺序执行。我们成为channel冲突。与之类似，如果两个访存请求映射到同一个内存bank，那么这两个请求也会顺序执行，我们称之为bank冲突。从软件开发人员的角度来看，channel冲突和bank冲突没有太大区别。如果数据请求的步长是2的幂次方的一个较大的数，那么往往会发生channel冲突。发生冲突的步长依赖于具体的芯片。如果一个步长在有8个channel的芯片上发生channel冲突，那么这个步长也可能会在有4个bank的芯片上导致bank冲突。
+如果两个访存请求指向同一个内存控制器，在硬件上这两个请求会顺序执行，我们称为channel冲突。与之类似，如果两个访存请求映射到同一个内存bank，那么这两个请求也会顺序执行，我们称之为bank冲突。从软件开发人员的角度来看，channel冲突和bank冲突没有太大区别。如果数据请求的步长是2的幂次方的一个较大的数，那么往往会发生channel冲突。发生冲突的步长依赖于具体的芯片。如果一个步长在有8个channel的芯片上发生channel冲突，那么这个步长也可能会在有4个bank的芯片上导致bank冲突。
 
-在本论文中，使用bank冲突来统一指代channel冲突或bank冲突。刚才讨论到，如果访存步长是一个较大的2的幂次方的一个数，那么往往会发生channel冲突。对于CPU来说，也会遇到同样的问题，访存步长为较大的2的幂次方的一个数，会使得访问的数据落在较少的Cache lines中，产生较多的cache不命中。对于很多kernels来说，channel冲突对性能影响非常大。这时，我们就很有必要理解并解决channel冲突。在GPU程序编写中，最好的方式是安排相邻的线程来读/写相邻的内存地址。这时一种避免channel冲突的方法。
-
-当应用程序可以完全控制数据的访存模式时，软件开发人员就需要合理的组织数据结构，使得bank冲突最小化。
-
-硬件地址字节分布：
+在本论文中，使用bank冲突来统一指代channel冲突或bank冲突。刚才讨论到，如果访存步长是一个较大的2的幂次方的一个数，那么往往会发生channel冲突。对于CPU来说，也会遇到同样的问题，访存步长为较大的2的幂次方的一个数，会使得访问的数据落在较少的Cache lines中，产生较多的cache不命中。对于很多kernels来说，channel冲突对性能影响非常大。这时，我们就很有必要理解并解决channel冲突。在GPU程序编写中，最好的方式是安排相邻的线程来读/写相邻的内存地址，这是一种避免channel冲突的方法。图\ref{fig:gpu_mem_channel}展示了内存channel分布：
+当应用程序可以完全控制数据的访存模式时，软件开发人员就需要合理的组织数据结构，使得bank冲突最小化。图\ref{fig:gpu_addr}展示了硬件地址字节分布：
 
 \begin{figure}[htbp]
 	\centering
@@ -232,15 +228,14 @@ else
 
 channel\_within\_quadrant = 2 * pipe[0]
 
-下图是内存channel分布：
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{gpu_mem_channel}
-	\bicaption{AMD GPU channel分布}{AMD GPU memoyr channel distribution}
+	\bicaption{AMD GPU channel分布}{AMD GPU memory channel distribution}
 	\label{fig:gpu_mem_channel}
 \end{figure}
 
-我们可以从上图得到，如果我们访存步长是2048，那么我们将会有1/3的概率会访问到相同的channel；如果我们的访存步长是256，那么将会有1/6的概率访问相同的channel。
+可以根据图\ref{fig:gpu_mem_channel}得到，如果访存步长是2048，那么将会有1/3的概率会访问到相同的channel；如果的访存步长是256，那么将会有1/6的概率访问相同的channel。
 
 \section{GPU微体系结构}
 \subsection{NVIDIA GPU架构}
@@ -263,17 +258,16 @@ NVIDIA GPUs由许多SMs(Streaming Multiprocessor)构成。每个SM包含多个SP
 
 
 \subsubsection{AMD GCN Data Parellel Processor阵列结构}
- AMD GCN处理器是一种并行微架构，不仅可用于计算机图形应用，而且也可用于通用数据并行应用。任何需要高带宽或计算密集型的数据密集型应用程序都可以在AMD GCN处理器上运行。
+ AMD GCN处理器是一种并行微架构，不仅可用于计算机图形应用，而且也可用于通用数据并行应用。任何需要高带宽或计算密集型的数据密集型应用程序都可以在AMD GCN处理器上运行。图\ref{fig:amd_vega_arch}展示了AMD Vega GPU内部结构。
  
  GCN架构包括数据并行处理器(DPP Data Parallel Processer)阵列，命令处理器，存储器控制器和其他逻辑。GCN命令处理器读取主机写入系统内存地址空间中的命令。当命令完成时，命令处理器将硬件生成的中断发送给主机端。 GCN内存控制器可直接访问所有GCN设备内存和主机指定的系统内存区域。存储器控制器使用DMA的方式进行数据的读取和写入。
  
  在GCN结构中，一个完整的应用程序包括两部分：
  
- (1)在主机端运行的程序
+ (1)在主机端运行的程序，
  
  (2)在GCN处理器上运行的程序，称之为kernel。
  
-下图展示了AMD Vega GPU内部结构。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.80\textwidth]{amd_vega_arch}
@@ -302,7 +296,7 @@ GCN程序由主机命令控制，包括
 %AMD GCN硬件可以检测浮点异常并生成中断。 特别是，他们在硬件中检测IEEE浮点异常; 这些可以被记录用于执行后分析。 上图中从命令处理器到主机的软件中断代表硬件生成的用于信号命令完成和相关管理功能的中断。
 
 GCN处理器通过跟踪大量work-item的不同执行阶段，通过线程间切换，将计算操作与内存访问操作进行重叠来隐藏访存延迟。
-下\ref{fig:amd_cs}展示了GCN应用程序的数据流动。
+图\ref{fig:amd_cs}展示了GCN应用程序的数据流动。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{amd_cs}
@@ -353,7 +347,7 @@ GPU上的指令级并行。对于AMD GPU每个时钟周期可发射多条向量�
 
 
 \section{AMD GPU微基准测试}
-通过设计微基准测试程序，我们可以探测AMD GPU的指令通量和带宽。
+根据AMD GPU微结构的特点，设计出了一个微基准测试程序。通过微基准测试程序，可以探测AMD GPU的指令通量和内存带宽。
 
 
 \subsubsection{AMD GPU指令通量和带宽探测}
@@ -364,7 +358,7 @@ GPU上的指令级并行。对于AMD GPU每个时钟周期可发射多条向量�
 	\label{fig:v_mac_throughput}
 \end{figure}
 
-我们探测得的AMD Fiji R9 Nano GPU的浮点通量为7958.29gflop/s。Fiji GPU的理论浮点峰值为8192gflop/s，所以实测浮点性能为7958.29/8192 = 97.15\%。
+探测得的AMD Fiji R9 Nano GPU的浮点通量为7958.29gflop/s。Fiji GPU的理论浮点峰值为8192gflop/s，所以实测浮点性能为7958.29/8192 = 97.15\%。
 
 \begin{figure}[htbp]
 	\centering
@@ -373,9 +367,9 @@ GPU上的指令级并行。对于AMD GPU每个时钟周期可发射多条向量�
 	\label{fig:mem_bandwidth}
 \end{figure}
 
-我们探测得的AMD Fiji R9 Nano GPU的内存带宽为341GB/s。Fiji GPU的理论内存带宽为512GB/s，所以实测内存带宽为341/512 = 66.6\%。
+探测得的AMD Fiji R9 Nano GPU的内存带宽为341GB/s。Fiji GPU的理论内存带宽为512GB/s，所以实测内存带宽为341/512 = 66.6\%。
 
 \section{本章小结}
-本章从GPU体系结构和OpenCL编程模型两方面对GPU架构进行了详细的描述。并探测了AMD GPU的浮点指令通量和内存带宽，为后面矩阵乘GPU调优做铺垫。
+本章从GPU微体系结构和OpenCL编程模型两方面对AMD GPU架构进行了详细的描述。对比了AMD GPU和NVIDIA GPU在架构上的异同，观察出AMD和NVIDIA GPU在设计都采用了SIMD结构。两种GPU都通过并发大量轻型线程来做到延迟容忍，是面向通量计算的处理器。针对AMD GPU设计出一套微基准测试程序，探测出AMD GPU的浮点指令通量和内存带宽，为后面矩阵乘GPU调优做铺垫。
 
 

@@ -62,9 +62,9 @@
 	\label{fig:opencl_gemm_1_1}
 \end{figure}
 
-从图\ref{fig:opencl_gemm_1_1}可以看出，最简单的矩阵乘GPU实现其浮点效率最低(图\ref{fig:opencl_gemm_1_1}中橙色的gemm original)。gemm original的实现没有使用shared memory，采用內积法每个线程计算一个输出。中间两条曲线表示使用shared memory，分块大小分别为8x8和16x16。由于矩阵乘在计算过程中有很多数据重用，利用数据重用的特点，将要计算的数据预先读入shared memory。在真正计算时从shared memory中取数据，可以减小数据读延迟。图\ref{fig:gemm_inner_product_tile}展示了使用shared memory分块的內积法矩阵乘。可以看出，计算C矩阵分块的同一行时，需要重复读A矩阵分块的同一行4个元素；同理，计算C矩阵分块的同一列时，要重复读B矩阵分块的同一列4个元素。全局内存读的次数减少4倍。分块大小为8时，全局内存读次数将减少8倍。所以在内存带宽受限时，提高shared memory分块大小可以减少全局内存读，降低内存带宽压力，提高计算性能。从图\ref{fig:opencl_gemm_1_1}中可以看出16x16分块的性能高于8x8分块。
+从图\ref{fig:opencl_gemm_1_1}可以看出，最简单的矩阵乘GPU实现其浮点效率最低(图\ref{fig:opencl_gemm_1_1}中的gemm original曲线)。gemm original的实现没有使用shared memory，采用內积法每个线程计算一个输出。中间两条曲线表示使用shared memory，分块大小分别为8x8和16x16。由于矩阵乘在计算过程中有很多数据重用，利用数据重用的特点，将要计算的数据预先读入shared memory。在真正计算时从shared memory中取数据，可以减小数据读延迟。图\ref{fig:gemm_inner_product_tile}展示了使用shared memory分块的內积法矩阵乘。可以看出，计算C矩阵分块的同一行时，需要重复读A矩阵分块的同一行4个元素；同理，计算C矩阵分块的同一列时，要重复读B矩阵分块的同一列4个元素。全局内存读的次数减少4倍。分块大小为8时，全局内存读次数将减少8倍。所以在内存带宽受限时，提高shared memory分块大小可以减少全局内存读，降低内存带宽压力，提高计算性能。从图\ref{fig:opencl_gemm_1_1}中可以看出16x16分块的性能高于8x8分块。
 
-图\ref{fig:opencl_gemm_1_1}中蓝色曲线openCL block8x8 thread8x8是原始的外积法矩阵乘实现。该矩阵乘的参数配置是，一个threadblock的线程数为8x8=64，在AMD GPU上即一个wavefront的大小。每个线程计算8x8的分块，因此一个threadblock计算64x64的输出。循环展开次数为8。写回结果时，直接从寄存器写回到全局内存。可见，外积法的矩阵乘性能从整体上要优于內积法。这是由于采用內积法可以并行地计算所有的乘法，但不能并行的计算加法。即使可以使用reduction来快速计算加法，但仍然会产生很多空闲的线程。这样，由于任务划分的不均衡，会使得计算性能大大降低。然而，如果用外积法来代替內积法，将会很大程度上缓解负载不均衡带来的性能损失。曲线openCL block8x8 thread8x8 shared double buffer表示在原始外积法实现的基础上进行了shared memory双缓冲的优化，性能得到进一步的提升。
+图\ref{fig:opencl_gemm_1_1}中曲线openCL block8x8 thread8x8是原始的外积法矩阵乘实现。该矩阵乘的参数配置是，一个threadblock的线程数为8x8=64，在AMD GPU上即一个wavefront的大小。每个线程计算8x8的分块，因此一个threadblock计算64x64的输出。循环展开次数为8。写回结果时，直接从寄存器写回到全局内存。可见，外积法的矩阵乘性能从整体上要优于內积法。这是由于采用內积法可以并行地计算所有的乘法，但不能并行的计算加法。即使可以使用reduction来快速计算加法，但仍然会产生很多空闲的线程。这样，由于任务划分的不均衡，会使得计算性能大大降低。然而，如果用外积法来代替內积法，将会很大程度上缓解负载不均衡带来的性能损失。曲线openCL block8x8 thread8x8 shared double buffer表示在原始外积法实现的基础上进行了shared memory双缓冲的优化，性能得到进一步的提升。
 
 \begin{figure}[htbp]
 	\centering
@@ -73,9 +73,7 @@
 	\label{fig:gemm_inner_product_tile}
 \end{figure}
 
-外积法矩阵乘的shared memory bank冲突分析：
-
-图\ref{fig:shared_memory_bank_dist}展示了shared memory bank的分布情况。这里首先介绍一下AMD GPU shared memory的bank设计，shared memory有32的bank，每个bank的宽度为4字节。图\ref{fig:shared_memory_bank_dist}中绿色部分表示bank编号，蓝色部分表示一个block中A矩阵在shared memory中的分布情况，蓝色部分的同一列位于相同的bank。图中用其他颜色标注的部分，表示每个线程要读取的数据，例如(0,xxx)表示tid.x == 0 tid.y为0~7的线程要读取的8个元素。可以看出(0,xxx)线程和(4,xxx)线程都要读取bank0$\sim$bank7中的元素。图\ref{fig:bank0}展示了所有线程读bank0的情况。可以看出bank0的读取有4-way bank冲突。其他bank可类似分析。可以得知对于所有的bank，此时的shared memory有4-way bank冲突。
+接下来进行外积法矩阵乘的shared memory bank冲突分析。图\ref{fig:shared_memory_bank_dist}展示了shared memory bank的分布情况。这里首先介绍一下AMD GPU shared memory的bank设计，shared memory有32的bank，每个bank的宽度为4字节。图\ref{fig:shared_memory_bank_dist}中绿色部分表示bank编号，蓝色部分表示一个block中A矩阵在shared memory中的分布情况，蓝色部分的同一列位于相同的bank。图中用其他颜色标注的部分，表示每个线程要读取的数据，例如(0,xxx)表示tid.x == 0，tid.y为0$\sim$7的线程要读取的8个元素。可以看出(0,xxx)线程和(4,xxx)线程都要读取bank0$\sim$bank7中的元素。图\ref{fig:bank0}展示了所有线程读bank0的情况。可以看出bank0的读取有4-way bank冲突。其他bank可类似分析。可以得知对于所有的bank，此时的shared memory有4-way bank冲突。
 
 %bank冲突消除：
 
@@ -250,12 +248,12 @@ AMD GPU shared memory有32个bank。当不同的线程访问不同的bank时，�
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.80\textwidth]{gemm_shared_db_no_bank_conflict}
-	\bicaption{shared memory 双缓冲，无bank冲突的性能表现}{GEMM performance with shared memory double buffering and bank conflict elimination}
+	\bicaption{shared memory 双缓冲，无bank冲突的性能表现}{GEMM performance with shared memory DB and bank conflict elimination}
 	\label{fig:gemm_shared_db_no_bank_conflict}
 \end{figure}
 
 
-图\ref{fig:bank_conflict}中小方格中的数字表示一个block中的64个线程，将64个线程看成一个2维的线程数组tid.x 取值从0~7， tid.y取值从0~7。
+图\ref{fig:bank_conflict}中小方格中的数字表示一个block中的64个线程，将64个线程看成一个2维的线程数组tid.x 取值为0$\sim$7， tid.y取值为0$\sim$7。
 
 小方格中的数字对(tid.x,tid.y)对应的线程号为tid = tid.y * 8 + tid.x。
 
@@ -269,22 +267,16 @@ AMD GPU shared memory有32个bank。当不同的线程访问不同的bank时，�
 
 
 \subsection{指令重排}
-通常，编程人员尝试将不同类型的指令交错放置来使得一个CU上不同的功能部件可以均衡的利用起来，进而获得更高的指令通量。本文采用下面的指令重排方法。
-
-将全局内存数据预取指令和v\_mac，DS\_READ指令交错放置来获得更高的性能。
+通常，编程人员尝试将不同类型的指令交错放置来使得一个CU上不同的功能部件可以均衡的利用起来，进而获得更高的指令通量。本文采用下面的指令重排方法。将全局内存数据预取指令和v\_mac，DS\_READ指令交错放置来获得更高的性能。
 
 \subsubsection{指令重排的几个原则}
 (1) 从shared memory中预取数据到寄存器的指令：尽可能地早放置
 
-ds\_read\_b128指令：从shared memory中预取数据到寄存器。
-
-循环展开8次，每次计算8x8个输出。总共8x8x8 = 512条v\_mac指令。一条ds\_read\_b128指令可以从shared memory中取4个浮点元素。计算8x8的输出需要8个A中对应元素和8个B中对应元素，因此需要(8+8)/4 = 4 条ds\_read\_b128指令。在计算本次8x8个v\_mac时，要预取下一个8x8个v\_mac所需的指令。为了给ds\_read\_b128指令从发射到结果返回留出足够多的时间，放置ds\_read\_b128指令的原则是尽可能地早发射ds\_read\_b128指令，所以在每次8x8个v\_mac最开始的位置之前插入4条ds\_read\_b128指令。
+ds\_read\_b128指令用于从shared memory中预取数据到寄存器。循环展开8次，每次计算8x8个输出。总共8x8x8 = 512条v\_mac指令。一条ds\_read\_b128指令可以从shared memory中取4个浮点元素。计算8x8的输出需要8个A中对应元素和8个B中对应元素，因此需要(8+8)/4 = 4 条ds\_read\_b128指令。在计算本次8x8个v\_mac时，要预取下一个8x8个v\_mac所需的指令。为了给ds\_read\_b128指令从发射到结果返回留出足够多的时间，放置ds\_read\_b128指令的原则是尽可能地早发射ds\_read\_b128指令，所以在每次8x8个v\_mac最开始的位置之前插入4条ds\_read\_b128指令。
 
 (2) 从全局内存读取数据到寄存器：尽可能地早放置
 
-t\_buffer\_load\_xyzw指令：从全局内存预取数据到寄存器。
-
-一个block有64个线程，每个线程计算8x8个输出，总共可以计算64x64个输出。t\_buffer\_load\_xyzw指令一次可以从全局内存读取4个元素，计算64x64的输出，循环展开8次，需要8x64个A中对应元素和8x64个B中对应元素。因此每个线程需要(8x64+8x64)/(4x64) = 4条t\_buffer\_load\_xyzw指令。
+t\_buffer\_load\_xyzw指令用于从全局内存预取数据到寄存器。一个block有64个线程，每个线程计算8x8个输出，总共可以计算64x64个输出。t\_buffer\_load\_xyzw指令一次可以从全局内存读取4个元素，计算64x64的输出，循环展开8次，需要8x64个A中对应元素和8x64个B中对应元素。因此每个线程需要(8x64+8x64)/(4x64) = 4条t\_buffer\_load\_xyzw指令。
 
 (3) 从寄存器写入数据到shared memory：和全局内存读指令间隔足够远
 
@@ -294,7 +286,7 @@ t\_buffer\_load\_xyzw指令：从全局内存预取数据到寄存器。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.80\textwidth]{hgemm_perf}
-	\bicaption{矩阵乘性能变化趋势}{GEMM performance}
+	\bicaption{汇编调优的矩阵乘性能展示}{GEMM performance}
 	\label{fig:hgemm_perf}
 \end{figure}
 
@@ -304,7 +296,7 @@ t\_buffer\_load\_xyzw指令：从全局内存预取数据到寄存器。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.80\textwidth]{gemm_tuning}
-	\bicaption{矩阵乘性能变化趋势}{GEMM performance}
+	\bicaption{矩阵乘性能变化趋势}{GEMM performance tuning}
 	\label{fig:gemm_tuning}
 \end{figure}
 
@@ -336,6 +328,5 @@ t\_buffer\_load\_xyzw指令：从全局内存预取数据到寄存器。
 %\subsection{Roofline模型}
 
 \section{本章小结}
-本章首先介绍了本次实验所使用的计算环境。然后讲述了寄存器分块的大小和读数据指令的位宽对浮点通量的影响。接下来，详细描述了矩阵乘汇编调优的过程，最后进行了矩阵乘性能上界分析。
-
+本章首先介绍了本次实验所使用的计算环境。然后分析了寄存器分块的大小和读数据指令的位宽对浮点通量的影响。接下来详细描述了矩阵乘调优的过程，分别展示了循环展开、shared memory双缓冲、bank冲突消除、寄存器双缓冲和指令重排这些优化方法所带来的一步步性能提升，并和AMD官方数学库rocBLAS的矩阵乘性能进行了对比。最后通过分析主循环中每种指令的个数和单双发射的情况，进行了矩阵乘性能上界分析。
 

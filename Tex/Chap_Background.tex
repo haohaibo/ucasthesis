@@ -32,7 +32,7 @@ GPU程序的逻辑调度和执行单元是block，在术语上，NVIDIA称为thr
 	\label{fig:thread_model}
 \end{figure}
 
-在线程执行模式上，NVIDIA GPU以warp为单元调度和执行，一个warp有32个线程。一个warp中的线程协作执行。AMD GPU以wavefront为单元调度，一个wavefront有64个线程(如图\ref{fig:warp_model})。
+在线程执行模式上，NVIDIA GPU以warp为单元调度和执行，一个warp有32个线程。一个warp中的线程协作执行。AMD GPU以wavefront为单元调度，一个wavefront有64个线程(如图\ref{fig:warp_model})。在warp(wavefront)执行过程中，遇到分支时，在时间上来看，是“串行”执行的(如图\ref{fig:if_else}，\ref{fig:warp_if_else})。
 
 \begin{figure}[htbp]
 	\centering
@@ -41,7 +41,6 @@ GPU程序的逻辑调度和执行单元是block，在术语上，NVIDIA称为thr
 	\label{fig:warp_model}
 \end{figure}
 
-在warp(wavefront)执行过程中，遇到分支时，在时间上来看，是“串行”执行的(如图\ref{fig:if_else}，\ref{fig:warp_if_else})。
 
 \begin{figure}[htbp]
 	\centering
@@ -59,12 +58,10 @@ GPU程序的逻辑调度和执行单元是block，在术语上，NVIDIA称为thr
 	\label{fig:warp_if_else}
 \end{figure}
 
-由此，可以看出在设计GPU程序时，尽量减少指令分支。因为分支将导致程序“串行”执行，极大降低了执行速度。
-
-在接下来的章节里，将讨论如何设计GPU程序，以使线程的执行步调尽可能一致。从而提高执行速度。
+由此，可以看出在设计GPU程序时，尽量减少指令分支。因为分支将导致程序“串行”执行，极大降低了执行速度。在接下来的章节里，将讨论如何设计GPU程序，以使线程的执行步调尽可能一致。从而提高执行速度。
 
 \section{现有矩阵乘调优工作}
-在本小节中，我们先给出矩阵乘的标准数学表达，然后介绍现有矩阵乘在多核处理器上的研究工作。
+在本小节中，首先给出矩阵乘的标准数学表达，然后介绍现有矩阵乘在多核处理器上的研究工作。
 
 \subsection{矩阵乘数学定义}
 矩阵乘（GEMM General Matrix Multiply）数学表达为
