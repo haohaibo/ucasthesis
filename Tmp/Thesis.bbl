@@ -1,4 +1,4 @@
-\begin{thebibliography}{6}
+\begin{thebibliography}{15}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \providecommand{\href}[2]{\url{#2}}
@@ -46,5 +46,59 @@ WILLIAMS S, WATERMAN A, PATTERSON D.
 \newblock Roofline: an insightful visual performance model for multicore
   architectures\allowbreak[J].
 \newblock Communications of the ACM, 2009, 52\penalty0 (4): 65--76.
+
+\bibitem[Chetlur\ et~al.(2014)Chetlur, Woolley, Vandermersch, Cohen, Tran,
+  Catanzaro, and Shelhamer]{chetlur2014cudnn}
+CHETLUR S, WOOLLEY C, VANDERMERSCH P, et~al.
+\newblock cudnn: Efficient primitives for deep learning\allowbreak[J].
+\newblock arXiv preprint arXiv:1410.0759, 2014.
+
+\bibitem[Volkov\ et~al.(2008)Volkov and Demmel]{volkov2008benchmarking}
+VOLKOV V, DEMMEL J~W.
+\newblock Benchmarking gpus to tune dense linear
+  algebra\allowbreak[C]//\allowbreak{}High Performance Computing, Networking,
+  Storage and Analysis, 2008. SC 2008. International Conference for.
+\newblock [S.l.]: IEEE, 2008: 1--11.
+
+\bibitem[Lai\ et~al.(2013)Lai and Seznec]{lai2013performance}
+LAI J, SEZNEC A.
+\newblock Performance upper bound analysis and optimization of sgemm on fermi
+  and kepler gpus\allowbreak[C]//\allowbreak{}Proceedings of the 2013 IEEE/ACM
+  International Symposium on Code Generation and Optimization (CGO).
+\newblock [S.l.]: IEEE Computer Society, 2013: 1--10.
+
+\bibitem[Gray()]{grayassembler}
+GRAY S.
+\newblock Assembler for nvidia maxwell architecture, 2014\allowbreak[J].
+\newblock URL https://github.com/NervanaSystems/maxas.
+
+\bibitem[Nvidia(2008)]{nvidia2008cublas}
+NVIDIA C.
+\newblock Cublas library\allowbreak[J].
+\newblock NVIDIA Corporation, Santa Clara, California, 2008, 15\penalty0 (27):
+  31.
+
+\bibitem[Zhang\ et~al.(2017)Zhang, Tan, Xue, Li, Zhou, and
+  Chen]{zhang2017understanding}
+ZHANG X, TAN G, XUE S, et~al.
+\newblock Understanding the gpu microarchitecture to achieve bare-metal
+  performance tuning\allowbreak[C]//\allowbreak{}Proceedings of the 22nd ACM
+  SIGPLAN Symposium on Principles and Practice of Parallel Programming.
+\newblock [S.l.]: ACM, 2017: 31--43.
+
+\bibitem[Xiuxia()]{xiuxiaassembler}
+XIUXIA Z.
+\newblock Assembler for nvidia kepler architecture, 2016\allowbreak[J].
+\newblock URL https://github.com/PAA\_NCIC/PPoPP2017\_artifact.
+
+\bibitem[Xianyi\ et~al.(2012)Xianyi, Qian, and Chothia]{xianyi2012openblas}
+XIANYI Z, QIAN W, CHOTHIA Z.
+\newblock Openblas\allowbreak[J].
+\newblock URL: http://xianyi.github.io/OpenBLAS, 2012: 88.
+
+\bibitem[Nugteren(2017)]{nugteren2017clblast}
+NUGTEREN C.
+\newblock Clblast: A tuned opencl blas library\allowbreak[J].
+\newblock arXiv preprint arXiv:1705.05249, 2017.
 
 \end{thebibliography}

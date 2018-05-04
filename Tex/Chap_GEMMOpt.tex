@@ -290,14 +290,12 @@ t\_buffer\_load\_xyzw指令用于从全局内存预取数据到寄存器。一�
 	\label{fig:hgemm_perf}
 \end{figure}
 
-通过实际测试，矩阵乘性能峰值可达$\sim$95\%。
-
-图\ref{fig:gemm_tuning}展示了分别采用循环展开，shared memory双缓冲，bank冲突消除，寄存器双缓冲和指令重排所带来的一步步性能提升。其中循环展开，shared memory双缓冲和寄存器双缓冲带来了大部分的性能能提升，这得益于利用shared memory和寄存器隐藏了全局内存读延迟。指令细粒度重排只有用汇编编写才能实现，因为在OpenCL层面，可以使用的同步指令只有barrier CLK\_GLOBAL\_MEM\_FENCE和barrier CLK\_LOCAL\_MEM\_FENCE这两种；而在汇编语言中，通过使用s\_waitcnt vmcnt()可以具体等待某一条访存指令的完成，同时，也没有OpenCL编译器所带来的无法预测的行为。通过利用前面讲到的指令重排的几个原则，进一步掩盖访存延迟，获得计算性能的提升。
+通过实际测试\ref{fig:hgemm_perf}，矩阵乘性能峰值可达$\sim$95\%。图\ref{fig:gemm_tuning_comp}展示了分别采用循环展开，shared memory双缓冲，bank冲突消除，寄存器双缓冲和指令重排所带来的一步步性能提升。对比了AMD官方库rocBLAS和Tensile，相比roclBLAS，最高有$\sim$20\%的性能提升，对比自动调优库Tensile生成的汇编矩阵乘有略微的性能优势，最多有3\%$\sim$5\%的性能提升。这里需要说明的是在本次测试中使用的矩阵规模都是正方形，即M=N=K的情况，并且都是64的整数倍，并且对非64整数倍的矩阵尺寸没有进行边界处理。其中循环展开，shared memory双缓冲和寄存器双缓冲带来了大部分的性能能提升，这得益于利用shared memory和寄存器隐藏了全局内存读延迟。指令细粒度重排只有用汇编编写才能实现，因为在OpenCL层面，可以使用的同步指令只有barrier CLK\_GLOBAL\_MEM\_FENCE和barrier CLK\_LOCAL\_MEM\_FENCE这两种；而在汇编语言中，通过使用s\_waitcnt vmcnt()可以具体等待某一条访存指令的完成，同时，也没有OpenCL编译器所带来的无法预测的行为。通过利用前面讲到的指令重排的几个原则，进一步掩盖访存延迟，获得计算性能的提升。
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.80\textwidth]{gemm_tuning}
+	\includegraphics[width=0.80\textwidth]{gemm_tuning_comp}
 	\bicaption{矩阵乘性能变化趋势}{GEMM performance tuning}
-	\label{fig:gemm_tuning}
+	\label{fig:gemm_tuning_comp}
 \end{figure}
 
 \section{矩阵乘性能分析}
@@ -328,5 +326,5 @@ t\_buffer\_load\_xyzw指令用于从全局内存预取数据到寄存器。一�
 %\subsection{Roofline模型}
 
 \section{本章小结}
-本章首先介绍了本次实验所使用的计算环境。然后分析了寄存器分块的大小和读数据指令的位宽对浮点通量的影响。接下来详细描述了矩阵乘调优的过程，分别展示了循环展开、shared memory双缓冲、bank冲突消除、寄存器双缓冲和指令重排这些优化方法所带来的一步步性能提升，并和AMD官方数学库rocBLAS的矩阵乘性能进行了对比。最后通过分析主循环中每种指令的个数和单双发射的情况，进行了矩阵乘性能上界分析。
+本章首先介绍了本次实验所使用的计算环境，然后分析了寄存器分块的大小和读数据指令的位宽对浮点通量的影响，接下来详细描述了矩阵乘调优的过程。分别展示了循环展开、shared memory双缓冲、bank冲突消除、寄存器双缓冲和指令重排这些优化方法所带来的一步步性能提升，并和AMD官方数学库rocBLAS和Tensile的矩阵乘性能进行了对比。其中循环展开，shared memory双缓冲和寄存器双缓冲带来了大部分的性能能提升，这得益于利用shared memory和寄存器隐藏了全局内存读延迟。指令细粒度重排只有用汇编编写才能实现，因为在OpenCL层面，可以使用的同步指令只有barrier CLK\_GLOBAL\_MEM\_FENCE和barrier CLK\_LOCAL\_MEM\_FENCE这两种；而在汇编语言中，通过使用s\_waitcnt vmcnt()可以具体等待某一条访存指令的完成，同时，也没有OpenCL编译器所带来的无法预测的行为。通过利用前面讲到的指令重排的几个原则，进一步掩盖访存延迟，获得计算性能的提升。最后通过统计主循环中每种指令的个数和单双发射的情况，进行了矩阵乘性能上界分析。
 
