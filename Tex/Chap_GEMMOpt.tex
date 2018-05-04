@@ -2,7 +2,7 @@
 
 \section{实验配置}
 
-本文实验的测试环境包括AMD Fiji服务器和AMD Vega服务器，其中每个服务器都是单节点。每个计算节点的软硬件主要参数如表\ref{tab:hardwareplatform}所示。
+本文实验的测试环境包括AMD Fiji服务器和AMD Vega服务器，其中每个服务器都是单节点，所用ROCm平台和操作系统版本相同。每个计算节点的软硬件主要参数如表\ref{tab:hardwareplatform}所示。
 \begin{table}[htbp]
 	\bicaption{实验平台软硬件主要参数}{Experimental platform hardware main parameters}
 	\label{tab:hardwareplatform}
@@ -97,7 +97,7 @@
 
 
 \subsection{循环展开}
-通过循环展开(如图\ref{fig:loop_unroll})，可以提高指令的通量。如下图中所示，沿着K方向做循环展开，这样在每次循环产生更多的浮点乘加操作，充分利用GPU上每个线程可拥有的寄存器个数。并且以循环展开作为前提，可以做后续的寄存器双缓冲，局部共享内存双缓冲等优化。通常都是做偶数次展开，这是为后面双缓冲要恰好是2的倍数做准备。在这里循环展开8次，考虑的因素有寄存器个数的限制，和局部共享内存容量的限制。
+通过循环展开(如图\ref{fig:loop_unroll})，可以提高指令的通量。如下图中所示，沿着K方向做循环展开，这样在每次循环产生更多的浮点乘加操作，充分利用GPU上每个线程可拥有的寄存器个数。并且以循环展开作为前提，可以做后续的寄存器双缓冲，局部共享内存双缓冲等优化。通常都是做偶数次展开，这是为后面双缓冲要恰好是2的倍数做准备。在这里循环展开8次，考虑的因素有寄存器个数的限制，和局部共享内存容量的限制。循环展开的好处是能够减少很多冗余指令，减少分支判断指令的数目。对于GPU而言，执行分支判断指令只要用到标量部件就可以了，这极大浪费了GPU的向量计算单元，致使程序性能降低。
 
 \begin{figure}[htbp]
 	\centering
@@ -270,15 +270,15 @@ AMD GPU shared memory有32个bank。当不同的线程访问不同的bank时，�
 通常，编程人员尝试将不同类型的指令交错放置来使得一个CU上不同的功能部件可以均衡的利用起来，进而获得更高的指令通量。本文采用下面的指令重排方法。将全局内存数据预取指令和v\_mac，DS\_READ指令交错放置来获得更高的性能。
 
 \subsubsection{指令重排的几个原则}
-(1) 从shared memory中预取数据到寄存器的指令：尽可能地早放置
+(1) 从shared memory中预取数据到寄存器的指令：尽可能地早放置。
 
 ds\_read\_b128指令用于从shared memory中预取数据到寄存器。循环展开8次，每次计算8x8个输出。总共8x8x8 = 512条v\_mac指令。一条ds\_read\_b128指令可以从shared memory中取4个浮点元素。计算8x8的输出需要8个A中对应元素和8个B中对应元素，因此需要(8+8)/4 = 4 条ds\_read\_b128指令。在计算本次8x8个v\_mac时，要预取下一个8x8个v\_mac所需的指令。为了给ds\_read\_b128指令从发射到结果返回留出足够多的时间，放置ds\_read\_b128指令的原则是尽可能地早发射ds\_read\_b128指令，所以在每次8x8个v\_mac最开始的位置之前插入4条ds\_read\_b128指令。
 
-(2) 从全局内存读取数据到寄存器：尽可能地早放置
+(2) 从全局内存读取数据到寄存器：尽可能地早放置。
 
 t\_buffer\_load\_xyzw指令用于从全局内存预取数据到寄存器。一个block有64个线程，每个线程计算8x8个输出，总共可以计算64x64个输出。t\_buffer\_load\_xyzw指令一次可以从全局内存读取4个元素，计算64x64的输出，循环展开8次，需要8x64个A中对应元素和8x64个B中对应元素。因此每个线程需要(8x64+8x64)/(4x64) = 4条t\_buffer\_load\_xyzw指令。
 
-(3) 从寄存器写入数据到shared memory：和全局内存读指令间隔足够远
+(3) 从寄存器写入数据到shared memory：和全局内存读指令间隔足够远。
 
 为了数据重用，把从全局内存读到寄存的数据写入shared memory。使用ds\_read\_b128指令将数据从存寄存器写入shared memory。ds\_read\_b128指令要等对应的t\_buffer\_load\_xyzw指令结果返回，所以ds\_read\_b128指令和t\_buffer\_load\_xyzw要间隔得足够远。
 
@@ -290,7 +290,7 @@ t\_buffer\_load\_xyzw指令用于从全局内存预取数据到寄存器。一�
 	\label{fig:hgemm_perf}
 \end{figure}
 
-通过实际测试\ref{fig:hgemm_perf}，矩阵乘性能峰值可达$\sim$95\%。图\ref{fig:gemm_tuning_comp}展示了分别采用循环展开，shared memory双缓冲，bank冲突消除，寄存器双缓冲和指令重排所带来的一步步性能提升。对比了AMD官方库rocBLAS和Tensile，相比roclBLAS，最高有$\sim$20\%的性能提升，对比自动调优库Tensile生成的汇编矩阵乘有略微的性能优势，最多有3\%$\sim$5\%的性能提升。这里需要说明的是在本次测试中使用的矩阵规模都是正方形，即M=N=K的情况，并且都是64的整数倍，并且对非64整数倍的矩阵尺寸没有进行边界处理。其中循环展开，shared memory双缓冲和寄存器双缓冲带来了大部分的性能能提升，这得益于利用shared memory和寄存器隐藏了全局内存读延迟。指令细粒度重排只有用汇编编写才能实现，因为在OpenCL层面，可以使用的同步指令只有barrier CLK\_GLOBAL\_MEM\_FENCE和barrier CLK\_LOCAL\_MEM\_FENCE这两种；而在汇编语言中，通过使用s\_waitcnt vmcnt()可以具体等待某一条访存指令的完成，同时，也没有OpenCL编译器所带来的无法预测的行为。通过利用前面讲到的指令重排的几个原则，进一步掩盖访存延迟，获得计算性能的提升。
+通过实际测试(如图\ref{fig:hgemm_perf})，矩阵乘性能峰值可达$\sim$95\%。图\ref{fig:gemm_tuning_comp}展示了分别采用循环展开，shared memory双缓冲，bank冲突消除，寄存器双缓冲和指令重排所带来的一步步性能提升。对比了AMD官方库rocBLAS和Tensile，相比roclBLAS，最高有$\sim$20\%的性能提升，对比自动调优库Tensile生成的汇编矩阵乘有略微的性能优势，最多有3\%$\sim$5\%的性能提升。这里需要说明的是在本次测试中使用的矩阵规模都是正方形，即M=N=K的情况，并且都是64的整数倍，并且对非64整数倍的矩阵尺寸没有进行边界处理。其中循环展开，shared memory双缓冲和寄存器双缓冲带来了大部分的性能能提升，这得益于利用shared memory和寄存器隐藏了全局内存读延迟。指令细粒度重排只有用汇编编写才能实现，因为在OpenCL层面，可以使用的同步指令只有barrier CLK\_GLOBAL\_MEM\_FENCE和barrier CLK\_LOCAL\_MEM\_FENCE这两种；而在汇编语言中，通过使用s\_waitcnt vmcnt()可以具体等待某一条访存指令的完成，同时，也没有OpenCL编译器所带来的无法预测的行为。通过利用前面讲到的指令重排的几个原则，进一步掩盖访存延迟，获得计算性能的提升。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.80\textwidth]{gemm_tuning_comp}
@@ -300,7 +300,7 @@ t\_buffer\_load\_xyzw指令用于从全局内存预取数据到寄存器。一�
 
 \section{矩阵乘性能分析}
 \subsection{矩阵乘潜在性能峰值}
-在寄存器分块大小为8x8，block线程数为64的情况下。v\_mac峰值性能为512/（512+24+2）= 512/538 = 95.17\%。这里在计算上认为32条ds\_read\_b128有只有8条指令双发射。实际处理器的执行行为需要通过测试可以得知。如果在执行时，将每4条ds\_read\_b128指令合并，则32条ds\_read\_b128全部都双发射。此时的v\_mac峰值性能为512/（512+2）= 99.61\%(如图\ref{tab:fijiFFMA})。
+在寄存器分块大小为8x8，block线程数为64的情况下。v\_mac峰值性能为512/(512+24+2) = 512/538 = 95.17\%。这里在计算上认为32条ds\_read\_b128有只有8条指令双发射。实际处理器的执行行为需要通过测试可以得知。如果在执行时，将每4条ds\_read\_b128指令合并，则32条ds\_read\_b128全部都双发射。此时的v\_mac峰值性能为512/(512+2) = 99.61\%(如表\ref{tab:fijiFFMA})。
 
 \begin{table}[htbp]
 	\bicaption{矩阵乘主循环指令构成}{GEMM main loop instructions}

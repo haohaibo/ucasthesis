@@ -61,7 +61,7 @@ SMT设计的目标是尽可能地将可用计算资源都利用起来。SMT方�
 \subsection{GPU多核结构}
 人们至少从概念上认为，提高每个时钟周期执行的任务数最直观的一种方法是在同一个芯片上将单个CPU核简单地“拷贝”多次，做成多核芯片。考虑最简单的情况，每个CPU核的运行都相当独立，通过内存系统来共享数据，通常是通过Cache一致性协议来实现。多核处理器可以看成是经典多套接字服务器对称多处理系统的缩小版。多套接字服务器对称多处理系统是计算机科学家和工程师们在过去十多年追求计算机极致性能所采用的技术体系。
 
-然而，多核系统有不同的表现形式。如何定义一个“核心”，也开始变得困难起来。例如，现在的主流的高端CPU通常包含各种各样的功能区块，这个功能块是独立于计算核心的，如内存控制器，barring接口逻辑等。但我们通常不把这些部件称为“核心”。然而，这些功能部件和核心之间的界限也可能变模糊。例如，AMD的高功率CPU Steamroller，在两个整数计算核心之间共享一个浮点功能部件(\ref{fig:amd_cpu_core})。
+然而，多核系统有不同的表现形式。如何定义一个“核心”，也开始变得困难起来。例如，现在的主流的高端CPU通常包含各种各样的功能区块，这个功能块是独立于计算核心的，如内存控制器，barring接口逻辑等。但我们通常不把这些部件称为“核心”。然而，这些功能部件和核心之间的界限也可能变模糊。例如，AMD的高功率CPU Steamroller，在两个整数计算核心之间共享一个浮点功能部件(如图\ref{fig:amd_cpu_core})。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{amd_cpu_core}
@@ -73,7 +73,7 @@ SMT设计的目标是尽可能地将可用计算资源都利用起来。SMT方�
 
 NVIDIA的kepler架构GPU的设计就和Steamroller设计有异曲同工之妙。NVIDIA kepler GPU的SM(Streaming Multi-proccessor)在两个CUDA核心之间共享一个FFMA(Floating Fused Multiply Add)部件。通过汇编控制码可以控制FFMA指令双发射。
 
-与CPU类似，GPU对“核心”也有不同的定义。现代GPU一般有几十个“核心”。不同架构的高端GPU，其“核心”由32到64不等。许多GPU的设计，如AMD GCN GPUs和NVIDIA的Fermi、Kepler GPUs，都在很大程度上参照CPU的设计风格。例如，AMD Radeon HD6970 GPU，拥有24个SIMD核心。和传统CPU相比，每个SIMD相当于一组ALU，可以做整数和浮点操作，通过wave调度器进行指令的调度，解码和分发(\ref{fig:amd_gpu_core})。
+与CPU类似，GPU对“核心”也有不同的定义。现代GPU一般有几十个“核心”。不同架构的高端GPU，其“核心”由32到64不等。许多GPU的设计，如AMD GCN GPUs和NVIDIA的Fermi、Kepler GPUs，都在很大程度上参照CPU的设计风格。例如，AMD Radeon HD6970 GPU，拥有24个SIMD核心。和传统CPU相比，每个SIMD相当于一组ALU，可以做整数和浮点操作，通过wave调度器进行指令的调度，解码和分发(如图\ref{fig:amd_gpu_core})。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{amd_gpu_core}
@@ -98,9 +98,9 @@ NVIDIA的kepler架构GPU的设计就和Steamroller设计有异曲同工之妙。
 
 Cache设计的目的就是减小访存延迟。为了实现这一目标，CPU设计者设计复杂的缓存系统来尽可能将数据“搬到”靠近CPU的算术逻辑单元。因为越靠近算术逻辑单元，CPU读/写数据所需时钟周期数就会越少。另外，从寄存器读/写数据也比从全局内存读/写数据的功耗要低。
 
-对于，面向通量计算的处理器，其对访存的延迟容忍度更高。因为有大量的线程会同时在处理器上运行，可以通过线程切换来掩盖从数据请求到结果返回这段延迟时间。现代的GPU可以看成是一种面向通量计算的处理器。对于基于SIMD的编程模型，在编制程序时尽可能实现合并访存，来提高单次内存访问的效率。
+对于面向通量计算的处理器，其对访存的延迟容忍度更高。因为有大量的线程会同时在处理器上运行，可以通过线程切换来掩盖从数据请求到结果返回这段延迟时间。现代的GPU可以看成是一种面向通量计算的处理器。对于基于SIMD的编程模型，在编制程序时尽可能实现合并访存，来提高单次内存访问的效率。
 
-在现代GPU的设计上，包括了一个可显式编程控制的片上内存空间，其速度和Cache接近。在编写程序时，通过小心合理地使用片上内存，可以使程序获得非常高的性能。同时也比编写其他程序更为复杂。
+在现代GPU的设计上，包括了一个可显式编程控制的片上内存空间，其速度和Cache接近。在编写程序时，通过小心合理地使用片上内存，可以使程序获得非常高的性能，同时也比编写其他程序更为复杂。
 
 
 
@@ -113,7 +113,7 @@ GPU体系结构的设计有很多权衡。GPU最初开始是为了做图形渲�
 
 移动端GPU与桌面端和服务器级GPU相比，移动端GPU一方面要追求较高计算性能，另一方面要做到低功耗。桌面端和服务器级GPU则更加追求高性能，对功耗则没有那么苛刻的要求。为了实现高访存带宽，GPU的大量引脚被用来连接内存，并且使用GDDR5这样的高带宽访存协议。
 
-AMD GPU和NVIDIA GPU的计算单元的设计都采用SIMD架构。在AMD Radeon Vega10架构上，每个CU有4个SIMD，每个SIMD的宽度为16。通过向量流水线的方式用4个时钟周期来执行宽度为64的向量操作。在NVIDIA GeForce GTX780上，其设计上为Kepler架构，每个SMX(Streaming Multiprocessor)由12个SIMD，每个SIMD的宽度为16。通过2个时钟周期来执行宽度为32的向量操作。通过这种比较，我们可以看出，AMD GPU和NVIDIA GPU都采用了SIMD架构，不同的是AMD GPU所计算的向量宽度为64，NVIDIA GPU所计算的向量宽度为32。也可以由此窥见SIMD结构代表着现代GPU的主流设计方向。
+AMD GPU和NVIDIA GPU的计算单元的设计都采用SIMD架构。在AMD Radeon Vega10架构上，每个CU有4个SIMD，每个SIMD的宽度为16。通过向量流水线的方式用4个时钟周期来执行宽度为64的向量操作。在NVIDIA GeForce GTX780上(如图\ref{fig:nvidia_gtx780})，其设计上为Kepler架构，每个SMX(Streaming Multiprocessor)由12个SIMD(如图\ref{fig:nvidia_gtx780_simd})，每个SIMD的宽度为16。通过2个时钟周期来执行宽度为32的向量操作。通过这种比较，我们可以看出，AMD GPU和NVIDIA GPU都采用了SIMD架构，不同的是AMD GPU所计算的向量宽度为64，NVIDIA GPU所计算的向量宽度为32。也可以由此窥见SIMD结构代表着现代GPU的主流设计方向。
 
 对于AMD GPU GCN架构，每个CU包含一个标量部件和4个SIMD部件，每个SIMD最多可以有10个向量线程(AMD称为wavefronts)in flight，向量线程的宽度为64。一个SIMD在每个指令发射周期选择一个向量线程来执行。所以，一个CU最多可以运行40个向量线程。NVIDIA GPU在设计上也与之类似。但实际可运行的向量线程数受很多因素限制，这里包括寄存器数量，局部共享内存的大小等。
 对于AMD GPU和NVIDIA GPU体系结构，采用SIMD的编程模型，每个线程是SIMD中的一项。英伟达称之为“SIMT(Single Instruction, Multiple Thread)”或者“SPMD(Single Program, Multiple Data)”。对于AMD GPU，一个wavefront有一个程序计数器，指令的分支由专门的寄存器做掩码来标记。

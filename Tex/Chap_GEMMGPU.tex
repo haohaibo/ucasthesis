@@ -25,7 +25,12 @@ C^{(k)}=A[:][k]B[k][:], C=\sum_{k}C^{(k)}
 问题定义： $C = A * B$， A大小为$M \times K$, B为$K \times N$, C为$M \times N$
 
 矩阵乘外积法：用A矩阵的一列乘以B矩阵的一行，沿着K方向做累加，可以计算出结果C(图\ref{fig:outer_product})。
-
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.50\textwidth]{outer_product}
+	\bicaption{矩阵乘外积法图示}{Illustration of Outer-product matrix multiplication method}
+	\label{fig:outer_product}
+\end{figure}
 \section{矩阵乘外积法算法描述}
 
 %\begin{algorithm}[htbp]
@@ -74,32 +79,25 @@ C^{(k)}=A[:][k]B[k][:], C=\sum_{k}C^{(k)}
 
 在算法\ref{alg:gemm}执行上，我们经过下面的步骤：
 
-(1)	数据预取， 从全局内存读取A,B矩阵数据块到寄存器
+(1)	数据预取，从全局内存读取A,B矩阵数据块到寄存器。
 
 (2) 循环开始：
 
-   (2.1)从全局内存读取A,B数据块到寄存器
+\qquad(2.1) 从全局内存读取A,B数据块到寄存器。
 
-   (2.2)将读取到寄存器的数据写回的共享内存
+\qquad(2.2) 将读取到寄存器的数据写回的共享内存。
 
-   (2.3)从共享内存读取A,B数据块到寄存器
+\qquad(2.3) 从共享内存读取A,B数据块到寄存器。
 
-   (2.4)在寄存器中计算结果C
+\qquad(2.4) 在寄存器中计算结果C。
 
-直到所有的A,B数据块都读取完
+\qquad 直到所有的A,B数据块都读取完。
 
-(3)  最后把C的结果从寄存器写回到全局内存
+(3) 最后把C的结果从寄存器写回到全局内存。
 
 
 \section{从全局内存读取数据到共享内存}
 全局内存是对所有线程可见，共享内存是对一个线程块里的线程是可见的，寄存器是对线程私有的。从全局内存读取数据到寄存器，然后到共享内存，是为了通过数据分享共享内存的数据，减少慢速的全局内存的访问次数，改为共享内存的访问。展示了线程块从矩阵A和B读取数据到共享内存的过程。线程块分别从矩阵A和矩阵B读取bmxbk和bkxbn的数据，然后使用外积法计算。为了隐藏全局访存的延迟，我们采用软流水和共享内存双缓冲机制。共享分块的大小与GPU上的计算资源如寄存器大小和共享内存大小有关。由于指令不能直接从全局访存读取到共享内存，需要寄存器中转，因此需要分两个步骤。
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.50\textwidth]{outer_product}
-	\bicaption{矩阵乘外积法图示}{Illustration of Outer-product matrix multiplication method}
-	\label{fig:outer_product}
-\end{figure}
 
 \subsection{线程到数据的映射}
 

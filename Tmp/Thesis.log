@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.26)  4 MAY 2018 10:51
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.26)  4 MAY 2018 19:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2130,27 +2130,27 @@ File: mem_bandwidth.png Graphic file (type QTm)
  <use  "mem_bandwidth.png" > [39])
 (./Tex/Chap_GEMMGPU.tex [40]
 第5章
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 50.
-[41
+File: outer_product.png Graphic file (type QTm)
+<use  "outer_product.png" > [41
 
 ]
-File: outer_product.png Graphic file (type QTm)
- <use  "outer_product.png" >
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 55.
+ [42]
 File: thread_to_data.png Graphic file (type QTm)
  <use  "thread_to_data.png" >
 File: global_A.png Graphic file (type QTm)
 
 <use  "global_A.png" >
 File: global_B.png Graphic file (type QTm)
- <use  "global_B.png" > [42] [43]
+ <use  "global_B.png" > [43]
 File: writeS.png Graphic file (type QTm)
  <use  "writeS.png" >
 File: readS.png Graphic file (type QTm)
 
-<use  "readS.png" > [44]
+<use  "readS.png" >
 File: threadblock.png Graphic file (type QTm)
- <use  "threadblock.png" > [45])
+ <use  "threadblock.png" > [44] [45])
 (./Tex/Chap_GEMMOpt.tex [46]
 第6章
 
@@ -2262,10 +2262,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 32851 strings out of 493005
- 614363 string characters out of 6137956
- 656362 words of memory out of 5000000
- 36358 multiletter control sequences out of 15000+600000
+ 32854 strings out of 493005
+ 614432 string characters out of 6137956
+ 656407 words of memory out of 5000000
+ 36361 multiletter control sequences out of 15000+600000
  29308 words of font info for 122 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  63i,12n,94p,10526b,644s stack positions out of 5000i,500n,10000p,200000b,80000s

@@ -74,6 +74,7 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}矩阵乘在多核处理器上的研究介绍}{10}{subsection.2.3.2}}
 \citation{zhang2017understanding}
 \citation{xiuxiaassembler}
+\citation{goto2008anatomy}
 \citation{xianyi2012openblas}
 \@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces 矩阵乘主循环指令构成\relax }}{11}{table.caption.14}}
 \newlabel{tab:maxwellFFMA}{{2.1}{11}{矩阵乘主循环指令构成\relax }{table.caption.14}{}}
@@ -158,25 +159,25 @@
 \newlabel{chap:GEMMGPU}{{5}{41}{矩阵乘GPU实现}{chapter.5}{}}
 \newlabel{eq:innerproduct}{{5.1}{41}{矩阵乘GPU实现}{equation.5.0.1}{}}
 \newlabel{eq:outerproduct}{{5.2}{41}{矩阵乘GPU实现}{equation.5.0.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}矩阵乘外积法算法描述}{41}{section.5.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces 矩阵乘外积法图示\relax }}{42}{figure.caption.35}}
+\newlabel{fig:outer_product}{{5.1}{42}{矩阵乘外积法图示\relax }{figure.caption.35}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}矩阵乘外积法算法描述}{42}{section.5.1}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces GEMM algorithm\relax }}{42}{algorithm.1}}
 \newlabel{alg:gemm}{{1}{42}{GEMM algorithm\relax }{algorithm.1}{}}
 \newlabel{gemmendwhile}{{13}{42}{GEMM algorithm\relax }{algorithm.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}从全局内存读取数据到共享内存}{42}{section.5.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}线程到数据的映射}{42}{subsection.5.2.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces 矩阵乘外积法图示\relax }}{43}{figure.caption.35}}
-\newlabel{fig:outer_product}{{5.1}{43}{矩阵乘外积法图示\relax }{figure.caption.35}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}从全局内存读取数据到共享内存}{43}{section.5.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}线程到数据的映射}{43}{subsection.5.2.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces 线程到数据映射\relax }}{43}{figure.caption.36}}
 \newlabel{fig:thread_to_data}{{5.2}{43}{线程到数据映射\relax }{figure.caption.36}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces 从全局内存读取A矩阵数据到寄存器\relax }}{43}{figure.caption.37}}
-\newlabel{fig:global_A}{{5.3}{43}{从全局内存读取A矩阵数据到寄存器\relax }{figure.caption.37}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces 从全局内存读取A矩阵数据到寄存器\relax }}{44}{figure.caption.37}}
+\newlabel{fig:global_A}{{5.3}{44}{从全局内存读取A矩阵数据到寄存器\relax }{figure.caption.37}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces 从全局内存读取B矩阵数据到寄存器\relax }}{44}{figure.caption.38}}
 \newlabel{fig:global_B}{{5.4}{44}{从全局内存读取B矩阵数据到寄存器\relax }{figure.caption.38}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces 写回A,B数据到共享内存\relax }}{44}{figure.caption.39}}
 \newlabel{fig:writeS}{{5.5}{44}{写回A,B数据到共享内存\relax }{figure.caption.39}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5.3}从共享内存读取数据到寄存器并计算}{44}{section.5.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces 从共享内存读取A,B数据到寄存器\relax }}{44}{figure.caption.40}}
-\newlabel{fig:readS}{{5.6}{44}{从共享内存读取A,B数据到寄存器\relax }{figure.caption.40}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces 从共享内存读取A,B数据到寄存器\relax }}{45}{figure.caption.40}}
+\newlabel{fig:readS}{{5.6}{45}{从共享内存读取A,B数据到寄存器\relax }{figure.caption.40}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces 一个threadblock中的计算任务\relax }}{45}{figure.caption.41}}
 \newlabel{fig:threadblock}{{5.7}{45}{一个threadblock中的计算任务\relax }{figure.caption.41}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5.4}将C矩阵从寄存器写回数据到全局内存}{45}{section.5.4}}
@@ -190,9 +191,9 @@
 \newlabel{tab:hardwareplatform}{{6.1}{47}{实验平台软硬件主要参数\relax }{table.caption.42}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {6.2}矩阵乘性能调优}{47}{section.6.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}寄存器分块对v\_mac指令占比的影响}{47}{subsection.6.2.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces v\_mac指令百分比随着寄存器分块大小的变化趋势\relax }}{47}{figure.caption.43}}
-\newlabel{fig:ffma_percentage}{{6.1}{47}{v\_mac指令百分比随着寄存器分块大小的变化趋势\relax }{figure.caption.43}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1.1}使用更宽的数据读指令}{48}{subsubsection.6.2.1.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1.1}使用更宽的数据读指令}{47}{subsubsection.6.2.1.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces v\_mac指令百分比随着寄存器分块大小的变化趋势\relax }}{48}{figure.caption.43}}
+\newlabel{fig:ffma_percentage}{{6.1}{48}{v\_mac指令百分比随着寄存器分块大小的变化趋势\relax }{figure.caption.43}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {6.3}汇编层次调优}{48}{section.6.3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}汇编调优的必要性}{49}{subsection.6.3.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces 矩阵乘OpenCL实现性能比较\relax }}{49}{figure.caption.44}}
@@ -265,9 +266,10 @@
 \bibcite{nvidia2008cublas}{{11}{2008}{{Nvidia}}{{}}}
 \bibcite{zhang2017understanding}{{12}{2017}{{Zhang\ et~al.}}{{Zhang, Tan, Xue, Li, Zhou, and Chen}}}
 \bibcite{xiuxiaassembler}{{13}{}{{Xiuxia}}{{}}}
-\bibcite{xianyi2012openblas}{{14}{2012}{{Xianyi\ et~al.}}{{Xianyi, Qian, and Chothia}}}
-\bibcite{nugteren2017clblast}{{15}{2017}{{Nugteren}}{{}}}
+\bibcite{goto2008anatomy}{{14}{2008}{{Goto\ et~al.}}{{Goto and Geijn}}}
+\bibcite{xianyi2012openblas}{{15}{2012}{{Xianyi\ et~al.}}{{Xianyi, Qian, and Chothia}}}
 \@writefile{toc}{\contentsline {chapter}{参考文献}{67}{section*.59}}
+\bibcite{nugteren2017clblast}{{16}{2017}{{Nugteren}}{{}}}
 \@writefile{toc}{\contentsline {chapter}{致谢}{69}{appendix*.61}}
 \@writefile{lof}{\addvspace {10.0pt}}
 \@writefile{lot}{\addvspace {10.0pt}}

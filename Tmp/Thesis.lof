@@ -31,15 +31,15 @@
 \contentsline {figure}{\numberline {4.14}{\ignorespaces AMD Fiji GPU浮点通量测试\relax }}{40}{figure.caption.33}
 \contentsline {figure}{\numberline {4.15}{\ignorespaces AMD Fiji GPU内存带宽测试\relax }}{40}{figure.caption.34}
 \addvspace {10.0pt}
-\contentsline {figure}{\numberline {5.1}{\ignorespaces 矩阵乘外积法图示\relax }}{43}{figure.caption.35}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces 矩阵乘外积法图示\relax }}{42}{figure.caption.35}
 \contentsline {figure}{\numberline {5.2}{\ignorespaces 线程到数据映射\relax }}{43}{figure.caption.36}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces 从全局内存读取A矩阵数据到寄存器\relax }}{43}{figure.caption.37}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces 从全局内存读取A矩阵数据到寄存器\relax }}{44}{figure.caption.37}
 \contentsline {figure}{\numberline {5.4}{\ignorespaces 从全局内存读取B矩阵数据到寄存器\relax }}{44}{figure.caption.38}
 \contentsline {figure}{\numberline {5.5}{\ignorespaces 写回A,B数据到共享内存\relax }}{44}{figure.caption.39}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces 从共享内存读取A,B数据到寄存器\relax }}{44}{figure.caption.40}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces 从共享内存读取A,B数据到寄存器\relax }}{45}{figure.caption.40}
 \contentsline {figure}{\numberline {5.7}{\ignorespaces 一个threadblock中的计算任务\relax }}{45}{figure.caption.41}
 \addvspace {10.0pt}
-\contentsline {figure}{\numberline {6.1}{\ignorespaces v\_mac指令百分比随着寄存器分块大小的变化趋势\relax }}{47}{figure.caption.43}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces v\_mac指令百分比随着寄存器分块大小的变化趋势\relax }}{48}{figure.caption.43}
 \contentsline {figure}{\numberline {6.2}{\ignorespaces 矩阵乘OpenCL实现性能比较\relax }}{49}{figure.caption.44}
 \contentsline {figure}{\numberline {6.3}{\ignorespaces 內积法矩阵乘shared memory分块图示说明\relax }}{51}{figure.caption.45}
 \contentsline {figure}{\numberline {6.4}{\ignorespaces shared memory bank分布\relax }}{51}{figure.caption.46}

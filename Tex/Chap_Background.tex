@@ -70,7 +70,7 @@ GPU程序的逻辑调度和执行单元是block，在术语上，NVIDIA称为thr
 	C:= \alpha op(A)*op(B) + \beta C
 \end{equation}
 
-其中A，B，C为矩阵，$\alpha$，$\beta$ 为标量。op 表示矩阵是否转置。即 op(X) = X 或 op(X) = $\mathbf{X}^\mathrm{T}$
+其中A，B，C为矩阵，$\alpha$，$\beta$ 为标量。op 表示矩阵是否转置，即op(X) = X 或 op(X) = $\mathbf{X}^\mathrm{T}$。
 
 \subsection{矩阵乘在多核处理器上的研究介绍}
 目前国内外对矩阵乘的调优工作主要集中在NVIDIA GPU和各种主流CPU。NVIDIA在2010年设计出了第一款Fermi架构GPU。Fermi架构也影响着此后NVIDIA GPU架构的演变。Volkov\citepns{volkov2008benchmarking}通过benchmark的方法做了8系列，9系列和200系列NVIDIA GPU矩阵乘调优工作。
@@ -103,7 +103,7 @@ FFMA通量为512/(512+4+3+1)=512/520 = 98.5\%。其他指令是双发射的，�
 
 Zhang\citepns{zhang2017understanding}实现了Kepler架构第一个开源汇编器KeplerAs\citepns{xiuxiaassembler}，填补了Kepler GPU无可用汇编器的现状。Zhang在Scott和Lai工作的基础上，破解了Kepler K20 GPU架构的控制码，探测出Kepler GPU寄存器bank分布。利用Kepler架构独有的FFMA双发射，在NVIDIA kepler K20m上实现了更快的SGEMM，性能为3.1Tflop/s，达到88\%的计算效率，高出cuBLAS7.0 15\%。优化的卷积高出cuDNN4.0 39\%$\sim$62\%。
 
-德州大学奥斯汀分校的Goto等人在2005年编写了基本线性代数库GotoBLAS。在BLAS Level-3中针对GEMM(General Matrix Multiply)做了优化。GotoBLAS作者在2010年去了微软工作，之后GotoBLAS停止了更新和维护。在2011年中科院软件所张先轶等人基于GotoBLAS发起了OpenBLAS\citepns{xianyi2012openblas}项目，OpenBLAS在各种主流CPU上都获得了比较高的性能。以OpenBLAS库为核心技术的彭峰科技取得了商业上的成功。但OpenBLAS主要针对CPU端做了十分细致的优化，而在GPU上做的优化工作则比较少。
+德州大学奥斯汀分校的Goto等人在2005年编写了基本线性代数库GotoBLAS。在BLAS Level-3中针对GEMM(General Matrix Multiply)做了优化\citepns{goto2008anatomy}。GotoBLAS作者在2010年去了微软工作，之后GotoBLAS停止了更新和维护。在2011年中科院软件所张先轶等人基于GotoBLAS发起了OpenBLAS\citepns{xianyi2012openblas}项目，OpenBLAS在各种主流CPU上都获得了比较高的性能。以OpenBLAS库为核心技术的彭峰科技取得了商业上的成功。但OpenBLAS主要针对CPU端做了十分细致的优化，而在GPU上做的优化工作则比较少。
 
 
 \section{本章小结}

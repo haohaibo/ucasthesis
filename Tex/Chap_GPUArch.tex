@@ -42,11 +42,11 @@ AMD ROCm软件栈为用户和软件开发人员提供完整，灵活的软件开
 
 AMD ROCm提供的工具包括：
 
-(1)  OpenCL编译器和运行时
+(1) OpenCL编译器和运行时。
 
-(2)  调试和性能分析工具----AMD CodeXL
+(2) 调试和性能分析工具----AMD CodeXL。
 
-(3)  高性能数学库(rocBLAS, Tensile)---AMD加速并行处理数学库，用于优化NDRange特定算法
+(3) 高性能数学库(rocBLAS, Tensile)---AMD加速并行处理数学库，用于优化NDRange特定算法。
 
 最新的AMD GPUs使用同一着色器架构可以在相同的硬件上交替运行不同的kernel。可编程GPU可以执行不同的用户程序，这些程序对图形编程人员称之为shaders，对于做通用计算的人称之为kernels。这些GPUs计算设备可以使用数据并行编程模型做通用计算，而不做图形渲染。AMD ROCM的编程模型将一组数据存放在内存中，这些数据可以被大量的计算单元(Compute Units)所访问。
 
@@ -150,13 +150,13 @@ OpenCL编译工具链提供了一个可以同时编译CPUs和GPUs代码的通用
 
 创建kernel的过程：
 
-1.	OpenCL C源程序被存储在一个字符数组中。如果源程序存放在磁盘的文件中，则将其从磁盘读取到内存，并存放在一个字符数组中。
+(1) OpenCL C源程序被存储在一个字符数组中。如果源程序存放在磁盘的文件中，则将其从磁盘读取到内存，并存放在一个字符数组中。
 
-2.	通过调用clCreateProgramWithSource()，将OpenCL C源程序转化为程序对象 cl\_program 。
+(2) 通过调用clCreateProgramWithSource()，将OpenCL C源程序转化为程序对象 cl\_program 。
 
-3.	通过调用clBuildProgram()，编译程序对象。
+(3)	通过调用clBuildProgram()，编译程序对象。
 
-4.	通过调用clCreateKernel()，创建kernel对象cl\_kernel。
+(4)	通过调用clCreateKernel()，创建kernel对象cl\_kernel。
 
 OpenCL kernel对象的具体二进制表示是和硬件厂商相关的。对于AMD运行时(runtime)，主要有两种设备：x86CPU和GPUs。对于x86 CPU，clBuildProgram()产生可以直接在x86 CPU上执行的x86指令。对于GPU，则产生AMD GPU的中间表示语言，之后用just-in-time技术将中间语言编译成具体GPU指令集体系结构的二进制代码。图\ref{fig:opencl_model_relation}展示了OpenCL各种模型之间的关系。
 \begin{figure}[htbp]
@@ -264,9 +264,9 @@ NVIDIA GPUs由许多SMs(Streaming Multiprocessor)构成。每个SM包含多个SP
  
  在GCN结构中，一个完整的应用程序包括两部分：
  
- (1)在主机端运行的程序，
+(1) 在主机端运行的程序。
  
- (2)在GCN处理器上运行的程序，称之为kernel。
+(2)在GCN处理器上运行的程序，称之为kernel。
  
 \begin{figure}[htbp]
 	\centering
@@ -275,13 +275,13 @@ NVIDIA GPUs由许多SMs(Streaming Multiprocessor)构成。每个SM包含多个SP
 	\label{fig:amd_vega_arch}
 \end{figure}
 
-GCN程序由主机命令控制，包括
+GCN程序由主机命令控制，包括：
 
-(1)设置GCN内部基址和其他配置寄存器，
+(1) 设置GCN内部基址和其他配置寄存器。
 
-(2)指定GCN GPU要在其上运行的数据域，
+(2) 指定GCN GPU要在其上运行的数据域。
 
-(3)发送命令让GCN GPU开始执行程序。
+(3) 发送命令让GCN GPU开始执行程序。
 %
 %GCN驱动程序在主机上运行。
 %
@@ -308,15 +308,15 @@ GCN kernel是由GCN处理器执行的程序。从概念上讲，kernel在每个w
 
 GCN处理器由以下部分组成：
 
-•	一个标量ALU，为一个CU的所有work-item所共用。
+(1) 一个标量ALU，为一个CU的所有work-item所共用。
 
-•	4个向量ALU，向量ALU的宽度为16，一个work-item在其中的一个lane中执行。
+(2)	4个向量ALU，向量ALU的宽度为16，一个work-item在其中的一个lane中执行。
 
-•	一个Local Data Share，使得workgroup中的work-item可以进行通信和数据共享。
+(3) 一个Local Data Share，使得workgroup中的work-item可以进行通信和数据共享。
 
-•	标量访存部件，可以通过Cache在SGPR和内存之间传输数据。
+(4) 标量访存部件，可以通过Cache在SGPR和内存之间传输数据。
 
-•	向量访存部件，可以在VGPR和存储器之间传输数据。
+(5) 向量访存部件，可以在VGPR和存储器之间传输数据。
 
 %所有内核控制流都使用标量ALU指令处理。这包括if / else，分支和循环。标量ALU(SALU)和访存指令适用于整个wavefront。向量访存和ALU指令一次对wavefront的所有work-itme进行操作。为了支持分支和条件执行，每个wavefront都有一个EXECUTE掩码，用于确定哪些work-item在当时处于活动状态，哪些处于休眠状态。活动的work-item执行矢量指令，休眠的work-item将该指令视为NOP。可以随时通过Scalar ALU指令更改EXEC掩码。向量访存指令在VGPR和存储器之间传输数据。每个work-item都提供自己的内存地址并提供或接收唯一的数据。这些也受到EXEC掩码的约束。
 \subsubsection{AMD GPU内存层次结构}

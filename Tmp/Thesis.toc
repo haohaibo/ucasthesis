@@ -38,9 +38,9 @@
 \contentsline {subsubsection}{\numberline {4.4.0.1}AMD GPU指令通量和带宽探测}{40}{subsubsection.4.4.0.1}
 \contentsline {section}{\numberline {4.5}本章小结}{40}{section.4.5}
 \contentsline {chapter}{\numberline {第5章\hspace {.3em}}矩阵乘GPU实现}{41}{chapter.5}
-\contentsline {section}{\numberline {5.1}矩阵乘外积法算法描述}{41}{section.5.1}
-\contentsline {section}{\numberline {5.2}从全局内存读取数据到共享内存}{42}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}线程到数据的映射}{42}{subsection.5.2.1}
+\contentsline {section}{\numberline {5.1}矩阵乘外积法算法描述}{42}{section.5.1}
+\contentsline {section}{\numberline {5.2}从全局内存读取数据到共享内存}{43}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}线程到数据的映射}{43}{subsection.5.2.1}
 \contentsline {section}{\numberline {5.3}从共享内存读取数据到寄存器并计算}{44}{section.5.3}
 \contentsline {section}{\numberline {5.4}将C矩阵从寄存器写回数据到全局内存}{45}{section.5.4}
 \contentsline {section}{\numberline {5.5}本章小结}{46}{section.5.5}
@@ -48,7 +48,7 @@
 \contentsline {section}{\numberline {6.1}实验配置}{47}{section.6.1}
 \contentsline {section}{\numberline {6.2}矩阵乘性能调优}{47}{section.6.2}
 \contentsline {subsection}{\numberline {6.2.1}寄存器分块对v\_mac指令占比的影响}{47}{subsection.6.2.1}
-\contentsline {subsubsection}{\numberline {6.2.1.1}使用更宽的数据读指令}{48}{subsubsection.6.2.1.1}
+\contentsline {subsubsection}{\numberline {6.2.1.1}使用更宽的数据读指令}{47}{subsubsection.6.2.1.1}
 \contentsline {section}{\numberline {6.3}汇编层次调优}{48}{section.6.3}
 \contentsline {subsection}{\numberline {6.3.1}汇编调优的必要性}{49}{subsection.6.3.1}
 \contentsline {subsection}{\numberline {6.3.2}优化内存访问}{52}{subsection.6.3.2}
