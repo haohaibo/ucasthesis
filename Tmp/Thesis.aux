@@ -45,12 +45,15 @@
 \@writefile{toc}{\contentsline {section}{\numberline {1.2}并行计算技术概述}{3}{section.1.2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1.3}{\ignorespaces 串行程序执行示意图\relax }}{3}{figure.caption.8}}
 \newlabel{fig:serialprogram}{{1.3}{3}{串行程序执行示意图\relax }{figure.caption.8}{}}
+\citation{nath2010improved}
+\citation{kurzak2012autotuning}
+\citation{cui2010auto}
 \@writefile{lof}{\contentsline {figure}{\numberline {1.4}{\ignorespaces 并行程序执行示意图\relax }}{4}{figure.caption.9}}
 \newlabel{fig:parallelprogram}{{1.4}{4}{并行程序执行示意图\relax }{figure.caption.9}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {1.3}研究动机述}{4}{section.1.3}}
 \citation{chetlur2014cudnn}
 \@writefile{toc}{\contentsline {section}{\numberline {1.4}本文主要贡献}{5}{section.1.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.5}本文组织结构}{6}{section.1.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.5}本文组织结构}{5}{section.1.5}}
 \@writefile{toc}{\contentsline {chapter}{\numberline {第2章\hspace  {.3em}}背景及相关研究}{7}{chapter.2}}
 \@writefile{lof}{\addvspace {10.0pt}}
 \@writefile{lot}{\addvspace {10.0pt}}
@@ -128,130 +131,130 @@
 \@writefile{toc}{\contentsline {section}{\numberline {4.2}OpenCL程序在AMD GCN GPUs上的性能和调优}{32}{section.4.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}优化全局访存}{32}{subsection.4.2.1}}
 \newlabel{eq:L1bandwidth}{{4.1}{33}{优化全局访存}{equation.4.2.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces 硬件地址字节分布\relax }}{33}{figure.caption.27}}
-\newlabel{fig:gpu_addr}{{4.8}{33}{硬件地址字节分布\relax }{figure.caption.27}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces 硬件地址字节分布\relax }}{34}{figure.caption.27}}
+\newlabel{fig:gpu_addr}{{4.8}{34}{硬件地址字节分布\relax }{figure.caption.27}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces AMD GPU channel分布\relax }}{34}{figure.caption.28}}
 \newlabel{fig:gpu_mem_channel}{{4.9}{34}{AMD GPU channel分布\relax }{figure.caption.28}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}GPU微体系结构}{34}{section.4.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}NVIDIA GPU架构}{34}{subsection.4.3.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}GPU微体系结构}{35}{section.4.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}NVIDIA GPU架构}{35}{subsection.4.3.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces NVIDIA三代GPU的比较\relax }}{35}{figure.caption.29}}
 \newlabel{fig:nvidia_3_gpus}{{4.10}{35}{NVIDIA三代GPU的比较\relax }{figure.caption.29}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}AMD GPU微架构}{35}{subsection.4.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}AMD GPU微架构}{36}{subsection.4.3.2}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2.1}AMD GCN Data Parellel Processor阵列结构}{36}{subsubsection.4.3.2.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces AMD VEGA GPU结构图\relax }}{36}{figure.caption.30}}
-\newlabel{fig:amd_vega_arch}{{4.11}{36}{AMD VEGA GPU结构图\relax }{figure.caption.30}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces AMD VEGA GPU结构图\relax }}{37}{figure.caption.30}}
+\newlabel{fig:amd_vega_arch}{{4.11}{37}{AMD VEGA GPU结构图\relax }{figure.caption.30}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces GCN GPU程序数据流动\relax }}{37}{figure.caption.31}}
 \newlabel{fig:amd_cs}{{4.12}{37}{GCN GPU程序数据流动\relax }{figure.caption.31}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2.2}AMD GPU内存层次结构}{37}{subsubsection.4.3.2.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2.2}AMD GPU内存层次结构}{38}{subsubsection.4.3.2.2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.13}{\ignorespaces AMD GPU内存层次结构\relax }}{38}{figure.caption.32}}
 \newlabel{fig:amd_gpu_memory}{{4.13}{38}{AMD GPU内存层次结构\relax }{figure.caption.32}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}AMD GPU和NVIDIA GPU架构的比较}{38}{subsection.4.3.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}AMD GPU微基准测试}{39}{section.4.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}AMD GPU微基准测试}{40}{section.4.4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.0.1}AMD GPU指令通量和带宽探测}{40}{subsubsection.4.4.0.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.14}{\ignorespaces AMD Fiji GPU浮点通量测试\relax }}{40}{figure.caption.33}}
 \newlabel{fig:v_mac_throughput}{{4.14}{40}{AMD Fiji GPU浮点通量测试\relax }{figure.caption.33}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.0.1}AMD GPU指令通量和带宽探测}{40}{subsubsection.4.4.0.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.15}{\ignorespaces AMD Fiji GPU内存带宽测试\relax }}{40}{figure.caption.34}}
 \newlabel{fig:mem_bandwidth}{{4.15}{40}{AMD Fiji GPU内存带宽测试\relax }{figure.caption.34}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}本章小结}{40}{section.4.5}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第5章\hspace  {.3em}}矩阵乘GPU实现}{41}{chapter.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}本章小结}{41}{section.4.5}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第5章\hspace  {.3em}}矩阵乘GPU实现}{43}{chapter.5}}
 \@writefile{lof}{\addvspace {10.0pt}}
 \@writefile{lot}{\addvspace {10.0pt}}
-\newlabel{chap:GEMMGPU}{{5}{41}{矩阵乘GPU实现}{chapter.5}{}}
-\newlabel{eq:innerproduct}{{5.1}{41}{矩阵乘GPU实现}{equation.5.0.1}{}}
-\newlabel{eq:outerproduct}{{5.2}{41}{矩阵乘GPU实现}{equation.5.0.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces 矩阵乘外积法图示\relax }}{42}{figure.caption.35}}
-\newlabel{fig:outer_product}{{5.1}{42}{矩阵乘外积法图示\relax }{figure.caption.35}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}矩阵乘外积法算法描述}{42}{section.5.1}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces GEMM algorithm\relax }}{42}{algorithm.1}}
-\newlabel{alg:gemm}{{1}{42}{GEMM algorithm\relax }{algorithm.1}{}}
-\newlabel{gemmendwhile}{{13}{42}{GEMM algorithm\relax }{algorithm.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}从全局内存读取数据到共享内存}{43}{section.5.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}线程到数据的映射}{43}{subsection.5.2.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces 线程到数据映射\relax }}{43}{figure.caption.36}}
-\newlabel{fig:thread_to_data}{{5.2}{43}{线程到数据映射\relax }{figure.caption.36}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces 从全局内存读取A矩阵数据到寄存器\relax }}{44}{figure.caption.37}}
-\newlabel{fig:global_A}{{5.3}{44}{从全局内存读取A矩阵数据到寄存器\relax }{figure.caption.37}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces 从全局内存读取B矩阵数据到寄存器\relax }}{44}{figure.caption.38}}
-\newlabel{fig:global_B}{{5.4}{44}{从全局内存读取B矩阵数据到寄存器\relax }{figure.caption.38}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces 写回A,B数据到共享内存\relax }}{44}{figure.caption.39}}
-\newlabel{fig:writeS}{{5.5}{44}{写回A,B数据到共享内存\relax }{figure.caption.39}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}从共享内存读取数据到寄存器并计算}{44}{section.5.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces 从共享内存读取A,B数据到寄存器\relax }}{45}{figure.caption.40}}
-\newlabel{fig:readS}{{5.6}{45}{从共享内存读取A,B数据到寄存器\relax }{figure.caption.40}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces 一个threadblock中的计算任务\relax }}{45}{figure.caption.41}}
-\newlabel{fig:threadblock}{{5.7}{45}{一个threadblock中的计算任务\relax }{figure.caption.41}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}将C矩阵从寄存器写回数据到全局内存}{45}{section.5.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.5}本章小结}{46}{section.5.5}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第6章\hspace  {.3em}}矩阵乘优化与性能评估}{47}{chapter.6}}
+\newlabel{chap:GEMMGPU}{{5}{43}{矩阵乘GPU实现}{chapter.5}{}}
+\newlabel{eq:innerproduct}{{5.1}{43}{矩阵乘GPU实现}{equation.5.0.1}{}}
+\newlabel{eq:outerproduct}{{5.2}{43}{矩阵乘GPU实现}{equation.5.0.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces 矩阵乘外积法图示\relax }}{44}{figure.caption.35}}
+\newlabel{fig:outer_product}{{5.1}{44}{矩阵乘外积法图示\relax }{figure.caption.35}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}矩阵乘外积法算法描述}{44}{section.5.1}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces GEMM algorithm\relax }}{44}{algorithm.1}}
+\newlabel{alg:gemm}{{1}{44}{GEMM algorithm\relax }{algorithm.1}{}}
+\newlabel{gemmendwhile}{{13}{44}{GEMM algorithm\relax }{algorithm.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}从全局内存读取数据到共享内存}{45}{section.5.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}线程到数据的映射}{45}{subsection.5.2.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces 线程到数据映射\relax }}{45}{figure.caption.36}}
+\newlabel{fig:thread_to_data}{{5.2}{45}{线程到数据映射\relax }{figure.caption.36}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces 从全局内存读取A矩阵数据到寄存器\relax }}{46}{figure.caption.37}}
+\newlabel{fig:global_A}{{5.3}{46}{从全局内存读取A矩阵数据到寄存器\relax }{figure.caption.37}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces 从全局内存读取B矩阵数据到寄存器\relax }}{46}{figure.caption.38}}
+\newlabel{fig:global_B}{{5.4}{46}{从全局内存读取B矩阵数据到寄存器\relax }{figure.caption.38}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces 写回A,B数据到共享内存\relax }}{46}{figure.caption.39}}
+\newlabel{fig:writeS}{{5.5}{46}{写回A,B数据到共享内存\relax }{figure.caption.39}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}从共享内存读取数据到寄存器并计算}{46}{section.5.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces 从共享内存读取A,B数据到寄存器\relax }}{47}{figure.caption.40}}
+\newlabel{fig:readS}{{5.6}{47}{从共享内存读取A,B数据到寄存器\relax }{figure.caption.40}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces 一个threadblock中的计算任务\relax }}{47}{figure.caption.41}}
+\newlabel{fig:threadblock}{{5.7}{47}{一个threadblock中的计算任务\relax }{figure.caption.41}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}将C矩阵从寄存器写回数据到全局内存}{47}{section.5.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}本章小结}{48}{section.5.5}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第6章\hspace  {.3em}}矩阵乘优化与性能评估}{49}{chapter.6}}
 \@writefile{lof}{\addvspace {10.0pt}}
 \@writefile{lot}{\addvspace {10.0pt}}
-\newlabel{chap:GEMMOpt}{{6}{47}{矩阵乘优化与性能评估}{chapter.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}实验配置}{47}{section.6.1}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces 实验平台软硬件主要参数\relax }}{47}{table.caption.42}}
-\newlabel{tab:hardwareplatform}{{6.1}{47}{实验平台软硬件主要参数\relax }{table.caption.42}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}矩阵乘性能调优}{47}{section.6.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}寄存器分块对v\_mac指令占比的影响}{47}{subsection.6.2.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1.1}使用更宽的数据读指令}{47}{subsubsection.6.2.1.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces v\_mac指令百分比随着寄存器分块大小的变化趋势\relax }}{48}{figure.caption.43}}
-\newlabel{fig:ffma_percentage}{{6.1}{48}{v\_mac指令百分比随着寄存器分块大小的变化趋势\relax }{figure.caption.43}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.3}汇编层次调优}{48}{section.6.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}汇编调优的必要性}{49}{subsection.6.3.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces 矩阵乘OpenCL实现性能比较\relax }}{49}{figure.caption.44}}
-\newlabel{fig:opencl_gemm_1_1}{{6.2}{49}{矩阵乘OpenCL实现性能比较\relax }{figure.caption.44}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces 內积法矩阵乘shared memory分块图示说明\relax }}{51}{figure.caption.45}}
-\newlabel{fig:gemm_inner_product_tile}{{6.3}{51}{內积法矩阵乘shared memory分块图示说明\relax }{figure.caption.45}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.4}{\ignorespaces shared memory bank分布\relax }}{51}{figure.caption.46}}
-\newlabel{fig:shared_memory_bank_dist}{{6.4}{51}{shared memory bank分布\relax }{figure.caption.46}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.5}{\ignorespaces 4-way shared memory bank冲突\relax }}{51}{figure.caption.47}}
-\newlabel{fig:bank0}{{6.5}{51}{4-way shared memory bank冲突\relax }{figure.caption.47}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}优化内存访问}{52}{subsection.6.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.3}循环展开}{52}{subsection.6.3.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.6}{\ignorespaces 循环展开图示\relax }}{52}{figure.caption.48}}
-\newlabel{fig:loop_unroll}{{6.6}{52}{循环展开图示\relax }{figure.caption.48}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.4}数据预取}{53}{subsection.6.3.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.5}shared memory双缓冲}{53}{subsection.6.3.5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.7}{\ignorespaces shared memory双缓冲带来的性能提升\relax }}{53}{figure.caption.49}}
-\newlabel{fig:gemm_shared_double_buffer}{{6.7}{53}{shared memory双缓冲带来的性能提升\relax }{figure.caption.49}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces GEMM algorithm with shared memory double buffer variant1\relax }}{54}{algorithm.2}}
-\newlabel{alg:gemm_sharedmem_v1}{{2}{54}{GEMM algorithm with shared memory double buffer variant1\relax }{algorithm.2}{}}
-\newlabel{gemmendfor}{{30}{54}{GEMM algorithm with shared memory double buffer variant1\relax }{algorithm.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.8}{\ignorespaces 两种shared memory双缓冲实现的性能比较\relax }}{55}{figure.caption.50}}
-\newlabel{fig:gemm_shared_double_buffer_v2}{{6.8}{55}{两种shared memory双缓冲实现的性能比较\relax }{figure.caption.50}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.6}寄存器双缓冲}{55}{subsection.6.3.6}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces GEMM algorithm with shared memory double buffer veriant2\relax }}{56}{algorithm.3}}
-\newlabel{alg:gemm_sharedmem_v2}{{3}{56}{GEMM algorithm with shared memory double buffer veriant2\relax }{algorithm.3}{}}
-\newlabel{gemmendfor}{{30}{56}{GEMM algorithm with shared memory double buffer veriant2\relax }{algorithm.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.9}{\ignorespaces 寄存器双缓冲\relax }}{57}{figure.caption.51}}
-\newlabel{fig:reg_double_buffer}{{6.9}{57}{寄存器双缓冲\relax }{figure.caption.51}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.7}线程负载均衡}{57}{subsection.6.3.7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.10}{\ignorespaces 线程负载均衡\relax }}{57}{figure.caption.52}}
-\newlabel{fig:load_balance}{{6.10}{57}{线程负载均衡\relax }{figure.caption.52}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.8}消除shared memory bank冲突}{57}{subsection.6.3.8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.11}{\ignorespaces shared memory bank冲突消除带来的性能提升\relax }}{58}{figure.caption.53}}
-\newlabel{fig:gemm_no_bank_conflict}{{6.11}{58}{shared memory bank冲突消除带来的性能提升\relax }{figure.caption.53}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.12}{\ignorespaces shared memory 双缓冲，无bank冲突的性能表现\relax }}{59}{figure.caption.54}}
-\newlabel{fig:gemm_shared_db_no_bank_conflict}{{6.12}{59}{shared memory 双缓冲，无bank冲突的性能表现\relax }{figure.caption.54}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.13}{\ignorespaces shared memory bank冲突消除\relax }}{59}{figure.caption.55}}
-\newlabel{fig:bank_conflict}{{6.13}{59}{shared memory bank冲突消除\relax }{figure.caption.55}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.9}指令重排}{59}{subsection.6.3.9}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.9.1}指令重排的几个原则}{60}{subsubsection.6.3.9.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.4}矩阵乘性能测试}{60}{section.6.4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.14}{\ignorespaces 汇编调优的矩阵乘性能展示\relax }}{61}{figure.caption.56}}
-\newlabel{fig:hgemm_perf}{{6.14}{61}{汇编调优的矩阵乘性能展示\relax }{figure.caption.56}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.15}{\ignorespaces 矩阵乘性能变化趋势\relax }}{61}{figure.caption.57}}
-\newlabel{fig:gemm_tuning_comp}{{6.15}{61}{矩阵乘性能变化趋势\relax }{figure.caption.57}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.5}矩阵乘性能分析}{62}{section.6.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.1}矩阵乘潜在性能峰值}{62}{subsection.6.5.1}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces 矩阵乘主循环指令构成\relax }}{62}{table.caption.58}}
-\newlabel{tab:fijiFFMA}{{6.2}{62}{矩阵乘主循环指令构成\relax }{table.caption.58}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.6}本章小结}{62}{section.6.6}}
+\newlabel{chap:GEMMOpt}{{6}{49}{矩阵乘优化与性能评估}{chapter.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}实验配置}{49}{section.6.1}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces 实验平台软硬件主要参数\relax }}{49}{table.caption.42}}
+\newlabel{tab:hardwareplatform}{{6.1}{49}{实验平台软硬件主要参数\relax }{table.caption.42}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}矩阵乘性能调优}{49}{section.6.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}寄存器分块对v\_mac指令占比的影响}{49}{subsection.6.2.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1.1}使用更宽的数据读指令}{49}{subsubsection.6.2.1.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces v\_mac指令百分比随着寄存器分块大小的变化趋势\relax }}{50}{figure.caption.43}}
+\newlabel{fig:ffma_percentage}{{6.1}{50}{v\_mac指令百分比随着寄存器分块大小的变化趋势\relax }{figure.caption.43}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}汇编层次调优}{50}{section.6.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}汇编调优的必要性}{51}{subsection.6.3.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces 矩阵乘OpenCL实现性能比较\relax }}{51}{figure.caption.44}}
+\newlabel{fig:opencl_gemm_1_1}{{6.2}{51}{矩阵乘OpenCL实现性能比较\relax }{figure.caption.44}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces 內积法矩阵乘shared memory分块图示说明\relax }}{53}{figure.caption.45}}
+\newlabel{fig:gemm_inner_product_tile}{{6.3}{53}{內积法矩阵乘shared memory分块图示说明\relax }{figure.caption.45}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.4}{\ignorespaces shared memory bank分布\relax }}{53}{figure.caption.46}}
+\newlabel{fig:shared_memory_bank_dist}{{6.4}{53}{shared memory bank分布\relax }{figure.caption.46}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.5}{\ignorespaces 4-way shared memory bank冲突\relax }}{53}{figure.caption.47}}
+\newlabel{fig:bank0}{{6.5}{53}{4-way shared memory bank冲突\relax }{figure.caption.47}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}优化内存访问}{54}{subsection.6.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.3}循环展开}{54}{subsection.6.3.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.4}数据预取}{54}{subsection.6.3.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.5}shared memory双缓冲}{54}{subsection.6.3.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.6}{\ignorespaces 循环展开图示\relax }}{55}{figure.caption.48}}
+\newlabel{fig:loop_unroll}{{6.6}{55}{循环展开图示\relax }{figure.caption.48}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.7}{\ignorespaces shared memory双缓冲带来的性能提升\relax }}{55}{figure.caption.49}}
+\newlabel{fig:gemm_shared_double_buffer}{{6.7}{55}{shared memory双缓冲带来的性能提升\relax }{figure.caption.49}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces GEMM algorithm with shared memory double buffer variant1\relax }}{56}{algorithm.2}}
+\newlabel{alg:gemm_sharedmem_v1}{{2}{56}{GEMM algorithm with shared memory double buffer variant1\relax }{algorithm.2}{}}
+\newlabel{gemmendfor}{{30}{56}{GEMM algorithm with shared memory double buffer variant1\relax }{algorithm.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.8}{\ignorespaces 两种shared memory双缓冲实现的性能比较\relax }}{57}{figure.caption.50}}
+\newlabel{fig:gemm_shared_double_buffer_v2}{{6.8}{57}{两种shared memory双缓冲实现的性能比较\relax }{figure.caption.50}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.6}寄存器双缓冲}{57}{subsection.6.3.6}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces GEMM algorithm with shared memory double buffer veriant2\relax }}{58}{algorithm.3}}
+\newlabel{alg:gemm_sharedmem_v2}{{3}{58}{GEMM algorithm with shared memory double buffer veriant2\relax }{algorithm.3}{}}
+\newlabel{gemmendfor}{{30}{58}{GEMM algorithm with shared memory double buffer veriant2\relax }{algorithm.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.9}{\ignorespaces 寄存器双缓冲\relax }}{59}{figure.caption.51}}
+\newlabel{fig:reg_double_buffer}{{6.9}{59}{寄存器双缓冲\relax }{figure.caption.51}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.7}线程负载均衡}{59}{subsection.6.3.7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.10}{\ignorespaces 线程负载均衡\relax }}{59}{figure.caption.52}}
+\newlabel{fig:load_balance}{{6.10}{59}{线程负载均衡\relax }{figure.caption.52}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.8}消除shared memory bank冲突}{60}{subsection.6.3.8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.11}{\ignorespaces shared memory bank冲突消除带来的性能提升\relax }}{60}{figure.caption.53}}
+\newlabel{fig:gemm_no_bank_conflict}{{6.11}{60}{shared memory bank冲突消除带来的性能提升\relax }{figure.caption.53}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.12}{\ignorespaces shared memory 双缓冲，无bank冲突的性能表现\relax }}{61}{figure.caption.54}}
+\newlabel{fig:gemm_shared_db_no_bank_conflict}{{6.12}{61}{shared memory 双缓冲，无bank冲突的性能表现\relax }{figure.caption.54}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.13}{\ignorespaces shared memory bank冲突消除\relax }}{61}{figure.caption.55}}
+\newlabel{fig:bank_conflict}{{6.13}{61}{shared memory bank冲突消除\relax }{figure.caption.55}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.9}指令重排}{61}{subsection.6.3.9}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.3.9.1}指令重排的几个原则}{62}{subsubsection.6.3.9.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.4}矩阵乘性能测试}{62}{section.6.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.14}{\ignorespaces 汇编调优的矩阵乘性能展示\relax }}{63}{figure.caption.56}}
+\newlabel{fig:hgemm_perf}{{6.14}{63}{汇编调优的矩阵乘性能展示\relax }{figure.caption.56}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.15}{\ignorespaces 矩阵乘性能变化趋势\relax }}{63}{figure.caption.57}}
+\newlabel{fig:gemm_tuning_comp}{{6.15}{63}{矩阵乘性能变化趋势\relax }{figure.caption.57}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.5}矩阵乘性能分析}{64}{section.6.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.1}矩阵乘潜在性能峰值}{64}{subsection.6.5.1}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces 矩阵乘主循环指令构成\relax }}{64}{table.caption.58}}
+\newlabel{tab:fijiFFMA}{{6.2}{64}{矩阵乘主循环指令构成\relax }{table.caption.58}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.6}本章小结}{64}{section.6.6}}
 \citation{nugteren2017clblast}
-\@writefile{toc}{\contentsline {chapter}{\numberline {第7章\hspace  {.3em}}结束语}{65}{chapter.7}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {第7章\hspace  {.3em}}结束语}{67}{chapter.7}}
 \@writefile{lof}{\addvspace {10.0pt}}
 \@writefile{lot}{\addvspace {10.0pt}}
-\newlabel{chap:Conclusion}{{7}{65}{结束语}{chapter.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.1}本文工作总结}{65}{section.7.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.2}下一步工作}{66}{section.7.2}}
+\newlabel{chap:Conclusion}{{7}{67}{结束语}{chapter.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.1}本文工作总结}{67}{section.7.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.2}下一步工作}{68}{section.7.2}}
 \bibdata{Biblio/ref}
 \bibcite{profiler2011nvidia}{{1}{2011}{{Profiler}}{{}}}
 \bibcite{meng2011grophecy}{{2}{2011}{{Meng\ et~al.}}{{Meng, Morozov, Kumaran, Vishwanath, and Uram}}}
@@ -259,20 +262,23 @@
 \bibcite{sim2012performance}{{4}{2012}{{Sim\ et~al.}}{{Sim, Dasgupta, Kim, and Vuduc}}}
 \bibcite{zhang2011quantitative}{{5}{2011}{{Zhang\ et~al.}}{{Zhang and Owens}}}
 \bibcite{williams2009roofline}{{6}{2009}{{Williams\ et~al.}}{{Williams, Waterman, and Patterson}}}
-\bibcite{chetlur2014cudnn}{{7}{2014}{{Chetlur\ et~al.}}{{Chetlur, Woolley, Vandermersch, Cohen, Tran, Catanzaro, and Shelhamer}}}
-\bibcite{volkov2008benchmarking}{{8}{2008}{{Volkov\ et~al.}}{{Volkov and Demmel}}}
-\bibcite{lai2013performance}{{9}{2013}{{Lai\ et~al.}}{{Lai and Seznec}}}
-\bibcite{grayassembler}{{10}{}{{Gray}}{{}}}
-\bibcite{nvidia2008cublas}{{11}{2008}{{Nvidia}}{{}}}
-\bibcite{zhang2017understanding}{{12}{2017}{{Zhang\ et~al.}}{{Zhang, Tan, Xue, Li, Zhou, and Chen}}}
-\bibcite{xiuxiaassembler}{{13}{}{{Xiuxia}}{{}}}
-\bibcite{goto2008anatomy}{{14}{2008}{{Goto\ et~al.}}{{Goto and Geijn}}}
-\bibcite{xianyi2012openblas}{{15}{2012}{{Xianyi\ et~al.}}{{Xianyi, Qian, and Chothia}}}
-\@writefile{toc}{\contentsline {chapter}{参考文献}{67}{section*.59}}
-\bibcite{nugteren2017clblast}{{16}{2017}{{Nugteren}}{{}}}
-\@writefile{toc}{\contentsline {chapter}{致谢}{69}{appendix*.61}}
+\bibcite{nath2010improved}{{7}{2010}{{Nath\ et~al.}}{{Nath, Tomov, and Dongarra}}}
+\bibcite{kurzak2012autotuning}{{8}{2012}{{Kurzak\ et~al.}}{{Kurzak, Tomov, and Dongarra}}}
+\bibcite{cui2010auto}{{9}{2010}{{Cui\ et~al.}}{{Cui, Chen, Zhang, and Mei}}}
+\bibcite{chetlur2014cudnn}{{10}{2014}{{Chetlur\ et~al.}}{{Chetlur, Woolley, Vandermersch, Cohen, Tran, Catanzaro, and Shelhamer}}}
+\bibcite{volkov2008benchmarking}{{11}{2008}{{Volkov\ et~al.}}{{Volkov and Demmel}}}
+\bibcite{lai2013performance}{{12}{2013}{{Lai\ et~al.}}{{Lai and Seznec}}}
+\bibcite{grayassembler}{{13}{}{{Gray}}{{}}}
+\bibcite{nvidia2008cublas}{{14}{2008}{{Nvidia}}{{}}}
+\@writefile{toc}{\contentsline {chapter}{参考文献}{69}{section*.59}}
+\bibcite{zhang2017understanding}{{15}{2017}{{Zhang\ et~al.}}{{Zhang, Tan, Xue, Li, Zhou, and Chen}}}
+\bibcite{xiuxiaassembler}{{16}{}{{Xiuxia}}{{}}}
+\bibcite{goto2008anatomy}{{17}{2008}{{Goto\ et~al.}}{{Goto and Geijn}}}
+\bibcite{xianyi2012openblas}{{18}{2012}{{Xianyi\ et~al.}}{{Xianyi, Qian, and Chothia}}}
+\bibcite{nugteren2017clblast}{{19}{2017}{{Nugteren}}{{}}}
+\@writefile{toc}{\contentsline {chapter}{致谢}{71}{appendix*.61}}
 \@writefile{lof}{\addvspace {10.0pt}}
 \@writefile{lot}{\addvspace {10.0pt}}
-\@writefile{toc}{\contentsline {chapter}{作者简介}{71}{appendix*.62}}
+\@writefile{toc}{\contentsline {chapter}{作者简介}{73}{appendix*.62}}
 \@writefile{lof}{\addvspace {10.0pt}}
 \@writefile{lot}{\addvspace {10.0pt}}

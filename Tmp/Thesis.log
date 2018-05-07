@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.26)  4 MAY 2018 19:18
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.26)  7 MAY 2018 13:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2032,9 +2032,9 @@ File: amd_roadmap.png Graphic file (type QTm)
  <use  "amd_roadmap.png" > [2]
 File: serialprogram.png Graphic file (type QTm)
 
-<use  "serialprogram.png" > [3]
+<use  "serialprogram.png" >
 File: parallelprogram.png Graphic file (type QTm)
- <use  "parallelprogram.png" > [4] [5])
+ <use  "parallelprogram.png" > [3] [4] [5])
 (./Tex/Chap_Background.tex [6]
 第2章
 
@@ -2101,57 +2101,63 @@ File: opencl_model_relation.png Graphic file (type QTm)
 File: opencl_memory_gpu.png Graphic file (type QTm)
 
 <use  "opencl_memory_gpu.png" > [32]
+(c:/texlive/2017/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+(c:/texlive/2017/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+)
 File: gpu_addr.png Graphic file (type QTm)
- <use  "gpu_addr.png" > [33]
+
+<use  "gpu_addr.png" >
 File: gpu_mem_channel.png Graphic file (type QTm)
-
-<use  "gpu_mem_channel.png" >
+ <use  "gpu_mem_channel.png" > [33] [34]
 File: nvidia_3_gpus.png Graphic file (type QTm)
- <use  "nvidia_3_gpus.png" > [34] [35]
+
+<use  "nvidia_3_gpus.png" > [35]
 File: amd_vega_arch.png Graphic file (type QTm)
-
-<use  "amd_vega_arch.png" >
+ <use  "amd_vega_arch.png" > [36]
 File: amd_cs.png Graphic file (type QTm)
- <use  "amd_cs.png" > [36]
-File: amd_gpu_memory.png Graphic file (type QTm)
 
-<use  "amd_gpu_memory.png" >
-Overfull \hbox (12.30972pt too wide) in paragraph at lines 334--335
+<use  "amd_cs.png" > [37]
+File: amd_gpu_memory.png Graphic file (type QTm)
+ <use  "amd_gpu_memory.png" >
+Overfull \hbox (12.30972pt too wide) in paragraph at lines 337--338
 []\TU/AdobeSongStd-Light(1)/m/n/12.045 在 计 算 单 元 的 设 计 上，| \TU/entextsf/m/n/12.
 045 AMD \TU/AdobeSongStd-Light(1)/m/n/12.045 和 \TU/entextsf/m/n/12.045 NVIDIA G
 PU \TU/AdobeSongStd-Light(1)/m/n/12.045 的 计 算 单 元 都 采 用 了 \TU/entextsf/m/n/12.0
 45 SIMD(Single
  []
 
-[37] [38]
+[38] [39]
 File: v_mac_throughput.png Graphic file (type QTm)
  <use  "v_mac_throughput.png" >
 File: mem_bandwidth.png Graphic file (type QTm)
- <use  "mem_bandwidth.png" > [39])
-(./Tex/Chap_GEMMGPU.tex [40]
-第5章
-File: outer_product.png Graphic file (type QTm)
-<use  "outer_product.png" > [41
+ <use  "mem_bandwidth.png" > [40])
+(./Tex/Chap_GEMMGPU.tex [41] [42
 
 ]
+第5章
+File: outer_product.png Graphic file (type QTm)
+<use  "outer_product.png" > [43]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 55.
- [42]
+ [44]
 File: thread_to_data.png Graphic file (type QTm)
  <use  "thread_to_data.png" >
 File: global_A.png Graphic file (type QTm)
 
 <use  "global_A.png" >
 File: global_B.png Graphic file (type QTm)
- <use  "global_B.png" > [43]
+ <use  "global_B.png" > [45]
 File: writeS.png Graphic file (type QTm)
  <use  "writeS.png" >
 File: readS.png Graphic file (type QTm)
 
 <use  "readS.png" >
 File: threadblock.png Graphic file (type QTm)
- <use  "threadblock.png" > [44] [45])
-(./Tex/Chap_GEMMOpt.tex [46]
+ <use  "threadblock.png" > [46] [47])
+(./Tex/Chap_GEMMOpt.tex [48]
 第6章
 
 Overfull \hbox (52.9118pt too wide) in paragraph at lines 10--22
@@ -2159,11 +2165,11 @@ Overfull \hbox (52.9118pt too wide) in paragraph at lines 10--22
  []
 
 File: ffma_percentage.png Graphic file (type QTm)
-<use  "ffma_percentage.png" > [47
+<use  "ffma_percentage.png" > [49
 
-] [48]
+] [50]
 File: opencl_gemm_1_1.png Graphic file (type QTm)
- <use  "opencl_gemm_1_1.png" > [49]
+ <use  "opencl_gemm_1_1.png" > [51]
 File: gemm_inner_product_tile.png Graphic file (type QTm)
 
 <use  "gemm_inner_product_tile.png" >
@@ -2171,29 +2177,29 @@ File: shared_memory_bank_dist.png Graphic file (type QTm)
  <use  "shared_memory_bank_dist.png" >
 File: bank0.png Graphic file (type QTm)
 
-<use  "bank0.png" > [50] [51]
+<use  "bank0.png" > [52] [53]
 File: loop_unroll.png Graphic file (type QTm)
- <use  "loop_unroll.png" > [52]
+ <use  "loop_unroll.png" > [54]
 File: gemm_shared_double_buffer.png Graphic file (type QTm)
 
 <use  "gemm_shared_double_buffer.png" >
 File: gemm_shared_double_buffer_v2.png Graphic file (type QTm)
 
-<use  "gemm_shared_double_buffer_v2.png" > [53] [54]
+<use  "gemm_shared_double_buffer_v2.png" > [55] [56] [57] [58]
 File: reg_double_buffer.png Graphic file (type QTm)
 
-<use  "reg_double_buffer.png" > [55] [56]
+<use  "reg_double_buffer.png" >
 File: load_balance.png Graphic file (type QTm)
- <use  "load_balance.png" > [57]
+ <use  "load_balance.png" > [59]
 File: gemm_no_bank_conflict.png Graphic file (type QTm)
 
 <use  "gemm_no_bank_conflict.png" >
 File: gemm_shared_db_no_bank_conflict.png Graphic file (type QTm)
 
-<use  "gemm_shared_db_no_bank_conflict.png" >
+<use  "gemm_shared_db_no_bank_conflict.png" > [60]
 File: bank_conflict.png Graphic file (type QTm)
  <use  "bank_conflict.png" >
-[58] [59]
+[61]
 Overfull \hbox (8.5408pt too wide) in paragraph at lines 279--280
 \TU/AdobeSongStd-Light(1)/m/n/12.045 个 线 程，|  每 个 线 程 计 算 \TU/entextsf/m/n/12.0
 45 8x8 \TU/AdobeSongStd-Light(1)/m/n/12.045 个 输 出，|  总 共 可 以 计 算 \TU/entextsf/m
@@ -2221,35 +2227,35 @@ n/12.045 t_buffer_load_xyzw
 File: hgemm_perf.png Graphic file (type QTm)
 <use  "hgemm_perf.png" >
 File: gemm_tuning_comp.png Graphic file (type QTm)
- <use  "gemm_tuning_comp.png" > [60] [61] [62])
-(./Tex/Chap_Conclusion.tex [63] [64
+ <use  "gemm_tuning_comp.png" > [62] [63] [64])
+(./Tex/Chap_Conclusion.tex [65] [66
 
 ]
 第7章
-[65])) [66] (Tmp/Thesis.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 71--74
+[67])) [68] (Tmp/Thesis.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 91--94
 []\TU/entextrm/m/n/10.53937 GRAY S.  Assembler for nvidia maxwell architecture,
  2014[J].  URL
  []
 
+[69
 
-Underfull \hbox (badness 10000) in paragraph at lines 90--93
+
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 110--113
 []\TU/entextrm/m/n/10.53937 XIUXIA Z.  Assembler for nvidia kepler architecture
 , 2016[J].  URL
  []
 
-[67
+) (./Tex/Backmatter.tex [70] [71
 
-
-
-
-]) (./Tex/Backmatter.tex [68] [69
-
-] [70
+] [72
 
 ])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 87.
- [71
+ [73
 
 ]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 87.
@@ -2262,12 +2268,12 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 32854 strings out of 493005
- 614432 string characters out of 6137956
- 656407 words of memory out of 5000000
- 36361 multiletter control sequences out of 15000+600000
- 29308 words of font info for 122 fonts, out of 8000000 for 9000
+ 32993 strings out of 493005
+ 616526 string characters out of 6137956
+ 672098 words of memory out of 5000000
+ 36493 multiletter control sequences out of 15000+600000
+ 29316 words of font info for 123 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 63i,12n,94p,10526b,644s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 63i,12n,94p,10526b,1115s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Tmp/Thesis.pdf (89 pages).
+Output written on Tmp/Thesis.pdf (91 pages).

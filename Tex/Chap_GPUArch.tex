@@ -213,20 +213,23 @@ OpenCL将内存分为两部分：主机端内存和设备端内存。主机端�
 在本论文中，使用bank冲突来统一指代channel冲突或bank冲突。刚才讨论到，如果访存步长是一个较大的2的幂次方的一个数，那么往往会发生channel冲突。对于CPU来说，也会遇到同样的问题，访存步长为较大的2的幂次方的一个数，会使得访问的数据落在较少的Cache lines中，产生较多的cache不命中。对于很多kernels来说，channel冲突对性能影响非常大。这时，我们就很有必要理解并解决channel冲突。在GPU程序编写中，最好的方式是安排相邻的线程来读/写相邻的内存地址，这是一种避免channel冲突的方法。图\ref{fig:gpu_mem_channel}展示了内存channel分布：
 当应用程序可以完全控制数据的访存模式时，软件开发人员就需要合理的组织数据结构，使得bank冲突最小化。图\ref{fig:gpu_addr}展示了硬件地址字节分布：
 
+Channel的计算方式：
+
+\lstset{language=C}
+\begin{lstlisting}
+if (({row, bank} % 3) == 1)
+channel_within_quadrant = 1;
+else
+channel_within_quadrant = 2 * pipe[0];
+\end{lstlisting}
+
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.80\textwidth]{gpu_addr}
 	\bicaption{硬件地址字节分布}{Hardware address byte distribution}
 	\label{fig:gpu_addr}
 \end{figure}
-Channel的计算方式：
 
-if (({ row, bank} \%3) == 1)
-channel\_within\_quadrant = 1
-
-else
-
-channel\_within\_quadrant = 2 * pipe[0]
 
 \begin{figure}[htbp]
 	\centering
