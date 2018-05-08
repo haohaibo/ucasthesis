@@ -24,12 +24,12 @@ C^{(k)}=A[:][k]B[k][:], C=\sum_{k}C^{(k)}
 %问题定义： C = A * B， A大小为MxK, B为KxN, C为MxN 
 问题定义： $C = A * B$， A大小为$M \times K$, B为$K \times N$, C为$M \times N$
 
-矩阵乘外积法：用A矩阵的一列乘以B矩阵的一行，沿着K方向做累加，可以计算出结果C(图\ref{fig:outer_product})。
+矩阵乘外积法：用A矩阵的一列乘以B矩阵的一行，沿着K方向做累加，可以计算出结果C(图\ref{fig:outer_product_replot})。
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.50\textwidth]{outer_product}
+	\includegraphics[width=0.50\textwidth]{outer_product_replot}
 	\bicaption{矩阵乘外积法图示}{Illustration of Outer-product matrix multiplication method}
-	\label{fig:outer_product}
+	\label{fig:outer_product_replot}
 \end{figure}
 \section{矩阵乘外积法算法描述}
 
@@ -68,7 +68,7 @@ C^{(k)}=A[:][k]B[k][:], C=\sum_{k}C^{(k)}
         \State barrier
         \For   {$k = 0$; $k<NUM\_UNROLL$;$++k$}\Comment{Loop Unroll}
         \State $regA \gets tileA, regB \gets tileB$
-        \State $regC += regA \cdot regB$
+        \State $regC \gets regA \cdot regB + regC$
         \EndFor
         \State barrier
 		\EndWhile\label{gemmendwhile}
@@ -103,12 +103,12 @@ C^{(k)}=A[:][k]B[k][:], C=\sum_{k}C^{(k)}
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.50\textwidth]{thread_to_data}
+	\includegraphics[width=0.50\textwidth]{thread_to_data_replot}
 	\bicaption{线程到数据映射}{Thread-to-data mapping}
-	\label{fig:thread_to_data}
+	\label{fig:thread_to_data_replot}
 \end{figure}
 
-64个线程(即一个wavefront)组成一个block，每个线程计算8x8的输出，一个block共计算64x8x8=64x64的输出(如图\ref{fig:thread_to_data})。
+64个线程(即一个wavefront)组成一个block，每个线程计算8x8的输出，一个block共计算64x8x8=64x64的输出(如图\ref{fig:thread_to_data_replot})。
 
 \begin{figure}[htbp]
 	\centering
@@ -158,7 +158,7 @@ B(表示保存B矩阵数据的寄存器) : 从全局内存读B数据到寄存器
 	\label{fig:threadblock}
 \end{figure}
 
-从block的角度观察每个线程的计算任务(如图\ref{fig:threadblock})。现在从一个block的角度来观察每个线程计算C的方式，这里一个block由一个wavefront组成，即64个线程， 一个block总共计算64x64个C中元素。图中橙色部分表示0号线程的计算任务，0号线程计算8x8的C，为了线程的负载均衡，这里将8x8分成4个4x4。这里总结一下：我们用了到数据预取，寄存器双缓冲，局部共享内存双缓冲，bank冲突消除，负载均衡，这些优化方法。
+从block的角度观察每个线程的计算任务(如图\ref{fig:threadblock})。现在从一个block的角度来观察每个线程计算C的方式，这里一个block由一个wavefront组成，即64个线程， 一个block总共计算64x64个C中元素。图中橙色部分表示0号线程的计算任务，0号线程计算8x8的C，为了线程的负载均衡，这里将8x8分成4个4x4。这里总结一下：我们用了到数据预取、寄存器双缓冲、局部共享内存双缓冲、bank冲突消除、线程负载均衡这些优化方法。
 
 
 \section{将C矩阵从寄存器写回数据到全局内存}

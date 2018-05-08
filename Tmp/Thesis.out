@@ -54,14 +54,3 @@
 \BOOKMARK [2][-]{subsection.6.3.6}{6.3.6 寄存器双缓冲}{section.6.3}% 54
 \BOOKMARK [2][-]{subsection.6.3.7}{6.3.7 线程负载均衡}{section.6.3}% 55
 \BOOKMARK [2][-]{subsection.6.3.8}{6.3.8 消除shared memory bank冲突}{section.6.3}% 56
-\BOOKMARK [2][-]{subsection.6.3.9}{6.3.9 指令重排}{section.6.3}% 57
-\BOOKMARK [1][-]{section.6.4}{6.4 矩阵乘性能测试}{chapter.6}% 58
-\BOOKMARK [1][-]{section.6.5}{6.5 矩阵乘性能分析}{chapter.6}% 59
-\BOOKMARK [2][-]{subsection.6.5.1}{6.5.1 矩阵乘潜在性能峰值}{section.6.5}% 60
-\BOOKMARK [1][-]{section.6.6}{6.6 本章小结}{chapter.6}% 61
-\BOOKMARK [0][-]{chapter.7}{第7章  结束语}{}% 62
-\BOOKMARK [1][-]{section.7.1}{7.1 本文工作总结}{chapter.7}% 63
-\BOOKMARK [1][-]{section.7.2}{7.2 下一步工作}{chapter.7}% 64
-\BOOKMARK [0][-]{section*.59}{参考文献}{}% 65
-\BOOKMARK [0][-]{appendix*.61}{致谢}{}% 66
-\BOOKMARK [0][-]{appendix*.62}{作者简介}{}% 67
