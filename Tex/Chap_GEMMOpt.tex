@@ -302,8 +302,8 @@ AMD GPU shared memory有32个bank。当不同的线程访问不同的bank时，�
 通常，编程人员尝试将不同类型的指令交错放置来使得一个CU上不同的功能部件可以均衡的利用起来，进而获得更高的指令通量。本文采用下面的指令重排方法。将全局内存数据预取指令和v\_mac，DS\_READ指令交错放置来获得更高的性能。图\ref{fig:none_f_mac_inst}展示了矩阵乘主循环中非v\_mac指令的位置。
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.80\textwidth]{none_f_mac_inst}
-	\bicaption{非v_mac指令的位置}{None v\_mac inst slot}
+	\includegraphics[width=1.0\textwidth]{none_f_mac_inst}
+	\bicaption{非v\_mac指令的位置}{None v\_mac inst slot}
 	\label{fig:none_f_mac_inst}
 \end{figure}
 \subsubsection{指令重排的几个原则}
@@ -313,11 +313,12 @@ ds\_read\_b128指令用于从shared memory中预取数据到寄存器。循环�
 
 (2) 从全局内存读取数据到寄存器：尽可能地早放置。
 
-t\_buffer\_load\_xyzw指令用于从全局内存预取数据到寄存器。一个block有64个线程，每个线程计算8x8个输出，总共可以计算64x64个输出。t\_buffer\_load\_xyzw指令一次可以从全局内存读取4个元素，计算64x64的输出，循环展开8次，需要8x64个A中对应元素和8x64个B中对应元素。因此每个线程需要(8x64+8x64)/(4x64) = 4条t\_buffer\_load\_xyzw指令。
-
-(3) 从寄存器写入数据到shared memory：和全局内存读指令间隔足够远。
+t\_buffer\_load\_xyzw指令用于从全局内存预取数据到寄存器。一个block有64个线程，每个线程计算8x8个输出，总共可以计算64x64个输出。t\_buffer\_load\_xyzw指令一次可以从全局内存读取4个元素，计算64x64的输出，循环展开8次，需要8x64个A中对应元素和8x64个B中对应元素。因此每个线程需要(8x64+8x64)/(4x64) = 4条t\_buffer\_load\_xyzw指令。(3) 从寄存器写入数据到shared memory：和全局内存读指令间隔足够远。
 
 为了数据重用，把从全局内存读到寄存的数据写入shared memory。使用ds\_read\_b128指令将数据从存寄存器写入shared memory。ds\_read\_b128指令要等对应的t\_buffer\_load\_xyzw指令结果返回，所以ds\_read\_b128指令和t\_buffer\_load\_xyzw要间隔得足够远。
+
+从图\ref{fig:none_f_mac_inst}可以观察出在每个8x8的循环的起始位置插入4条ds\_read\_b128指令，这4条指令是为下一个8x8循环进行预取。在第0次展开的24和32的位置插入两条全局内存读指令t\_buffer\_load\_xyzw，这两条指令也是在进行数据预取。为了让全局内存读指令和共享内存写指令间隔的尽可能地远，在第6次展开的24和32位置插入共享内存写指令ds\_write\_b128。其中最为巧妙的是利用s\_waitcnt vmcnt()指令来精确地等待某一条全局内存读指令的完成。第6次展开的24位置s\_waitcnt vmcnt(3)指令表示3条全局访存指令还未完成，即按顺序发射了4条访存指令，其中第1条访存指令结果已经返回，剩下3条指令结果还未返回，这样就是在等待第1条指令结果返回然后继续执行，否则就等待。其他指令的位置可类似分析。同时相比于OpenCL，手工编写汇编可以去除冗余指令，在OpenCL中只能使用barrier指令来进行等待，手工编写汇编可以去除barrier指令使用更为准确的s\_waitcnt指令进行等待。
+
 
 \section{矩阵乘性能测试}
 \begin{figure}[htbp]
