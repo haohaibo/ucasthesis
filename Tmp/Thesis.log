@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.26)  8 MAY 2018 23:03
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.26)  10 MAY 2018 23:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1998,87 +1998,34 @@ File: se-ascii-print.def 2016/05/16 v1.11 stringenc: Printable ASCII characters
 ] [6
 
 
-]
-
-Package natbib Warning: Citation `profiler2011nvidia' on page I undefined on in
-put line 52.
-
-
-Package natbib Warning: Citation `meng2011grophecy' on page I undefined on inpu
-t line 54.
-
-
-Package natbib Warning: Citation `hong2009analytical' on page I undefined on in
-put line 54.
-
-
-Package natbib Warning: Citation `sim2012performance' on page I undefined on in
-put line 54.
-
-
-Package natbib Warning: Citation `zhang2011quantitative' on page I undefined on
- input line 54.
-
-
-Package natbib Warning: Citation `williams2009roofline' on page I undefined on 
-input line 54.
-
-[1
+] [1
 
 ] [2
 
-]
+]) [3] [4] (Tmp/Thesis.toc [5
 
-Package natbib Warning: Citation `profiler2011nvidia' on page III undefined on 
-input line 64.
-
-
-Package natbib Warning: Citation `meng2011grophecy' on page III undefined on in
-put line 66.
-
-
-Package natbib Warning: Citation `hong2009analytical' on page III undefined on 
-input line 66.
-
-
-Package natbib Warning: Citation `sim2012performance' on page III undefined on 
-input line 66.
-
-
-Package natbib Warning: Citation `zhang2011quantitative' on page III undefined 
-on input line 66.
-
-
-Package natbib Warning: Citation `williams2009roofline' on page III undefined o
-n input line 66.
-
-) [3] [4] (Tmp/Thesis.toc)
+] [6])
 \tf@toc=\write4
 \openout4 = `Thesis.toc'.
 
- [5
+ [7] [8
 
-] [6
-
-] (Tmp/Thesis.lof)
+]
+(Tmp/Thesis.lof [9])
 \tf@lof=\write5
 \openout5 = `Thesis.lof'.
 
- [7] [8
-
-] (Tmp/Thesis.lot)
+ [10] (Tmp/Thesis.lot)
 \tf@lot=\write6
 \openout6 = `Thesis.lot'.
 
+ (./Tex/Prematter.tex) [11
 
-(./Tex/Prematter.tex) [9] [10
+] [12
 
-] (./Tex/Mainmatter.tex (./Tex/Chap_Intro.tex
+]
+(./Tex/Mainmatter.tex (./Tex/Chap_Intro.tex
 第1章
-
-Package natbib Warning: Citation `profiler2011nvidia' on page 1 undefined on in
-put line 11.
-
 [1
 
 ]
@@ -2090,245 +2037,8 @@ File: serialprogram.png Graphic file (type QTm)
 
 <use  "serialprogram.png" >
 File: parallelprogram.png Graphic file (type QTm)
- <use  "parallelprogram.png" > [3]
-
-Package natbib Warning: Citation `nath2010improved' on page 4 undefined on inpu
-t line 67.
-
-
-Package natbib Warning: Citation `kurzak2012autotuning' on page 4 undefined on 
-input line 67.
-
-
-Package natbib Warning: Citation `cui2010auto' on page 4 undefined on input lin
-e 67.
-
-[4]
-
-Package natbib Warning: Citation `chetlur2014cudnn' on page 5 undefined on inpu
-t line 73.
-
-[5]) (./Tex/Chap_Background.tex [6]
+ <use  "parallelprogram.png" > [3] [4] [5])
+(./Tex/Chap_Background.tex [6]
 第2章
 
-Overfull \hbox (12.30972pt too wide) in paragraph at lines 12--13
-[]\TU/AdobeSongStd-Light(1)/m/n/12.045 在 计 算 单 元 的 设 计 上，| \TU/entextsf/m/n/12.
-045 AMD \TU/AdobeSongStd-Light(1)/m/n/12.045 和 \TU/entextsf/m/n/12.045 NVIDIA G
-PU \TU/AdobeSongStd-Light(1)/m/n/12.045 的 计 算 单 元 都 采 用 了 \TU/entextsf/m/n/12.0
-45 SIMD(Single
- []
-
-[7
-
-]
-File: thread_model.png Graphic file (type QTm)
- <use  "thread_model.png" >
-File: warp_model.png Graphic file (type QTm)
- <use  "warp_model.png" >
-File: if_else.png Graphic file (type QTm)
- <use  "if_else.png" >
-File: warp_if_else.png Graphic file (type QTm)
-
-<use  "warp_if_else.png" > [8] [9]
-
-Package natbib Warning: Citation `volkov2008benchmarking' on page 10 undefined 
-on input line 76.
-
-
-Package natbib Warning: Citation `lai2013performance' on page 10 undefined on i
-nput line 78.
-
-
-Package natbib Warning: Citation `grayassembler' on page 10 undefined on input 
-line 80.
-
-
-Package natbib Warning: Citation `nvidia2008cublas' on page 10 undefined on inp
-ut line 80.
-
-[10]
-
-Package natbib Warning: Citation `zhang2017understanding' on page 11 undefined 
-on input line 104.
-
-
-Package natbib Warning: Citation `xiuxiaassembler' on page 11 undefined on inpu
-t line 104.
-
-
-Package natbib Warning: Citation `goto2008anatomy' on page 11 undefined on inpu
-t line 106.
-
-
-Package natbib Warning: Citation `xianyi2012openblas' on page 11 undefined on i
-nput line 106.
-
-[11]) (./Tex/Chap_parallelArch.tex [12]
-第3章
-File: cpu_trend.png Graphic file (type QTm)
-<use  "cpu_trend.png" > [13
-
-] [14] [15]
-Overfull \hbox (14.00099pt too wide) in paragraph at lines 59--60
-[]\TU/AdobeSongStd-Light(1)/m/n/12.045 这 两 种 硬 件 多 线 程 技 术 都 十 分 常 见。|  在 \TU/e
-ntextsf/m/n/12.045 Tera \TU/AdobeSongStd-Light(1)/m/n/12.045 公 司 设 计 的 超 级 计 算 
-机 \TU/entextsf/m/n/12.045 MTA(Multi-
- []
-
-[16]
-File: amd_cpu_core.png Graphic file (type QTm)
- <use  "amd_cpu_core.png" > [17]
-File: amd_gpu_core.png Graphic file (type QTm)
- <use  "amd_gpu_core.png" > [18] [19]
-[20]
-File: nvidia_gtx780.png Graphic file (type QTm)
- <use  "nvidia_gtx780.png" >
-File: nvidia_gtx780_simd.png Graphic file (type QTm)
- <use  "nvidia_gtx780_simd.png" > [21] [22])
-(./Tex/Chap_GPUArch.tex [23] [24
-
-]
-第4章
-[25]
-File: gcn_gpu.png Graphic file (type QTm)
- <use  "gcn_gpu.png" >
-File: rocm_llvm.png Graphic file (type QTm)
- <use  "rocm_llvm.png" > [26] [27]
-File: opencl_thread_model.png Graphic file (type QTm)
-
-<use  "opencl_thread_model.png" >
-File: thread_model.png Graphic file (type QTm)
- <use  "thread_model.png" > [28] [29]
-File: thread_map.png Graphic file (type QTm)
-
-<use  "thread_map.png" > [30]
-File: opencl_model_relation.png Graphic file (type QTm)
- <use  "opencl_model_relation.png" > [31]
-File: opencl_memory_gpu.png Graphic file (type QTm)
-
-<use  "opencl_memory_gpu.png" > [32]
-(c:/texlive/2017/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2015/06/04 1.6 listings language file
-)
-(c:/texlive/2017/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-)
-File: gpu_addr.png Graphic file (type QTm)
-
-<use  "gpu_addr.png" >
-File: gpu_mem_channel.png Graphic file (type QTm)
- <use  "gpu_mem_channel.png" > [33] [34]
-File: nvidia_3_gpus.png Graphic file (type QTm)
-
-<use  "nvidia_3_gpus.png" > [35]
-File: amd_vega_arch.png Graphic file (type QTm)
- <use  "amd_vega_arch.png" > [36]
-File: amd_cs.png Graphic file (type QTm)
-
-<use  "amd_cs.png" > [37]
-File: amd_gpu_memory.png Graphic file (type QTm)
- <use  "amd_gpu_memory.png" >
-Overfull \hbox (12.30972pt too wide) in paragraph at lines 337--338
-[]\TU/AdobeSongStd-Light(1)/m/n/12.045 在 计 算 单 元 的 设 计 上，| \TU/entextsf/m/n/12.
-045 AMD \TU/AdobeSongStd-Light(1)/m/n/12.045 和 \TU/entextsf/m/n/12.045 NVIDIA G
-PU \TU/AdobeSongStd-Light(1)/m/n/12.045 的 计 算 单 元 都 采 用 了 \TU/entextsf/m/n/12.0
-45 SIMD(Single
- []
-
-[38] [39]
-File: v_mac_throughput.png Graphic file (type QTm)
- <use  "v_mac_throughput.png" >
-File: mem_bandwidth.png Graphic file (type QTm)
- <use  "mem_bandwidth.png" > [40])
-(./Tex/Chap_GEMMGPU.tex [41] [42
-
-]
-第5章
-
-LaTeX Warning: Reference `fig:outer_product' on page 43 undefined on input line
- 22.
-
-File: outer_product_replot.png Graphic file (type QTm)
-<use  "outer_product_replot.png" > [43]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 55.
- [44]
-File: thread_to_data_replot.png Graphic file (type QTm)
-
-<use  "thread_to_data_replot.png" >
-File: global_A.png Graphic file (type QTm)
- <use  "global_A.png" >
-File: global_B.png Graphic file (type QTm)
-
-<use  "global_B.png" > [45]
-File: writeS.png Graphic file (type QTm)
- <use  "writeS.png" >
-File: readS.png Graphic file (type QTm)
- <use  "readS.png" >
-File: threadblock.png Graphic file (type QTm)
-
-<use  "threadblock.png" > [46] [47]) (./Tex/Chap_GEMMOpt.tex [48]
-第6章
-
-Overfull \hbox (52.9118pt too wide) in paragraph at lines 10--22
- [] 
- []
-
-File: ffma_percentage.png Graphic file (type QTm)
-<use  "ffma_percentage.png" > [49
-
-] [50]
-File: opencl_gemm_1_1_replot.png Graphic file (type QTm)
- <use  "opencl_gemm_1_1_replot.png" >
-[51]
-File: gemm_inner_product_tile.png Graphic file (type QTm)
- <use  "gemm_inner_product_tile.png" >
-File: shared_memory_bank_dist.png Graphic file (type QTm)
-
-<use  "shared_memory_bank_dist.png" >
-File: bank0.png Graphic file (type QTm)
- <use  "bank0.png" > [52] [53]
-File: loop_unroll_replot.png Graphic file (type QTm)
-
-<use  "loop_unroll_replot.png" > [54]
-File: gemm_manual_unroll.png Graphic file (type QTm)
- <use  "gemm_manual_unroll.png" >
-File: gemm_shared_double_buffer_replot.png Graphic file (type QTm)
-
-<use  "gemm_shared_double_buffer_replot.png" > [55]
-File: gemm_shared_double_buffer_v2_replot.png Graphic file (type QTm)
-
-<use  "gemm_shared_double_buffer_v2_replot.png" > [56] [57] [58]
-File: reg_double_buffer_replot.png Graphic file (type QTm)
-
-<use  "reg_double_buffer_replot.png" >
-File: load_balance_replot.png Graphic file (type QTm)
- <use  "load_balance_replot.png" >
-[59] [60]
-File: gemm_no_bank_conflict_replot.png Graphic file (type QTm)
- <use  "gemm_no_bank_conflict_replot.png" > [61]
-File: gemm_shared_db_no_bank_conflict_replot.png Graphic file (type QTm)
-
-<use  "gemm_shared_db_no_bank_conflict_replot.png" >
-
-LaTeX Warning: Reference `fig:bank_conflict_replot' on page 62 undefined on inp
-ut line 288.
-
-
-LaTeX Warning: Reference `fig:bank_conflict_replot' on page 62 undefined on inp
-ut line 292.
-
-File: bank_conflict_replot.png Graphic file (type QTm)
-<use  "bank_conflict_replot.png" > [62]
-
-LaTeX Warning: Reference `fig:none_f_mac_inst' on page 63 undefined on input li
-ne 302.
-
-File: none_f_mac_inst.png Graphic file (type QTm)
-<use  "none_f_mac_inst.png" >
-! Missing $ inserted.
-<inserted text> 
-                $
-l.306 ...ac指令的位置}{None v\_mac inst slot}
-                                                  
-? 
+Overfull \hbox (12
