@@ -1,0 +1,69 @@
+\BOOKMARK [0][-]{chapter.1}{第1章  引言}{}% 1
+\BOOKMARK [1][-]{section.1.1}{1.1 通用并行处理器概述}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{1.2 并行计算技术概述}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{1.3 研究动机述}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.4}{1.4 本文主要贡献}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.5}{1.5 本文组织结构}{chapter.1}% 6
+\BOOKMARK [0][-]{chapter.2}{第2章  背景及相关研究}{}% 7
+\BOOKMARK [1][-]{section.2.1}{2.1 GPU架构概述}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.2}{2.2 GPU线程执行模型}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.3}{2.3 现有矩阵乘调优工作}{chapter.2}% 10
+\BOOKMARK [2][-]{subsection.2.3.1}{2.3.1 矩阵乘数学定义}{section.2.3}% 11
+\BOOKMARK [2][-]{subsection.2.3.2}{2.3.2 矩阵乘在多核处理器上的研究介绍}{section.2.3}% 12
+\BOOKMARK [1][-]{section.2.4}{2.4 本章小结}{chapter.2}% 13
+\BOOKMARK [0][-]{chapter.3}{第3章  并行处理器架构分析}{}% 14
+\BOOKMARK [1][-]{section.3.1}{3.1 并行计算介绍}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.2}{3.2 并行处理器架构}{chapter.3}% 16
+\BOOKMARK [2][-]{subsection.3.2.1}{3.2.1 超标量和VLIW}{section.3.2}% 17
+\BOOKMARK [2][-]{subsection.3.2.2}{3.2.2 GPU的SIMD结构}{section.3.2}% 18
+\BOOKMARK [2][-]{subsection.3.2.3}{3.2.3 GPU时分多线程技术}{section.3.2}% 19
+\BOOKMARK [2][-]{subsection.3.2.4}{3.2.4 GPU多核结构}{section.3.2}% 20
+\BOOKMARK [2][-]{subsection.3.2.5}{3.2.5 Cache层次结构和内存系统}{section.3.2}% 21
+\BOOKMARK [1][-]{section.3.3}{3.3 现有并行处理器和专用加速器介绍}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.4}{3.4 本章小结}{chapter.3}% 23
+\BOOKMARK [0][-]{chapter.4}{第4章  GPU微体系结构研究}{}% 24
+\BOOKMARK [1][-]{section.4.1}{4.1 OpenCL编程模型}{chapter.4}% 25
+\BOOKMARK [2][-]{subsection.4.1.1}{4.1.1 OpenCL程序语言介绍}{section.4.1}% 26
+\BOOKMARK [2][-]{subsection.4.1.2}{4.1.2 AMD ROCm软硬件系统}{section.4.1}% 27
+\BOOKMARK [2][-]{subsection.4.1.3}{4.1.3 OpenCL线程模型}{section.4.1}% 28
+\BOOKMARK [1][-]{section.4.2}{4.2 OpenCL程序在AMD GCN GPUs上的性能和调优}{chapter.4}% 29
+\BOOKMARK [2][-]{subsection.4.2.1}{4.2.1 优化全局访存}{section.4.2}% 30
+\BOOKMARK [1][-]{section.4.3}{4.3 GPU微体系结构}{chapter.4}% 31
+\BOOKMARK [2][-]{subsection.4.3.1}{4.3.1 NVIDIA GPU架构}{section.4.3}% 32
+\BOOKMARK [2][-]{subsection.4.3.2}{4.3.2 AMD GPU微架构}{section.4.3}% 33
+\BOOKMARK [2][-]{subsection.4.3.3}{4.3.3 AMD GPU和NVIDIA GPU架构的比较}{section.4.3}% 34
+\BOOKMARK [1][-]{section.4.4}{4.4 AMD GPU微基准测试}{chapter.4}% 35
+\BOOKMARK [1][-]{section.4.5}{4.5 本章小结}{chapter.4}% 36
+\BOOKMARK [0][-]{chapter.5}{第5章  矩阵乘GPU实现}{}% 37
+\BOOKMARK [1][-]{section.5.1}{5.1 矩阵乘外积法算法描述}{chapter.5}% 38
+\BOOKMARK [1][-]{section.5.2}{5.2 从全局内存读取数据到共享内存}{chapter.5}% 39
+\BOOKMARK [2][-]{subsection.5.2.1}{5.2.1 线程到数据的映射}{section.5.2}% 40
+\BOOKMARK [1][-]{section.5.3}{5.3 从共享内存读取数据到寄存器并计算}{chapter.5}% 41
+\BOOKMARK [1][-]{section.5.4}{5.4 将C矩阵从寄存器写回数据到全局内存}{chapter.5}% 42
+\BOOKMARK [1][-]{section.5.5}{5.5 本章小结}{chapter.5}% 43
+\BOOKMARK [0][-]{chapter.6}{第6章  矩阵乘优化与性能评估}{}% 44
+\BOOKMARK [1][-]{section.6.1}{6.1 实验配置}{chapter.6}% 45
+\BOOKMARK [1][-]{section.6.2}{6.2 矩阵乘性能调优}{chapter.6}% 46
+\BOOKMARK [2][-]{subsection.6.2.1}{6.2.1 寄存器分块对v_mac指令占比的影响}{section.6.2}% 47
+\BOOKMARK [2][-]{subsection.6.2.2}{6.2.2 workgroup大小对访存带宽的影响}{section.6.2}% 48
+\BOOKMARK [1][-]{section.6.3}{6.3 汇编层次调优}{chapter.6}% 49
+\BOOKMARK [2][-]{subsection.6.3.1}{6.3.1 汇编调优的必要性}{section.6.3}% 50
+\BOOKMARK [2][-]{subsection.6.3.2}{6.3.2 优化内存访问}{section.6.3}% 51
+\BOOKMARK [2][-]{subsection.6.3.3}{6.3.3 循环展开}{section.6.3}% 52
+\BOOKMARK [2][-]{subsection.6.3.4}{6.3.4 数据预取}{section.6.3}% 53
+\BOOKMARK [2][-]{subsection.6.3.5}{6.3.5 shared memory双缓冲}{section.6.3}% 54
+\BOOKMARK [2][-]{subsection.6.3.6}{6.3.6 寄存器双缓冲}{section.6.3}% 55
+\BOOKMARK [2][-]{subsection.6.3.7}{6.3.7 线程负载均衡}{section.6.3}% 56
+\BOOKMARK [2][-]{subsection.6.3.8}{6.3.8 消除shared memory bank冲突}{section.6.3}% 57
+\BOOKMARK [2][-]{subsection.6.3.9}{6.3.9 指令重排}{section.6.3}% 58
+\BOOKMARK [1][-]{section.6.4}{6.4 矩阵乘性能测试}{chapter.6}% 59
+\BOOKMARK [1][-]{section.6.5}{6.5 矩阵乘性能分析}{chapter.6}% 60
+\BOOKMARK [2][-]{subsection.6.5.1}{6.5.1 矩阵乘潜在性能峰值}{section.6.5}% 61
+\BOOKMARK [2][-]{subsection.6.5.2}{6.5.2 Roofline模型}{section.6.5}% 62
+\BOOKMARK [1][-]{section.6.6}{6.6 本章小结}{chapter.6}% 63
+\BOOKMARK [0][-]{chapter.7}{第7章  结束语}{}% 64
+\BOOKMARK [1][-]{section.7.1}{7.1 本文工作总结}{chapter.7}% 65
+\BOOKMARK [1][-]{section.7.2}{7.2 下一步工作}{chapter.7}% 66
+\BOOKMARK [0][-]{section*.63}{参考文献}{}% 67
+\BOOKMARK [0][-]{appendix*.65}{致谢}{}% 68
+\BOOKMARK [0][-]{appendix*.66}{作者简介}{}% 69

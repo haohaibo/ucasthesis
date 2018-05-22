@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.26)  10 MAY 2018 23:05
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.26)  22 MAY 2018 12:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1766,10 +1766,108 @@ LaTeX Warning: You have requested package `Style/artracom',
                but the package provides `artracom'.
 
 Package: artracom 2014/10/01 v0.1 LaTeX macros package
-) (c:/texlive/2017/texmf-dist/tex/xelatex/xecjk/xeCJK-listings.sty
+) (c:/texlive/2017/texmf-dist/tex/latex/diagbox/diagbox.sty
+Package: diagbox 2016/12/28 v2.2 Making table heads with diagonal lines
+
+(c:/texlive/2017/texmf-dist/tex/latex/pict2e/pict2e.sty
+Package: pict2e 2016/02/05 v0.3b Improved picture commands (HjG,RN,JT)
+
+(c:/texlive/2017/texmf-dist/tex/latex/pict2e/pict2e.cfg
+File: pict2e.cfg 2016/02/05 v0.1u pict2e configuration for teTeX/TeXLive
+)
+Package pict2e Info: Driver file: xetex.def on input line 119.
+Package pict2e Info: Driver file for pict2e: p2e-xetex.def on input line 121.
+
+(c:/texlive/2017/texmf-dist/tex/latex/pict2e/p2e-xetex.def
+File: p2e-xetex.def 2016/02/05 v0.1u Driver-dependant file (RN,HjG,JT)
+)
+\pIIe@GRAPH=\toks35
+\@arclen=\dimen258
+\@arcrad=\dimen259
+\@tempdimd=\dimen260
+)
+(c:/texlive/2017/texmf-dist/tex/latex/fp/fp.sty
+Package: fp 1995/04/02
+
+`Fixed Point Package', Version 0.8, April 2, 1995 (C) Michael Mehlich
+(c:/texlive/2017/texmf-dist/tex/latex/fp/defpattern.sty
+Package: defpattern 1994/10/12
+\actioncount=\count267
+)
+(c:/texlive/2017/texmf-dist/tex/latex/fp/fp-basic.sty
+Package: fp-basic 1996/05/13
+\FP@xs=\count268
+\FP@xia=\count269
+\FP@xib=\count270
+\FP@xfa=\count271
+\FP@xfb=\count272
+\FP@rega=\count273
+\FP@regb=\count274
+\FP@regs=\count275
+\FP@times=\count276
+)
+(c:/texlive/2017/texmf-dist/tex/latex/fp/fp-addons.sty
+Package: fp-addons 1995/03/15
+)
+(c:/texlive/2017/texmf-dist/tex/latex/fp/fp-snap.sty
+Package: fp-snap 1995/04/05
+)
+(c:/texlive/2017/texmf-dist/tex/latex/fp/fp-exp.sty
+Package: fp-exp 1995/04/03
+)
+(c:/texlive/2017/texmf-dist/tex/latex/fp/fp-trigo.sty
+Package: fp-trigo 1995/04/14
+)
+(c:/texlive/2017/texmf-dist/tex/latex/fp/fp-pas.sty
+Package: fp-pas 1994/08/29
+)
+(c:/texlive/2017/texmf-dist/tex/latex/fp/fp-random.sty
+Package: fp-random 1995/02/23
+\FPseed=\count277
+)
+(c:/texlive/2017/texmf-dist/tex/latex/fp/fp-eqn.sty
+Package: fp-eqn 1995/04/03
+)
+(c:/texlive/2017/texmf-dist/tex/latex/fp/fp-upn.sty
+Package: fp-upn 1996/10/21
+)
+(c:/texlive/2017/texmf-dist/tex/latex/fp/fp-eval.sty
+Package: fp-eval 1995/04/03
+))
+(c:/texlive/2017/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count278
+\calc@Bcount=\count279
+\calc@Adimen=\dimen261
+\calc@Bdimen=\dimen262
+\calc@Askip=\skip83
+\calc@Bskip=\skip84
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count280
+\calc@Cskip=\skip85
+)
+\diagbox@boxa=\box62
+\diagbox@boxb=\box63
+\diagbox@boxm=\box64
+\diagbox@wd=\dimen263
+\diagbox@ht=\dimen264
+\diagbox@insepl=\dimen265
+\diagbox@insepr=\dimen266
+\diagbox@outsepl=\dimen267
+\diagbox@outsepr=\dimen268
+)
+(c:/texlive/2017/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
+\multirow@colwidth=\skip86
+\multirow@cntb=\count281
+\multirow@dima=\skip87
+\bigstrutjot=\dimen269
+)
+(c:/texlive/2017/texmf-dist/tex/xelatex/xecjk/xeCJK-listings.sty
 Package: xeCJK-listings 2017/05/15 v3.4.8 xeCJK patch file for listings
-\l__xeCJK_listings_max_char_int=\count267
-\l__xeCJK_listings_flag_int=\count268
+\l__xeCJK_listings_max_char_int=\count282
+\l__xeCJK_listings_flag_int=\count283
 )
 (Tmp/Thesis.aux
 
@@ -1784,63 +1882,63 @@ LaTeX Warning: Label `gemmendfor' multiply defined.
 )
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 53.
-LaTeX Font Info:    Try loading font information for OML+ntxmi on input line 53
+LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 55.
+LaTeX Font Info:    Try loading font information for OML+ntxmi on input line 55
 .
  (c:/texlive/2017/texmf-dist/tex/latex/newtx/omlntxmi.fd
 File: omlntxmi.fd 2015/08/25 Fontinst v1.933 font definitions for OML/ntxmi.
 )
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 53.
-LaTeX Font Info:    Try loading font information for U+ntxexa on input line 53.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 55.
+LaTeX Font Info:    Try loading font information for U+ntxexa on input line 55.
 
 
 (c:/texlive/2017/texmf-dist/tex/latex/newtx/untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 53.
-LaTeX Font Info:    Try loading font information for T3+cmr on input line 53.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 55.
+LaTeX Font Info:    Try loading font information for T3+cmr on input line 55.
 
 (c:/texlive/2017/texmf-dist/tex/latex/tipa/t3cmr.fd
 File: t3cmr.fd 2001/12/31 TIPA font definitions
 )
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 53.
-LaTeX Font Info:    Try loading font information for LMS+ntxsy on input line 53
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 55.
+LaTeX Font Info:    Try loading font information for LMS+ntxsy on input line 55
 .
 
 (c:/texlive/2017/texmf-dist/tex/latex/newtx/lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 55.
 LaTeX Font Info:    Try loading font information for LMX+ntxexx on input line 5
-3.
+5.
 
 (c:/texlive/2017/texmf-dist/tex/latex/newtx/lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
 
 ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 53.
+LaTeX Info: Redefining \selectfont on input line 55.
 .................................................
 . fontspec info: "setup-math"
 . 
@@ -1848,64 +1946,64 @@ LaTeX Info: Redefining \selectfont on input line 53.
 .................................................
 \symlegacymaths=\mathgroup8
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 53.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 53.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 53.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 53.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 53.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 53.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 53.
-LaTeX Font Info:    Redeclaring math accent \check on input line 53.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 53.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 53.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 53.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 53.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 53.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 53.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 53.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 53.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 53.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 53.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 53.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 53.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 53.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 53.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 53.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 53.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 55.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 55.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 55.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 55.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 55.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 55.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 55.
+LaTeX Font Info:    Redeclaring math accent \check on input line 55.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 55.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 55.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 55.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 55.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 55.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 55.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 55.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 55.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 55.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 55.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 55.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 55.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 55.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 55.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 55.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 55.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 53.
+(Font)              `operators' in the math version `normal' on input line 55.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/lmr/m/n --> TU/entextrm/m/n on input line 53.
+(Font)                  OT1/lmr/m/n --> TU/entextrm/m/n on input line 55.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 53.
+(Font)              `operators' in the math version `bold' on input line 55.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/lmr/b/n --> TU/entextrm/m/n on input line 53.
+(Font)                  OT1/lmr/b/n --> TU/entextrm/m/n on input line 55.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  TU/entextrm/m/n --> TU/entextrm/m/n on input line 53.
+(Font)                  TU/entextrm/m/n --> TU/entextrm/m/n on input line 55.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> TU/entextrm/m/it on input line 53.
+(Font)                  OT1/lmr/m/it --> TU/entextrm/m/it on input line 55.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/b/n --> TU/entextrm/bx/n on input line 53.
+(Font)                  OT1/lmr/b/n --> TU/entextrm/bx/n on input line 55.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  TU/lmss/m/n --> TU/entextsf/m/n on input line 53.
+(Font)                  TU/lmss/m/n --> TU/entextsf/m/n on input line 55.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  TU/lmtt/m/n --> TU/lmtt/m/n on input line 53.
+(Font)                  TU/lmtt/m/n --> TU/lmtt/m/n on input line 55.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  TU/entextrm/m/n --> TU/entextrm/bx/n on input line 53.
+(Font)                  TU/entextrm/m/n --> TU/entextrm/bx/n on input line 55.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/lmr/b/it --> TU/entextrm/bx/it on input line 53.
+(Font)                  OT1/lmr/b/it --> TU/entextrm/bx/it on input line 55.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  TU/lmss/b/n --> TU/entextsf/bx/n on input line 53.
+(Font)                  TU/lmss/b/n --> TU/entextsf/bx/n on input line 55.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  TU/lmtt/b/n --> TU/lmtt/bx/n on input line 53.
+(Font)                  TU/lmtt/b/n --> TU/lmtt/bx/n on input line 55.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count269
-\AtBeginShipoutBox=\box62
-Package hyperref Info: Link coloring ON on input line 53.
+\c@lstlisting=\count284
+\AtBeginShipoutBox=\box65
+Package hyperref Info: Link coloring ON on input line 55.
 
 (c:/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1913,11 +2011,11 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (c:/texlive/2017/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count270
+\c@section@level=\count285
 )
-LaTeX Info: Redefining \ref on input line 53.
-LaTeX Info: Redefining \pageref on input line 53.
-LaTeX Info: Redefining \nameref on input line 53.
+LaTeX Info: Redefining \ref on input line 55.
+LaTeX Info: Redefining \pageref on input line 55.
+LaTeX Info: Redefining \nameref on input line 55.
 
 (Tmp/Thesis.out) (Tmp/Thesis.out)
 \@outlinefile=\write3
@@ -1927,7 +2025,7 @@ LaTeX Info: Redefining \nameref on input line 53.
 File: ucas_logo.pdf Graphic file (type QTm)
 
 <use  "ucas_logo.pdf" >
-\g__fontspec_family_AdobeHeitiStd-Regular_int=\count271
+\g__fontspec_family_AdobeHeitiStd-Regular_int=\count286
 .................................................
 . fontspec info: "no-font-shape"
 . 
@@ -2041,4 +2139,251 @@ File: parallelprogram.png Graphic file (type QTm)
 (./Tex/Chap_Background.tex [6]
 第2章
 
-Overfull \hbox (12
+Overfull \hbox (12.30972pt too wide) in paragraph at lines 12--13
+[]\TU/AdobeSongStd-Light(1)/m/n/12.045 在 计 算 单 元 的 设 计 上，| \TU/entextsf/m/n/12.
+045 AMD \TU/AdobeSongStd-Light(1)/m/n/12.045 和 \TU/entextsf/m/n/12.045 NVIDIA G
+PU \TU/AdobeSongStd-Light(1)/m/n/12.045 的 计 算 单 元 都 采 用 了 \TU/entextsf/m/n/12.0
+45 SIMD(Single
+ []
+
+[7
+
+]
+File: thread_model.png Graphic file (type QTm)
+ <use  "thread_model.png" >
+File: warp_model.png Graphic file (type QTm)
+ <use  "warp_model.png" >
+File: if_else.png Graphic file (type QTm)
+ <use  "if_else.png" >
+File: warp_if_else.png Graphic file (type QTm)
+
+<use  "warp_if_else.png" > [8] [9] [10] [11]) (./Tex/Chap_parallelArch.tex
+[12]
+第3章
+File: cpu_trend.png Graphic file (type QTm)
+<use  "cpu_trend.png" > [13
+
+] [14] [15]
+Overfull \hbox (14.00099pt too wide) in paragraph at lines 59--60
+[]\TU/AdobeSongStd-Light(1)/m/n/12.045 这 两 种 硬 件 多 线 程 技 术 都 十 分 常 见。|  在 \TU/e
+ntextsf/m/n/12.045 Tera \TU/AdobeSongStd-Light(1)/m/n/12.045 公 司 设 计 的 超 级 计 算 
+机 \TU/entextsf/m/n/12.045 MTA(Multi-
+ []
+
+[16]
+File: amd_cpu_core.png Graphic file (type QTm)
+ <use  "amd_cpu_core.png" > [17]
+File: amd_gpu_core.png Graphic file (type QTm)
+ <use  "amd_gpu_core.png" > [18] [19]
+[20]
+File: nvidia_gtx780.png Graphic file (type QTm)
+ <use  "nvidia_gtx780.png" >
+File: nvidia_gtx780_simd.png Graphic file (type QTm)
+ <use  "nvidia_gtx780_simd.png" > [21] [22])
+(./Tex/Chap_GPUArch.tex [23] [24
+
+]
+第4章
+[25]
+File: gcn_gpu.png Graphic file (type QTm)
+ <use  "gcn_gpu.png" >
+File: rocm_llvm.png Graphic file (type QTm)
+ <use  "rocm_llvm.png" > [26] [27]
+File: opencl_thread_model.png Graphic file (type QTm)
+
+<use  "opencl_thread_model.png" >
+File: thread_model.png Graphic file (type QTm)
+ <use  "thread_model.png" > [28] [29]
+File: thread_map.png Graphic file (type QTm)
+
+<use  "thread_map.png" > [30]
+File: opencl_model_relation.png Graphic file (type QTm)
+ <use  "opencl_model_relation.png" > [31]
+File: opencl_memory_gpu.png Graphic file (type QTm)
+
+<use  "opencl_memory_gpu.png" > [32]
+(c:/texlive/2017/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+(c:/texlive/2017/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+)
+File: gpu_addr.png Graphic file (type QTm)
+
+<use  "gpu_addr.png" >
+File: gpu_mem_channel.png Graphic file (type QTm)
+ <use  "gpu_mem_channel.png" > [33] [34]
+File: nvidia_3_gpus.png Graphic file (type QTm)
+
+<use  "nvidia_3_gpus.png" > [35]
+File: amd_vega_arch.png Graphic file (type QTm)
+ <use  "amd_vega_arch.png" > [36]
+File: amd_cs.png Graphic file (type QTm)
+
+<use  "amd_cs.png" > [37]
+File: amd_gpu_memory.png Graphic file (type QTm)
+ <use  "amd_gpu_memory.png" >
+Overfull \hbox (12.30972pt too wide) in paragraph at lines 337--338
+[]\TU/AdobeSongStd-Light(1)/m/n/12.045 在 计 算 单 元 的 设 计 上，| \TU/entextsf/m/n/12.
+045 AMD \TU/AdobeSongStd-Light(1)/m/n/12.045 和 \TU/entextsf/m/n/12.045 NVIDIA G
+PU \TU/AdobeSongStd-Light(1)/m/n/12.045 的 计 算 单 元 都 采 用 了 \TU/entextsf/m/n/12.0
+45 SIMD(Single
+ []
+
+[38] [39]
+File: v_mac_throughput.png Graphic file (type QTm)
+ <use  "v_mac_throughput.png" >
+File: mem_bandwidth.png Graphic file (type QTm)
+ <use  "mem_bandwidth.png" > [40])
+(./Tex/Chap_GEMMGPU.tex [41] [42
+
+]
+第5章
+File: outer_product_replot.png Graphic file (type QTm)
+<use  "outer_product_replot.png" > [43]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 55.
+ [44]
+File: thread_to_data_replot.png Graphic file (type QTm)
+
+<use  "thread_to_data_replot.png" >
+File: global_A.png Graphic file (type QTm)
+ <use  "global_A.png" >
+File: global_B.png Graphic file (type QTm)
+
+<use  "global_B.png" > [45]
+File: writeS.png Graphic file (type QTm)
+ <use  "writeS.png" >
+File: readS.png Graphic file (type QTm)
+ <use  "readS.png" >
+File: threadblock.png Graphic file (type QTm)
+
+<use  "threadblock.png" > [46] [47]) (./Tex/Chap_GEMMOpt.tex [48]
+第6章
+
+Overfull \hbox (52.9118pt too wide) in paragraph at lines 10--22
+ [] 
+ []
+
+File: ffma_percentage.png Graphic file (type QTm)
+<use  "ffma_percentage.png" > [49
+
+] [50] [51]
+File: opencl_gemm_1_1_replot.png Graphic file (type QTm)
+
+<use  "opencl_gemm_1_1_replot.png" > [52]
+File: gemm_inner_product_tile.png Graphic file (type QTm)
+
+<use  "gemm_inner_product_tile.png" > [53]
+File: shared_memory_bank_dist.png Graphic file (type QTm)
+
+<use  "shared_memory_bank_dist.png" >
+File: bank0.png Graphic file (type QTm)
+ <use  "bank0.png" > [54]
+File: loop_unroll_replot.png Graphic file (type QTm)
+
+<use  "loop_unroll_replot.png" > [55]
+File: gemm_manual_unroll.png Graphic file (type QTm)
+ <use  "gemm_manual_unroll.png" > [56]
+File: gemm_shared_double_buffer_replot.png Graphic file (type QTm)
+
+<use  "gemm_shared_double_buffer_replot.png" >
+File: gemm_shared_double_buffer_v2_replot.png Graphic file (type QTm)
+
+<use  "gemm_shared_double_buffer_v2_replot.png" > [57] [58] [59]
+File: reg_double_buffer_replot.png Graphic file (type QTm)
+
+<use  "reg_double_buffer_replot.png" >
+File: load_balance_replot.png Graphic file (type QTm)
+ <use  "load_balance_replot.png" >
+[60] [61]
+File: gemm_no_bank_conflict_replot.png Graphic file (type QTm)
+ <use  "gemm_no_bank_conflict_replot.png" >
+File: gemm_shared_db_no_bank_conflict_replot.png Graphic file (type QTm)
+
+<use  "gemm_shared_db_no_bank_conflict_replot.png" >
+File: bank_conflict_replot.png Graphic file (type QTm)
+
+<use  "bank_conflict_replot.png" > [62] [63]
+File: none_f_mac_inst.png Graphic file (type QTm)
+ <use  "none_f_mac_inst.png" >
+[64]
+Overfull \hbox (8.5408pt too wide) in paragraph at lines 372--373
+\TU/AdobeSongStd-Light(1)/m/n/12.045 个 线 程，|  每 个 线 程 计 算 \TU/entextsf/m/n/12.0
+45 8x8 \TU/AdobeSongStd-Light(1)/m/n/12.045 个 输 出，|  总 共 可 以 计 算 \TU/entextsf/m
+/n/12.045 64x64 \TU/AdobeSongStd-Light(1)/m/n/12.045 个 输 出。| \TU/entextsf/m/n/1
+2.045 t_buffer_load_xyzw
+ []
+
+
+Overfull \hbox (21.2741pt too wide) in paragraph at lines 372--373
+\TU/entextsf/m/n/12.045 8x64 \TU/AdobeSongStd-Light(1)/m/n/12.045 个 \TU/entexts
+f/m/n/12.045 A \TU/AdobeSongStd-Light(1)/m/n/12.045 中 对 应 元 素 和 \TU/entextsf/m/
+n/12.045 8x64 \TU/AdobeSongStd-Light(1)/m/n/12.045 个 \TU/entextsf/m/n/12.045 B 
+\TU/AdobeSongStd-Light(1)/m/n/12.045 中 对 应 元 素。|  因 此 每 个 线 程 需 要 \TU/entextsf/
+m/n/12.045 (8x64+8x64)/(4x64)
+ []
+
+
+Overfull \hbox (30.5333pt too wide) in paragraph at lines 374--375
+\TU/AdobeSongStd-Light(1)/m/n/12.045 对 应 的 \TU/entextsf/m/n/12.045 t_buffer_loa
+d_xyzw \TU/AdobeSongStd-Light(1)/m/n/12.045 指 令 结 果 返 回，|  所 以 \TU/entextsf/m/n
+/12.045 ds_read_b128 \TU/AdobeSongStd-Light(1)/m/n/12.045 指 令 和 \TU/entextsf/m/
+n/12.045 t_buffer_load_xyzw
+ []
+
+File: hgemm_perf.png Graphic file (type QTm)
+<use  "hgemm_perf.png" >
+File: gemm_tuning_comp.png Graphic file (type QTm)
+ <use  "gemm_tuning_comp.png" > [65] [66] [67]
+File: roofline_global.png Graphic file (type QTm)
+
+<use  "roofline_global.png" > [68]) (./Tex/Chap_Conclusion.tex [69] [70
+
+]
+第7章
+[71])) [72] (Tmp/Thesis.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 91--94
+[]\TU/entextrm/m/n/10.53937 GRAY S.  Assembler for nvidia maxwell architecture,
+ 2014[J].  URL
+ []
+
+[73
+
+
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 110--113
+[]\TU/entextrm/m/n/10.53937 XIUXIA Z.  Assembler for nvidia kepler architecture
+, 2016[J].  URL
+ []
+
+) (./Tex/Backmatter.tex [74] [75
+
+] [76
+
+])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 89.
+ [77
+
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 89.
+ (Tmp/Thesis.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 89.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 89.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 34009 strings out of 493005
+ 629003 string characters out of 6137956
+ 707796 words of memory out of 5000000
+ 37449 multiletter control sequences out of 15000+600000
+ 29316 words of font info for 123 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 63i,12n,94p,10526b,1115s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on Tmp/Thesis.pdf (95 pages).
