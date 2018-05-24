@@ -1,9 +1,7 @@
 \chapter{结束语}\label{chap:Conclusion}
 
 \section{本文工作总结}
-本文研究对AMD GPU矩阵乘算法进行并行加速。 
-
-本文首先分析了AMD GPU架构细节，分析了当前主流GPU矩阵乘的优化工作。总结了NVIDIA GPU矩阵乘的优化手法，将该手法结合AMD Fiji和Vega架构，设计了Fiji和Vega架构矩阵乘，并进行了调优工作。实现了AMD GPU高效的矩阵乘。
+本文研究对AMD GPU矩阵乘算法进行并行加速。本文首先分析了AMD GPU架构细节，分析了当前主流GPU矩阵乘的优化工作。总结了NVIDIA GPU矩阵乘的优化手法，将该手法结合AMD Fiji和Vega架构，设计了Fiji和Vega架构矩阵乘，并进行了调优工作。实现了AMD GPU高效的矩阵乘。
 
 在开始做AMD GPU矩阵乘调优时，使用了AMD Fiji和Vega GPU。首先通过AMD官网找到Fiji和Vega GPU架构的ISA手册，阅读与分析ISA手册，开始对AMD GPU的架构有所了解。接下来开始测AMD的rocBLAS，MIOpenGEMM和Tensile等数学库的矩阵乘性能，并分析其中的GEMM kernerl。一开始的研究计划是同时考虑做自动调优和手工调优。在现有的AMD GPU开源数学中，有官方的rocBLAS库，也有第三方开源库如CLBlast\citepns{nugteren2017clblast}。CLBlast目前维护的比较好，其整体性能要略好于rocBLAS，是一个很好的工作。AMD GPU现有GEMM自动调优库有MIOpenGEMM和Tensile。从性能上，Tensile要好于MIOpenGEMM，Tensile可以将矩阵乘的性能通过自动调优接近91\%。缺点是Tensile生成kernel的时间要比MIOpenGEMM长很多。MIOpenGEMM目前集成在MIOpen卷积数学库中。Tensile集成在rocBLAS中。我用了较多时间阅读MIOpenGEMM和Tensile库的源码，分析其中的技术要点和设计原理。手工优化GEMM的方法主要来源于Junjie Lai在Fermi和Kepler GPU上的GEMM调优工作和GEMM性能上界分析以及Scott Gray针对Maxwell架构做的maxas SGEMM的工作。
 

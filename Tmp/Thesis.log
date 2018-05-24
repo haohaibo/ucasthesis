@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.26)  22 MAY 2018 12:41
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/W32TeX) (preloaded format=xelatex 2018.3.26)  24 MAY 2018 14:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2157,8 +2157,24 @@ File: if_else.png Graphic file (type QTm)
  <use  "if_else.png" >
 File: warp_if_else.png Graphic file (type QTm)
 
-<use  "warp_if_else.png" > [8] [9] [10] [11]) (./Tex/Chap_parallelArch.tex
-[12]
+<use  "warp_if_else.png" > [8] [9] [10] [11]
+
+Package natbib Warning: Citation `meng2011grophecy' on page 12 undefined on inp
+ut line 108.
+
+
+Package natbib Warning: Citation `hong2009analytical' on page 12 undefined on i
+nput line 108.
+
+
+Package natbib Warning: Citation `sim2012performance' on page 12 undefined on i
+nput line 108.
+
+
+Package natbib Warning: Citation `zhang2011quantitative' on page 12 undefined o
+n input line 108.
+
+) (./Tex/Chap_parallelArch.tex [12]
 第3章
 File: cpu_trend.png Graphic file (type QTm)
 <use  "cpu_trend.png" > [13
@@ -2289,101 +2305,3 @@ File: gemm_shared_double_buffer_replot.png Graphic file (type QTm)
 
 <use  "gemm_shared_double_buffer_replot.png" >
 File: gemm_shared_double_buffer_v2_replot.png Graphic file (type QTm)
-
-<use  "gemm_shared_double_buffer_v2_replot.png" > [57] [58] [59]
-File: reg_double_buffer_replot.png Graphic file (type QTm)
-
-<use  "reg_double_buffer_replot.png" >
-File: load_balance_replot.png Graphic file (type QTm)
- <use  "load_balance_replot.png" >
-[60] [61]
-File: gemm_no_bank_conflict_replot.png Graphic file (type QTm)
- <use  "gemm_no_bank_conflict_replot.png" >
-File: gemm_shared_db_no_bank_conflict_replot.png Graphic file (type QTm)
-
-<use  "gemm_shared_db_no_bank_conflict_replot.png" >
-File: bank_conflict_replot.png Graphic file (type QTm)
-
-<use  "bank_conflict_replot.png" > [62] [63]
-File: none_f_mac_inst.png Graphic file (type QTm)
- <use  "none_f_mac_inst.png" >
-[64]
-Overfull \hbox (8.5408pt too wide) in paragraph at lines 372--373
-\TU/AdobeSongStd-Light(1)/m/n/12.045 个 线 程，|  每 个 线 程 计 算 \TU/entextsf/m/n/12.0
-45 8x8 \TU/AdobeSongStd-Light(1)/m/n/12.045 个 输 出，|  总 共 可 以 计 算 \TU/entextsf/m
-/n/12.045 64x64 \TU/AdobeSongStd-Light(1)/m/n/12.045 个 输 出。| \TU/entextsf/m/n/1
-2.045 t_buffer_load_xyzw
- []
-
-
-Overfull \hbox (21.2741pt too wide) in paragraph at lines 372--373
-\TU/entextsf/m/n/12.045 8x64 \TU/AdobeSongStd-Light(1)/m/n/12.045 个 \TU/entexts
-f/m/n/12.045 A \TU/AdobeSongStd-Light(1)/m/n/12.045 中 对 应 元 素 和 \TU/entextsf/m/
-n/12.045 8x64 \TU/AdobeSongStd-Light(1)/m/n/12.045 个 \TU/entextsf/m/n/12.045 B 
-\TU/AdobeSongStd-Light(1)/m/n/12.045 中 对 应 元 素。|  因 此 每 个 线 程 需 要 \TU/entextsf/
-m/n/12.045 (8x64+8x64)/(4x64)
- []
-
-
-Overfull \hbox (30.5333pt too wide) in paragraph at lines 374--375
-\TU/AdobeSongStd-Light(1)/m/n/12.045 对 应 的 \TU/entextsf/m/n/12.045 t_buffer_loa
-d_xyzw \TU/AdobeSongStd-Light(1)/m/n/12.045 指 令 结 果 返 回，|  所 以 \TU/entextsf/m/n
-/12.045 ds_read_b128 \TU/AdobeSongStd-Light(1)/m/n/12.045 指 令 和 \TU/entextsf/m/
-n/12.045 t_buffer_load_xyzw
- []
-
-File: hgemm_perf.png Graphic file (type QTm)
-<use  "hgemm_perf.png" >
-File: gemm_tuning_comp.png Graphic file (type QTm)
- <use  "gemm_tuning_comp.png" > [65] [66] [67]
-File: roofline_global.png Graphic file (type QTm)
-
-<use  "roofline_global.png" > [68]) (./Tex/Chap_Conclusion.tex [69] [70
-
-]
-第7章
-[71])) [72] (Tmp/Thesis.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 91--94
-[]\TU/entextrm/m/n/10.53937 GRAY S.  Assembler for nvidia maxwell architecture,
- 2014[J].  URL
- []
-
-[73
-
-
-
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 110--113
-[]\TU/entextrm/m/n/10.53937 XIUXIA Z.  Assembler for nvidia kepler architecture
-, 2016[J].  URL
- []
-
-) (./Tex/Backmatter.tex [74] [75
-
-] [76
-
-])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 89.
- [77
-
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 89.
- (Tmp/Thesis.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 89.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 89.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
-Here is how much of TeX's memory you used:
- 34009 strings out of 493005
- 629003 string characters out of 6137956
- 707796 words of memory out of 5000000
- 37449 multiletter control sequences out of 15000+600000
- 29316 words of font info for 123 fonts, out of 8000000 for 9000
- 1348 hyphenation exceptions out of 8191
- 63i,12n,94p,10526b,1115s stack positions out of 5000i,500n,10000p,200000b,80000s
-
-Output written on Tmp/Thesis.pdf (95 pages).

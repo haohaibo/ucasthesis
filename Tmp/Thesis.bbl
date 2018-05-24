@@ -1,4 +1,4 @@
-\begin{thebibliography}{19}
+\begin{thebibliography}{24}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \providecommand{\href}[2]{\url{#2}}
@@ -10,42 +10,6 @@
 PROFILER V.
 \newblock Nvidia\allowbreak[Z].
 \newblock [S.l.: s.n.], 2011.
-
-\bibitem[Meng\ et~al.(2011)Meng, Morozov, Kumaran, Vishwanath, and
-  Uram]{meng2011grophecy}
-MENG J, MOROZOV V~A, KUMARAN K, et~al.
-\newblock Grophecy: Gpu performance projection from cpu code
-  skeletons\allowbreak[C]//\allowbreak{}High Performance Computing, Networking,
-  Storage and Analysis (SC), 2011 International Conference for.
-\newblock [S.l.]: IEEE, 2011: 1--11.
-
-\bibitem[Hong\ et~al.(2009)Hong and Kim]{hong2009analytical}
-HONG S, KIM H.
-\newblock An analytical model for a gpu architecture with memory-level and
-  thread-level parallelism awareness\allowbreak[C]//\allowbreak{}ACM SIGARCH
-  Computer Architecture News: volume~37.
-\newblock [S.l.]: ACM, 2009: 152--163.
-
-\bibitem[Sim\ et~al.(2012)Sim, Dasgupta, Kim, and Vuduc]{sim2012performance}
-SIM J, DASGUPTA A, KIM H, et~al.
-\newblock A performance analysis framework for identifying potential benefits
-  in gpgpu applications\allowbreak[C]//\allowbreak{}ACM SIGPLAN Notices:
-  volume~47.
-\newblock [S.l.]: ACM, 2012: 11--22.
-
-\bibitem[Zhang\ et~al.(2011)Zhang and Owens]{zhang2011quantitative}
-ZHANG Y, OWENS J~D.
-\newblock A quantitative performance analysis model for gpu
-  architectures\allowbreak[C]//\allowbreak{}High Performance Computer
-  Architecture (HPCA), 2011 IEEE 17th International Symposium on.
-\newblock [S.l.]: IEEE, 2011: 382--393.
-
-\bibitem[Williams\ et~al.(2009)Williams, Waterman, and
-  Patterson]{williams2009roofline}
-WILLIAMS S, WATERMAN A, PATTERSON D.
-\newblock Roofline: an insightful visual performance model for multicore
-  architectures\allowbreak[J].
-\newblock Communications of the ACM, 2009, 52\penalty0 (4): 65--76.
 
 \bibitem[Nath\ et~al.(2010)Nath, Tomov, and Dongarra]{nath2010improved}
 NATH R, TOMOV S, DONGARRA J.
@@ -121,6 +85,75 @@ GOTO K, GEIJN R~A.
 XIANYI Z, QIAN W, CHOTHIA Z.
 \newblock Openblas\allowbreak[J].
 \newblock URL: http://xianyi.github.io/OpenBLAS, 2012: 88.
+
+\bibitem[Meng\ et~al.(2011)Meng, Morozov, Kumaran, Vishwanath, and
+  Uram]{meng2011grophecy}
+MENG J, MOROZOV V~A, KUMARAN K, et~al.
+\newblock Grophecy: Gpu performance projection from cpu code
+  skeletons\allowbreak[C]//\allowbreak{}High Performance Computing, Networking,
+  Storage and Analysis (SC), 2011 International Conference for.
+\newblock [S.l.]: IEEE, 2011: 1--11.
+
+\bibitem[Hong\ et~al.(2009)Hong and Kim]{hong2009analytical}
+HONG S, KIM H.
+\newblock An analytical model for a gpu architecture with memory-level and
+  thread-level parallelism awareness\allowbreak[C]//\allowbreak{}ACM SIGARCH
+  Computer Architecture News: volume~37.
+\newblock [S.l.]: ACM, 2009: 152--163.
+
+\bibitem[Sim\ et~al.(2012)Sim, Dasgupta, Kim, and Vuduc]{sim2012performance}
+SIM J, DASGUPTA A, KIM H, et~al.
+\newblock A performance analysis framework for identifying potential benefits
+  in gpgpu applications\allowbreak[C]//\allowbreak{}ACM SIGPLAN Notices:
+  volume~47.
+\newblock [S.l.]: ACM, 2012: 11--22.
+
+\bibitem[Zhang\ et~al.(2011)Zhang and Owens]{zhang2011quantitative}
+ZHANG Y, OWENS J~D.
+\newblock A quantitative performance analysis model for gpu
+  architectures\allowbreak[C]//\allowbreak{}High Performance Computer
+  Architecture (HPCA), 2011 IEEE 17th International Symposium on.
+\newblock [S.l.]: IEEE, 2011: 382--393.
+
+\bibitem[Williams\ et~al.(2009)Williams, Waterman, and
+  Patterson]{williams2009roofline}
+WILLIAMS S, WATERMAN A, PATTERSON D.
+\newblock Roofline: an insightful visual performance model for multicore
+  architectures\allowbreak[J].
+\newblock Communications of the ACM, 2009, 52\penalty0 (4): 65--76.
+
+\bibitem[Fisher(1983)]{fisher1983very}
+FISHER J~A.
+\newblock Very long instruction word architectures and the eli-512:
+  volume~11\allowbreak[M].
+\newblock [S.l.]: ACM, 1983.
+
+\bibitem[Konecny(2007)]{konecny2007introducing}
+KONECNY P.
+\newblock Introducing the cray xmt\allowbreak[C]//\allowbreak{}Proc. Cray User
+  Group meeting (CUG 2007). Seattle, WA: CUG Proceedings.
+\newblock [S.l.: s.n.], 2007.
+
+\bibitem[Kongetira\ et~al.(2005)Kongetira, Aingaran, and
+  Olukotun]{kongetira2005niagara}
+KONGETIRA P, AINGARAN K, OLUKOTUN K.
+\newblock Niagara: A 32-way multithreaded sparc processor\allowbreak[J].
+\newblock IEEE micro, 2005, 25\penalty0 (2): 21--29.
+
+\bibitem[Jouppi\ et~al.(2017)Jouppi, Young, Patil, Patterson, Agrawal, Bajwa,
+  Bates, Bhatia, Boden, Borchers, et~al.]{jouppi2017datacenter}
+JOUPPI N~P, YOUNG C, PATIL N, et~al.
+\newblock In-datacenter performance analysis of a tensor processing
+  unit\allowbreak[C]//\allowbreak{}Proceedings of the 44th Annual International
+  Symposium on Computer Architecture.
+\newblock [S.l.]: ACM, 2017: 1--12.
+
+\bibitem[Chen\ et~al.(2014)Chen, Du, Sun, Wang, Wu, Chen, and
+  Temam]{chen2014diannao}
+CHEN T, DU Z, SUN N, et~al.
+\newblock Diannao: A small-footprint high-throughput accelerator for ubiquitous
+  machine-learning\allowbreak[J].
+\newblock ACM Sigplan Notices, 2014, 49\penalty0 (4): 269--284.
 
 \bibitem[Nugteren(2017)]{nugteren2017clblast}
 NUGTEREN C.

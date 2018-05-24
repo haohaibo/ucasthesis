@@ -33,7 +33,7 @@
 	\label{fig:ffma_percentage}
 \end{figure}
 
-从上图\ref{fig:ffma_percentage}中可以看出，随着寄存器分块大小增大，v\_mac指令百分比在提高。在寄存器分块大小不变的情况下，ds\_read\_bxx指令的位数宽度越宽，v\_mac指令百分比越高。如果采用的寄存器分块大小为6，则FFMA/DS\_READ\_B32=4:1，FFMA/DS\_READ\_B64=8:1，FFMA/DS\_READ\_B128=16:1。FFMA指令的百分比分别为80\%，88.89\%和94.12\%。
+从图\ref{fig:ffma_percentage}中可以看出，随着寄存器分块大小增大，v\_mac指令百分比在提高。在寄存器分块大小不变的情况下，ds\_read\_bxx指令的位数宽度越宽，v\_mac指令百分比越高。如果采用的寄存器分块大小为6，则FFMA/DS\_READ\_B32=4:1，FFMA/DS\_READ\_B64=8:1，FFMA/DS\_READ\_B128=16:1。FFMA指令的百分比分别为80\%，88.89\%和94.12\%。
 
 增大寄存器分块可以提高v\_mac指令的百分比，在v\_mac和ds\_read混合指令通量不变的情况下，v\_mac指令的百分比越高，v\_mac指令的通量越高。
 
@@ -390,7 +390,7 @@ t\_buffer\_load\_xyzw指令用于从全局内存预取数据到寄存器。一�
 	\bicaption{矩阵乘性能变化趋势}{GEMM performance tuning}
 	\label{fig:gemm_tuning_comp}
 \end{figure}
-这里需要说明的是在本次测试中使用的矩阵规模都是正方形，即M=N=K的情况，并且都是64的整数倍，并且对非64整数倍的矩阵尺寸没有进行边界处理。其中循环展开，shared memory双缓冲和寄存器双缓冲带来了大部分的性能能提升，这得益于利用shared memory和寄存器隐藏了全局内存读延迟。
+这里需要说明的是在本次测试中使用的矩阵规模都是正方形，即M=N=K的情况，并且都是64的整数倍，对非64整数倍的矩阵尺寸没有进行边界处理。矩阵数据采用随机函数进行生成。其中循环展开，shared memory双缓冲和寄存器双缓冲带来了大部分的性能能提升，这得益于利用shared memory和寄存器隐藏了全局内存读延迟。
 
 指令细粒度重排只有用汇编才可实现，OpenCL可以使用的同步指令只有barrier CLK\_GLOBAL\_MEM\_FENCE和barrier CLK\_LOCAL\_MEM\_FENCE这两种；而在汇编语言中，通过使用s\_waitcnt vmcnt()可以具体等待某一条访存指令的完成，同时，也没有OpenCL编译器所带来的无法预测的行为。通过利用前面讲到的指令重排的几个原则，进一步掩盖访存延迟，获得计算性能的提升。
 

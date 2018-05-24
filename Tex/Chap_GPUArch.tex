@@ -4,7 +4,7 @@
 OpenCL(Open Computing Language)既是一个语言，也是一个标准，OpenCL用于异构编程领域。对于AMD GPU，OpenCL是其主要编程语言之一。
 
 \subsection{OpenCL程序语言介绍}
-OpenCL是一种异构并行编程语言，OpenCL标准最初由苹果公司提出，同时参与的公司有AMD，IBM，Qualcomm，Intel和NVIDIA。最后由Khronos Group进行标准化和发布。Khronos Group在2008年发布了OpenCL标准的第一版，OpenCL 1.0。OpenCL 1.0定义了主机端的编程接口和设备端的编写kernel的语言。OpenCL语言基于C语言发展而来。随后发布的OpenCL 1.1和1.2标准增加了OpenCL与OpenGL的互操作性。在2013年，正式发布了OpenCL 2.0标准。新标准在一定程度上简化了并行程序的开发。OpenCL的API在设计上就做的尽可能通用，以使其可以运行在不同的平台上；并且也足够底层，以使其可以在不同的平台上都可以获得较高的性能。
+OpenCL是一种异构并行编程语言，OpenCL标准最初由苹果公司提出，同时参与的公司有AMD、IBM、Qualcomm、Intel和NVIDIA。最后由Khronos Group进行标准化和发布。Khronos Group在2008年发布了OpenCL标准的第一版，OpenCL 1.0。OpenCL 1.0定义了主机端的编程接口和设备端的编写kernel的语言。OpenCL语言基于C语言发展而来。随后发布的OpenCL 1.1和1.2标准增加了OpenCL与OpenGL的互操作性。在2013年，正式发布了OpenCL 2.0标准。新标准在一定程度上简化了并行程序的开发。OpenCL的API在设计上就做的尽可能通用，以使其可以运行在不同的平台上；并且也足够底层，以使其可以在不同的平台上都可以获得较高的性能。
 
 OpenCL程序在不同的平台具有可移植性，按照OpenCL标准编写的程序，可以在不同的硬件平台上运行。用OpenCL C语言可以编写在OpenCL设备上运行程序。OpenCL C在C99的基础上发展而来。其设计的目标是可在不同的OpenCL硬件平台(如GPU、FPGA、DSP等)上编写并执行可数据并行的程序。同时OpenCL C也实现了一组原子和同步操作。虽然OpenCL API本身是基于C的API，但也可以绑定到其他语言，例如Python，C++，Java等。另外，很多专用的库如数学库，计算机视觉库）也都集成了OpenCL的实现，来提升异构系统的计算性能。所以，我们可以看到OpenCL的目标是做通用并行计算。OpenCL 标准包含4部分，分别是平台模型，执行模型，kernel编程模型和内存模型。
 
@@ -19,7 +19,7 @@ Kernel编程模型：描述了如何将并发模型映射到具体的物理设�
 
 一个通用的OpenCL设备包含多个CUs(Compute Units)，每个CU每个最终由多个ALUs构成。一个线程(或者SPMD(单程序多数据)kernel的一个执行实例)最终会执行在一个ALU上。
 
-对于AMD Radeon Instinct MI25(Vega10)和AMD Radeon Instinct MI8(Fiji)架构的GPU，每颗芯片有64个CUs，对于AMD Radeon Instinct MI6(Polaris)架构，每颗芯片有32个CUs。其中，每个CU包含一个标量单元和四个向量单元。每个向量单元是一个宽度为16的向量ALU。这四个向量单元以SIMD的方式执行指令。在单个CU上可以同时执行多个wavefronts。
+对于AMD Radeon Instinct MI25(Vega10)和AMD Radeon Instinct MI8(Fiji)架构的GPU，每颗芯片有64个CUs，对于AMD Radeon Instinct MI6(Polaris)架构，每颗芯片有32个CUs。其中，每个CU包含一个标量单元和四个向量单元(如图\ref{fig:gcn_gpu})。每个向量单元是一个宽度为16的向量ALU。这四个向量单元以SIMD的方式执行指令。在单个CU上可以同时执行多个wavefronts。
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{gcn_gpu}
@@ -350,10 +350,10 @@ GPU上的指令级并行。对于AMD GPU每个时钟周期可发射多条向量�
 
 
 \section{AMD GPU微基准测试}
-根据AMD GPU微结构的特点，设计出了一个微基准测试程序。通过微基准测试程序，可以探测AMD GPU的指令通量和内存带宽。
+设计微基准测试是为了探测GPU微体系结构的参数特性，是通向认识微体系结构的大门。Scott\citepns{grayassembler}设计了用以探测NVIDIA Maxwell架构的基准测试程序，Zhang\citepns{xiuxiaassembler}设计了一组微基准测试程序用来探测NVIDIA Kepler架构的FFMA指令延迟和通量以及全局内存和共享内存的访存带宽。本文参考上述工作根据AMD GPU微结构的特点，设计了微基准测试程序。通过微基准测试程序，可以探测AMD GPU的乘加指令通量和访存带宽。
 
 
-\subsubsection{AMD GPU指令通量和带宽探测}
+%\subsubsection{AMD GPU指令通量和带宽探测}
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.50\textwidth]{v_mac_throughput}
@@ -361,7 +361,7 @@ GPU上的指令级并行。对于AMD GPU每个时钟周期可发射多条向量�
 	\label{fig:v_mac_throughput}
 \end{figure}
 
-探测得的AMD Fiji R9 Nano GPU的浮点通量为7958.29gflop/s。Fiji GPU的理论浮点峰值为8192gflop/s，所以实测浮点性能为7958.29/8192 = 97.15\%。
+探测得的AMD Fiji R9 Nano GPU的浮点通量为7958.29gflop/s(如图\ref{fig:v_mac_throughput})。Fiji GPU的理论浮点峰值为8192gflop/s，所以实测浮点性能为7958.29/8192 = 97.15\%。
 
 \begin{figure}[htbp]
 	\centering
@@ -370,7 +370,7 @@ GPU上的指令级并行。对于AMD GPU每个时钟周期可发射多条向量�
 	\label{fig:mem_bandwidth}
 \end{figure}
 
-探测得的AMD Fiji R9 Nano GPU的内存带宽为341GB/s。Fiji GPU的理论内存带宽为512GB/s，所以实测内存带宽为341/512 = 66.6\%。
+探测得的AMD Fiji R9 Nano GPU的内存带宽为341GB/s(如图\ref{fig:mem_bandwidth})。Fiji GPU的理论内存带宽为512GB/s，所以实测内存带宽为341/512 = 66.6\%。
 
 \section{本章小结}
 本章从GPU微体系结构和OpenCL编程模型两方面对AMD GPU架构进行了详细的描述。对比了AMD GPU和NVIDIA GPU在架构上的异同，观察出AMD和NVIDIA GPU在设计都采用了SIMD结构。两种GPU都通过并发大量轻型线程来做到延迟容忍，是面向通量计算的处理器。针对AMD GPU设计出一套微基准测试程序，探测出AMD GPU的浮点指令通量和内存带宽，为后面矩阵乘GPU调优做铺垫。
